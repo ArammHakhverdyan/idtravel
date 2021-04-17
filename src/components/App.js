@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <Typography variant="h1">
-        IDTravel
+        IDTravel dd
       </Typography>
     </div>
   );
