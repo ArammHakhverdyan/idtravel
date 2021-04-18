@@ -1,13 +1,20 @@
 import React from 'react';
-import { Typography } from '@material-ui/core/';
+import { useEffect } from 'react';
+import { TextField, Typography } from '@material-ui/core/';
+import Auth from './Auth';
+import {auth} from "../index"
 
 
 function App() {
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+        console.log("Sign Up",user)
+        
+    })
+  })
   return (
     <div className="App">
-      <Typography variant="h1">
-        asfdsadsdfgdfg
-      </Typography>
+      <Auth />
     </div>
   );
 }
