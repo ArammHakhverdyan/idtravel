@@ -1,6 +1,7 @@
 import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from "@material-ui/core"
 import react, { useState } from "react"
 import { auth } from "../index"
+import React from 'react'
 
 function Auth() {
     const [signInEmail, setSignInEmail] = useState("")
@@ -15,7 +16,7 @@ function Auth() {
         auth.signInWithEmailAndPassword(signInEmail, signInPassword).then((userCredential) => {
             // Signed in 
             var user = userCredential.user;
-            
+
             // setButtonText(text)
             //Button.innerText = "Sign Out"
             console.log("Yor are logged In", userCredential.id, user)
@@ -51,7 +52,7 @@ function Auth() {
             <br />
             <br />
             <Button variant="contained" color="primary" onClick={signIn}>
-            Sign In
+                Sign In
             </Button>
             <br />
             <br />
@@ -64,7 +65,7 @@ function Auth() {
             {/* <input type="text" value={lastName} onChange={e => setLastName(e.target.value)} placeholder={"LastName"}></input> */}
             <br />
             <br />
-            
+
             <form noValidate>
                 <TextField
                     id="date"
