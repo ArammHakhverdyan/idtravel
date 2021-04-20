@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { TextField, Typography } from '@material-ui/core/';
 import Auth from './Auth';
 import { auth } from "../index";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
 import { CssBaseline } from "@material-ui/core"
 import '../Style/nav-style.css'
 import AboutUs from './AboutUs';
@@ -31,6 +31,7 @@ function App() {
           <Route path="/aboutUs" component={AboutUs} />
           <Route path="/tours" component={Tours} />
           <Route path="/auth" component={Auth} />
+          <Redirect to="/" />
         </Switch>
       </Router>
 
