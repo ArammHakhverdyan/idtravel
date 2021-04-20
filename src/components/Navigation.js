@@ -1,37 +1,49 @@
-import { createMuiTheme, List, makeStyles, ThemeProvider } from '@material-ui/core';
 import React from 'react'
 import { Link } from 'react-router-dom'
-
-
+import { List, makeStyles, Button } from '@material-ui/core';
 
 const useStyles = makeStyles({
-    navDisplayFlex: {
-
-    },
     linkText: {
-        textDecoration: "none",
-        textTransform: "uppercase",
-        color: "black",
-        margin: 20,
-        fontFamily: '"Crimson Pro", cursive',
-        fontSize: 24,
-        marginTop: 20
-    }
+        color: "#272727",
+        margin: "0px 8px",
+        fontSize: "18px",
+        textTransform: "none",
+    },
+    navCont: {
+        display: "flex",
+        alignItems: "center",
+    },
+    linkBtn: {
+        marginLeft: "15px",
+    },
 });
 
-
 function Navigation() {
-    const classes = useStyles()
+    const classes = useStyles();
+
     return (
-        <List component="nav" aria-labelledby="main navigation">
-            <Link className={classes.linkText} to="/home">Home</Link>
-            <Link className={classes.linkText} to="/menu">Menu</Link>
-            <Link className={classes.linkText} to="/aboutUs">About Us</Link>
-            <Link className={classes.linkText} to="/tours">Tours</Link>
-            <Link className={classes.linkText} to="/auth">Sign in</Link>
-
-
-        </List>
+        <>
+            <List className={classes.navCont} component="nav" aria-labelledby="main navigation">
+                <Button component={Link} to="/aboutUs" className={classes.linkText}>
+                    About Us
+                </Button>
+                <Button component={Link} to="/services" className={classes.linkText}>
+                    Services
+                </Button>
+                <Button component={Link} to="/tours" className={classes.linkText}>
+                    Tours
+                </Button>
+                <Button component={Link} to="/contact" className={classes.linkText}>
+                    Contact
+                </Button>
+                <Button component={Link} to="/register" className={classes.linkBtn} variant="outlined" color="primary">
+                    Register
+                </Button>
+                <Button component={Link} to="/signIn" className={classes.linkBtn} variant="contained" color="primary">
+                    Sign In
+                </Button>
+            </List>
+        </>
     )
 }
 

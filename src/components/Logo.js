@@ -1,18 +1,13 @@
 import React from 'react';
-import logo from '../components/logo.jpeg'
+import { Link } from 'react-router-dom'
+import logo from '../assets/images/logo_v.png'
 
-
-const style = {
-    width: "130px",
-    height: "130px",
-
-}
 
 function Logo() {
     return (
-        <div>
-            <img style={style} src={logo} alt="Logo" />
-        </div>
+        <Link to="/">
+            <img style={{ display: "flex", width: "220px", }} src={logo} alt="Logo" />
+        </Link>
     )
 }
 
