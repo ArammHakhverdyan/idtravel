@@ -14,17 +14,11 @@ const config = {
 };
 
 
-// const config = {
-//     apiKey: "AIzaSyDe2tXXyUNm5sesgGRPB2qul8MMKQmkii8",
-//     authDomain: "example-596ba.firebaseapp.com",
-//     projectId: "example-596ba",
-//     storageBucket: "example-596ba.appspot.com",
-//     messagingSenderId: "420454727595",
-//     appId: "1:420454727595:web:36c2b630fe6aef8959dcee"
-// };
-
 
 firebase.initializeApp(config);
 firebase.firestore().settings({ timestampsInSnapshots: true })
 
+
+export const db = firebase.firestore()
+export const auth = firebase.auth()
 export default firebase;

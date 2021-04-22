@@ -20,8 +20,8 @@ class SignIn extends Component {
     }
 
     render() {
-        const { authError, auth } = this.props;
-        if (auth.uid) return <Redirect to='/' />
+        const { authError, loggedInUser } = this.props;
+        if (loggedInUser) return null
         return (
             <div className="container">
                 <form onSubmit={this.handleSubmit} className="white">
@@ -50,7 +50,7 @@ class SignIn extends Component {
 const mapStateToProps = (state) => {
     return {
         authError: state.auth.authError,
-        auth: state.firebase.auth
+        loggedInUser: state.auth.loggedInUser,
     }
 }
 

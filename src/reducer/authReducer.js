@@ -30,6 +30,11 @@ const authReducer = (state = initState, action) => {
                 ...state,
                 authError: action.error.message
             }
+        case "SET_LOGGEDIN_USER":
+            return {
+                ...state,
+                loggedInUser: action.user
+            }
 
         default:
             return state
