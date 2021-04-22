@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route, } from "react-router-dom";
-import Header from './components/Header';
+import Header from './components/layout/Header';
 import Footer from './components/Footer';
 import Contact from './components/pages/Contact';
 import AboutUs from './components/pages/AboutUs';
@@ -9,7 +9,6 @@ import Services from './components/pages/Services';
 import Home from './components/pages/Home';
 import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
-import Navbar from './components/layout/navBar';
 
 
 class App extends React.Component {
@@ -17,8 +16,7 @@ class App extends React.Component {
     return (
       <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
         <Router>
-          {/* <Header /> */}
-          <Navbar />
+          <Header />
           <Switch>
             <Route path="/aboutUs" component={AboutUs} />
             <Route path="/services" component={Services} />

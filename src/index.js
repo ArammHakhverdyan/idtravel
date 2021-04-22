@@ -1,16 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Example } from './App';
 import App from './App'
 import { applyMiddleware, compose, createStore } from 'redux';
 import { Provider, useSelector } from 'react-redux';
 import rootReducer from './reducer/rootReducer';
 import thunk from 'redux-thunk';
 import { reduxFirestore, getFirestore } from 'redux-firestore';
-import { getFirebase, isLoaded, reactReduxFirebase, ReactReduxFirebaseProvider } from 'react-redux-firebase'
+import { getFirebase, isLoaded, ReactReduxFirebaseProvider } from 'react-redux-firebase'
 import config from '../src/config/config.js';
 import { createFirestoreInstance } from 'redux-firestore';
-import firebase from 'firebase/app'
+import firebase from 'firebase/app';
+import './index.css';
 
 const store = createStore(rootReducer,
   compose(

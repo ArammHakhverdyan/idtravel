@@ -1,16 +1,28 @@
 import React from 'react'
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { makeStyles, Button } from '@material-ui/core';
 
 
 const SignedOutLInks = () => {
-    return (
-        <ul className="right col s12">
-            {/* <li><NavLink to="/">Login</NavLink></li> */}
-            <li><NavLink to="/signup"> Sign Up</NavLink></li>
-            <li><NavLink to="/signin">Login</NavLink></li>
+    const classes = useStyles();
 
-        </ul>
+    return (
+        <>
+            <Button component={Link} to="/signup" className={classes.linkBtn} variant="outlined" color="primary">
+                Sign Up
+            </Button>
+            <Button component={Link} to="/signin" className={classes.linkBtn} variant="contained" color="primary">
+                Login
+            </Button>
+        </>
     )
 }
 
-export default SignedOutLInks
+export default SignedOutLInks;
+
+
+const useStyles = makeStyles({
+    linkBtn: {
+        marginLeft: "15px",
+    },
+});

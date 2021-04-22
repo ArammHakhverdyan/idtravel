@@ -8,23 +8,28 @@ import SignedOutLInks from './signedOutLinks'
 
 
 const Navbar = (props) => {
+    const classes = useStyles();
+
     const { auth, profile } = props;
     console.log(auth)
     const links = auth.uid ? <SignedInLInks /> : <SignedOutLInks />
-    return (
-        <nav className=" grey-darken-3">
-            <div className="container">
-                {links}
-                <Link to="/" className="brand-logo" > IDTravel</Link>
-                <ul className="right">
-                    <li><NavLink to="/aboutUs">About Us</NavLink></li>
-                    <li><NavLink to="/services"> Services</NavLink></li>
-                    <li><NavLink to="/tours"> Tours</NavLink></li>
-                    <li><NavLink to="/contact"> Contact</NavLink></li>
-                </ul>
 
-            </div>
-        </nav>
+    return (
+        <List className={classes.navCont}>
+            <Button component={Link} to="/aboutUs" className={classes.linkText}>
+                About Us
+            </Button>
+            <Button component={Link} to="/services" className={classes.linkText}>
+                Services
+            </Button>
+            <Button component={Link} to="/tours" className={classes.linkText}>
+                Tours
+            </Button>
+            <Button component={Link} to="/contact" className={classes.linkText}>
+                Contact
+            </Button>
+            {links}
+        </List>
     )
 }
 
@@ -38,3 +43,20 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps)(Navbar)
+
+
+const useStyles = makeStyles({
+    linkText: {
+        color: "#272727",
+        margin: "0px 8px",
+        fontSize: "18px",
+        textTransform: "none",
+    },
+    navCont: {
+        display: "flex",
+        alignItems: "center",
+    },
+    linkBtn: {
+        marginLeft: "15px",
+    },
+});
