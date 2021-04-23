@@ -6,3 +6,18 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.carouselItem{
+  height: 200px;
+  text-align: center;
+}
+
+.carouselItemImg{
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+}
+
+
+
+
