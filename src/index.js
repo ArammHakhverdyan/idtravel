@@ -23,11 +23,7 @@ const store = createStore(rootReducer,
   )
 );
 
-// const AuthIsLoaded = ({ children }) => {
-//   const auth = useSelector(state => state.firebase.auth)
-//   if (!isLoaded(auth)) return <div className="center">Loading...</div>
-//   return children
-// }
+
 
 const rrfProps = {
   firebase,

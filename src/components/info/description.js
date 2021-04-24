@@ -10,7 +10,7 @@ const Description = () => {
 
         <div className="pages">
             <div className="img-container">
-                <img className="img" src={img} />,
+                <img className="img" src={img} alt='' />,
             <div className="text-container">
                     <h2>Find your perfect place to have a rest</h2>
                     <p>Experience pure serenity and see the Milky Way at night at Armenia's Sevan Lake</p>
@@ -25,11 +25,11 @@ const Description = () => {
                     and queens used special, festive dresses which were called “tsirani” as they had an apricot color.
                      The name “tsirani” came from the word “tsiran”, which means apricot.</p>
                 </div>
-                <img className="img" src={img1} />,
+                <img className="img" src={img1} alt='' />,
             </div>
             <div className="cover">
                 <h2>Find all of these in one place</h2>
-                <img className="about-img" src={pic} />
+                <img className="about-img" src={pic} alt='' />
             </div>
         </div>
 
