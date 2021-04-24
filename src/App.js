@@ -27,6 +27,7 @@ class App extends React.Component {
       const docRef = db.collection('users').doc(userData.uid);
       const doc = await docRef.get()
       userData.info = doc.data()
+      console.log(userData)
     }
     this.props.dispatch({
       type: "SET_LOGGEDIN_USER",
