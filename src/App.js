@@ -11,6 +11,9 @@ import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
 import { auth, db } from './config/config'
 import { connect } from 'react-redux';
+import HotelsList from './components/pages/HotelsList';
+import CarRental from './components/pages/CarRental';
+import Vehicles from './Vehicles';
 
 
 class App extends React.Component {
@@ -42,6 +45,9 @@ class App extends React.Component {
               <Route path="/services" component={Services} />
               <Route path="/tours" component={Tours} />
               <Route path="/contact" component={Contact} />
+              <Route path="/hotelsList" component={HotelsList} />
+              <Route path="/carRental" component={CarRental} />
+              <Route path="/vehicles" component={Vehicles} />
               <Route path="/" exact component={Home} />
               <Redirect to="/" />
             </Switch>
@@ -56,7 +62,6 @@ class App extends React.Component {
               <Route path="/" exact component={Home} />
             </Switch>
           )}
-
 
           <Footer />
         </Router>
