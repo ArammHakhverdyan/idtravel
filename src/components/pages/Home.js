@@ -5,25 +5,12 @@ import CarouselItem from '../CarouselItems'
 import img from '../img/1.jpg'
 import img2 from '../img/2.jpg'
 import img3 from '../img/3.jpg'
+import img4 from '../img/4.jpg'
+import img5 from '../img/5.jpg'
+import Description from '../info/description';
 
 
 
-// function Home() {
-//     return (
-//         <Container>
-//             {/* <Box py={4}>
-//                 <Typography variant="h3">
-
-//                 </Typography>
-//             </Box> */}
-//             <Carousel>
-//                 {
-//                     items.map((src, i) => <CarouselItem key={i} src={img} />)
-//                 }
-//             </Carousel>
-//         </Container>
-//     )
-// }
 
 
 export default Home;
@@ -39,15 +26,24 @@ function Home(props) {
         },
         {
             img: img3,
+        },
+        {
+            img: img4,
+        },
+        {
+            img: img5,
         }
     ]
 
     return (
-        <Carousel>
-            {
-                items.map((item, i) => <Item key={i} item={item} />)
-            }
-        </Carousel>
+        <>
+            <Carousel>
+                {items.map((item, i) => <Item key={i} item={item} />)}
+            </Carousel>
+            <div>
+                <Description />
+            </div>
+        </>
     )
 }
 
