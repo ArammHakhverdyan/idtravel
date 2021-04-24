@@ -5,7 +5,7 @@ function CarouselItem(props) {
 
     return (
         <div className="carouselItem">
-            <img className="carouselItemImg" alt="photo" src={props.src} />
+            <img className="carouselItemImg" alt="" src={props.src} />
         </div>
     )
 }
