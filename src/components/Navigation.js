@@ -4,7 +4,7 @@ import { List, makeStyles, Button } from '@material-ui/core';
 
 const useStyles = makeStyles({
     linkText: {
-        color: "#272727",
+        color: "#82b440",
         margin: "0px 8px",
         fontSize: "18px",
         textTransform: "none",

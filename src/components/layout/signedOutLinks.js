@@ -8,10 +8,10 @@ const SignedOutLInks = () => {
 
     return (
         <>
-            <Button component={Link} to="/signup" className={classes.linkBtn} variant="outlined" color="primary">
+            <Button component={Link} to="/signup" className={classes.signBtn} variant="outlined" color="primary">
                 Sign Up
             </Button>
-            <Button component={Link} to="/signin" className={classes.linkBtn} variant="contained" color="primary">
+            <Button component={Link} to="/signin" className={classes.loginBtn} variant="contained" color="primary">
                 Login
             </Button>
         </>
@@ -22,7 +22,19 @@ export default SignedOutLInks;
 
 
 const useStyles = makeStyles({
-    linkBtn: {
+    signBtn: {
         marginLeft: "15px",
+        borderColor: "#94c93d",
+        color: "#94c93d",
+        '&:hover': {
+            borderColor: "#8cc927",
+        },
     },
+    loginBtn: {
+        marginLeft: "15px",
+        backgroundColor: "#94c93d",
+        '&:hover': {
+            backgroundColor: "#8cc927",
+        },
+    }
 });

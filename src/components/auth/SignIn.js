@@ -1,50 +1,42 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router';
-import { signIn } from '../../actions/AuthActions'
+import { signIn } from '../../actions/AuthActions';
+import { makeStyles, Container, Box, TextField, Button, Typography } from '@material-ui/core/';
 
-class SignIn extends Component {
-    state = {
+
+const SignIn = (props) => {
+    const classes = useStyles();
+    const { authError, loggedInUser } = props;
+
+    const [value, setValue] = useState({
         email: "",
         password: ""
-    }
+    });
 
-    handleChange = (e) => {
-        this.setState({
+    const handleChange = (e) => {
+        setValue({
+            ...value,
             [e.target.id]: e.target.value
         })
     }
-    handleSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        this.props.signIn(this.state)
+        props.signIn(value);
     }
 
-    render() {
-        const { authError, loggedInUser } = this.props;
-        if (loggedInUser) return null
-        return (
-            <div className="container">
-                <form onSubmit={this.handleSubmit} className="white">
-                    <h5 className="grey-text text-darken-3">Sign In</h5>
-                    <div className="input-field">
-                        <label htmlFor="email">Email</label>
-                        <input type="email" id="email" onChange={this.handleChange}></input>
-                    </div>
-                    <div className="input-field">
-                        <label htmlFor="password">Password</label>
-                        <input type="password" id="password" onChange={this.handleChange}></input>
-                    </div>
-                    <div className="input-field">
-                        <button className="btn pink lighten-1 z-depth-0">Login</button>
-                        <div className="red-text center">
-                            {authError ? <p>{authError}</p> : null}
-                        </div>
-                    </div>
-                </form>
+    if (loggedInUser) return null
 
-            </div>
-        )
-    }
+    return (
+        <Container>
+            <Box py={5} className={classes.loginForm} textAlign="center">
+                <Typography variant="h4" component="h1" gutterBottom>Sign In</Typography>
+                {authError && <Typography color="secondary" gutterBottom>{authError}</Typography>}
+                <TextField id="email" fullWidth={true} label="Email" variant="outlined" value={value.email} onChange={handleChange} />
+                <TextField type="password" id="password" fullWidth={true} label="Password" variant="outlined" value={value.password} onChange={handleChange} />
+                <Button className={classes.loginBtn} fullWidth={true} variant="contained" onClick={handleSubmit}>Login</Button>
+            </Box>
+        </Container>
+    )
 }
 
 const mapStateToProps = (state) => {
@@ -60,4 +52,23 @@ const mapDispatchToProps = (dipsatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
+
+
+
+const useStyles = makeStyles({
+    loginForm: {
+        maxWidth: "400px",
+        margin: "auto",
+        '& .MuiTextField-root': {
+            marginBottom: '20px',
+        },
+    },
+    loginBtn: {
+        backgroundColor: "#94c93d",
+        color: "#fff",
+        '&:hover': {
+            backgroundColor: "#8cc927",
+        }
+    },
+});

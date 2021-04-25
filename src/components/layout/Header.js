@@ -18,19 +18,21 @@ const theme = createMuiTheme({
 function Header() {
     return (
         <ThemeProvider theme={theme} >
-            <AppBar position="static" >
+            <AppBar position="sticky" style={{ backgroundColor: "rgb(0 0 0 / 75%)", }}>
                 <Toolbar>
                     <Container>
                         <Box display="flex" justifyContent="space-between" alignItems="center" py={1}>
-                            <Link to="/">
-                                <Typography variant="h3">IDTRavel</Typography>
+                            <Link to="/" style={{ textDecoration: "none", color: "#94c93d" }}>
+                                <Typography variant="h3">ID
+                                    <span style={{ color: "#fff" }}>Travel</span>
+                                </Typography>
                             </Link>
                             <Navbar />
                         </Box>
                     </Container>
                 </Toolbar>
             </AppBar>
-        </ThemeProvider>
+        </ThemeProvider >
     );
 }
 

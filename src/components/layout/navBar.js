@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { List, makeStyles, Button } from '@material-ui/core';
 import { connect } from 'react-redux'
 import SignedInLInks from './signedInLInks'
@@ -47,7 +47,7 @@ export default connect(mapStateToProps)(Navbar)
 
 const useStyles = makeStyles({
     linkText: {
-        color: "#82b440",
+        color: "#fff",
         margin: "0px 8px",
         fontSize: "18px",
         textTransform: "none",
