@@ -17,9 +17,11 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
 }));
-
+function info () {
+  alert("Information about hotel")
+}
 export default function HotelsList() { 
-    
+
   const classes = useStyles();
   const [checked, setChecked] = React.useState("");
 
@@ -37,7 +39,7 @@ export default function HotelsList() {
   };
 
   return (
-    <List className={classes.root} component={Link} to="/HotelsList" className={classes.linkText}>
+    <List className={classes.root} /*component={Link}*/ /*to="/HotelsList" */className={classes.linkText}>
       {[0, 1, 2, 3].map((value) => {
         const labelId = `checkbox-list-label-${value}`;
 
@@ -54,7 +56,7 @@ export default function HotelsList() {
             </ListItemIcon>
             <ListItemText id={labelId} primary={`Hotel ${value + 1}`} />
             <ListItemSecondaryAction>
-              <IconButton edge="end" aria-label="comments" >
+              <IconButton edge="end" aria-label="comments" onClick={info}>
                 <CommentIcon />
               </IconButton>
             </ListItemSecondaryAction>
@@ -62,6 +64,6 @@ export default function HotelsList() {
         );
       })}
     </List>
-    
+
   );
 }
