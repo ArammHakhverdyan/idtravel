@@ -1,4 +1,6 @@
-const initState = {}
+import { initialState } from "./initialState"
+
+const initState = initialState.auth
 
 
 const authReducer = (state = initState, action) => {
@@ -13,7 +15,7 @@ const authReducer = (state = initState, action) => {
             console.log('login success')
             return {
                 ...state,
-                authError: 'null'
+                authError: null
             }
         case 'SIGNOUT_SUCCESS':
             console.log('signout success')

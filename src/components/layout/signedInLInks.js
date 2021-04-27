@@ -3,18 +3,19 @@ import { connect, useSelector } from 'react-redux'
 import { Link, NavLink } from 'react-router-dom'
 import { signOut } from '../../actions/AuthActions'
 import { db } from '../../config/config'
+import { selectLoggedInUserId } from '../../redux/selectors'
 
 
 
 const SignedInLInks = (props) => {
-    const uId = useSelector((state) => state.firebase?.auth?.uid);
+    const uId = useSelector(selectLoggedInUserId);
     console.log(uId)
     const [initials, setInitials] = useState('')
     useEffect(() => {
         if (uId) {
             const docRef = db.collection('users').doc(uId);
             docRef.get().then((doc) => {
-                setInitials(doc.data().initials)
+                setInitials(doc.data()?.initials)
             })
         }
     }, [uId])
