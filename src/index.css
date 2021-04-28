@@ -118,22 +118,23 @@ p{
   display: block;
   max-width: 100%;
   max-height: 100%;
-  width: 300px;
+  width: 230px;
   transition: transform .2s;
 }
 
 .sprinter:hover{
-  content: url("https://automotiveluxury.com/wp-content/uploads/2019/12/Mercedes-sprinter-interior-2020-1-2-710x375.jpg");
+  content: url("https://artourbus.com/img/cars/8/4.jpg");
   transform: scale(2);
   cursor: zoom-out;
-  margin-left: 100%;
-  margin-top: 10%
+  margin-top: 10%;
+  z-index: 999;
 }
 .grandis {
   margin: auto;
   display: block;
   max-width: 100%;
   max-height: 100%;
+  width: 230px;
   transition: transform .2s;
 }
 
@@ -141,8 +142,8 @@ p{
   content: url("https://lh3.googleusercontent.com/proxy/kuW7FvCYjiWVSlryrHzRkBcMdXQXrysVBefaP9xVv-ghv2ZcMQPVp_MhmVvYaOXfv3XEQE0NEuoRg6YCQh3gj_cDVowIAzuozc6BdoZQP4MTipYiKwvcfCOyveUo07gowS4GT3l4zXb6yr3kWIVmGPptCY4");
   transform: scale(2);
   cursor: zoom-out;
-  margin-left: 100%;
-  margin-top: 10%
+  margin-top: 10%;
+  z-index: 999;
 }
 
 .sienna {
@@ -150,6 +151,7 @@ p{
   display: block;
   max-width: 100%;
   max-height: 100%;
+  width: 230px;
   transition: transform .2s;
 }
 
@@ -157,6 +159,39 @@ p{
   content: url("https://i.pinimg.com/originals/39/f0/ba/39f0ba031266d329fdfbe34d9c101db9.jpg");
   transform: scale(2);
   cursor: zoom-out;
-  margin-left: 100%;
-  margin-top: 10%
+  margin-top: 10%;
+  z-index: 999;
+}
+
+.travego {
+  margin: auto;
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: 230px;
+  transition: transform .2s;
+}
+
+.travego:hover{
+  content: url("https://artourbus.com/img/cars/16/4.jpg");
+  transform: scale(2);
+  cursor: zoom-out;
+  margin-top: 10%;
+  z-index: 999;
+}
+.viano {
+  margin: auto;
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: 230px;
+  transition: transform .2s;
+}
+
+.viano:hover{
+  content: url("https://artourbus.com/img/cars/9/2.jpg");
+  transform: scale(2);
+  cursor: zoom-out;
+  margin-top: 10%;
+  z-index: 999;
 }

@@ -47,6 +47,7 @@ class App extends React.Component {
               <Route path="/services" component={Services} />
               <Route path="/tours" component={Tours} />
               <Route path="/contact" component={Contact} />
+              <Route path="/vehicles" component={Vehicles} />
               <Route path="/hotelsList" component={HotelsList} />
               <Route path="/carRental" component={CarRental} />
               <Route path="/user" component={User} />

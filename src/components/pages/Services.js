@@ -11,7 +11,6 @@ import { Link } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import ImageHeader from '../shared/ImageHeader';
 import Grid from '@material-ui/core/Grid';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 const useStyles = makeStyles({
     root: {
         maxWidth: 400,
@@ -27,7 +26,11 @@ const useStyles = makeStyles({
     },
     button: {
         backgroundColor: "#94c93d",
-        color: "#fff"
+        color: "#fff",
+        marginLeft: "27%"
+    },
+    pos: {
+        textAlign: "left"
     }
 });
 
