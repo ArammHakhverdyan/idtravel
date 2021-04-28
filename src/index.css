@@ -85,7 +85,17 @@ p{
   opacity: 0.8;
 }
 
+.MuiGrid-justify-xs-center {
+  background-image: url("https://i.pinimg.com/originals/d1/22/17/d1221753c3148b1995d1cce12bd75694.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.backk {
+  background-image: url("https://roadsup.com/wp-content/uploads/2019/01/Armenia_11_Mountains_RoadsUp.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 
+}
 .backg-img{
   background: url("../src/components/img/1.jpg") no-repeat center;
   min-height: 100vh;
@@ -102,4 +112,51 @@ p{
     left: 0;
     opacity: 0.5;
     background-color: #ffffff;
+}
+.sprinter {
+  margin: auto;
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: 300px;
+  transition: transform .2s;
+}
+
+.sprinter:hover{
+  content: url("https://automotiveluxury.com/wp-content/uploads/2019/12/Mercedes-sprinter-interior-2020-1-2-710x375.jpg");
+  transform: scale(2);
+  cursor: zoom-out;
+  margin-left: 100%;
+  margin-top: 10%
+}
+.grandis {
+  margin: auto;
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  transition: transform .2s;
+}
+
+.grandis:hover{
+  content: url("https://lh3.googleusercontent.com/proxy/kuW7FvCYjiWVSlryrHzRkBcMdXQXrysVBefaP9xVv-ghv2ZcMQPVp_MhmVvYaOXfv3XEQE0NEuoRg6YCQh3gj_cDVowIAzuozc6BdoZQP4MTipYiKwvcfCOyveUo07gowS4GT3l4zXb6yr3kWIVmGPptCY4");
+  transform: scale(2);
+  cursor: zoom-out;
+  margin-left: 100%;
+  margin-top: 10%
+}
+
+.sienna {
+  margin: auto;
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  transition: transform .2s;
+}
+
+.sienna:hover{
+  content: url("https://i.pinimg.com/originals/39/f0/ba/39f0ba031266d329fdfbe34d9c101db9.jpg");
+  transform: scale(2);
+  cursor: zoom-out;
+  margin-left: 100%;
+  margin-top: 10%
 }
