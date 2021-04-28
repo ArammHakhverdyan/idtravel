@@ -2,10 +2,13 @@ import React from 'react';
 import img from '../img/sevanLake.jpg';
 import img1 from '../img/apricot.jpg';
 import pic from '../img/pic.jpg';
+import { Button, makeStyles } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 
 
 const Description = () => {
+    const classes = useStyles()
     return (
 
         <div className="pages">
@@ -14,6 +17,7 @@ const Description = () => {
             <div className="text-container">
                     <h2>Find your perfect place to have a rest</h2>
                     <p>Experience pure serenity and see the Milky Way at night at Armenia's Sevan Lake</p>
+                    <Button className={classes.loginBtn} fullWidth={false} variant="contained" component={Link} to="/tours">Tours</Button>
                 </div>
             </div>
             <div className="img-container">
@@ -38,3 +42,15 @@ const Description = () => {
 
 
 export default Description
+
+
+const useStyles = makeStyles({
+    loginBtn: {
+        backgroundColor: "#94c93d",
+        color: "#fff",
+        margin: "5px",
+        '&:hover': {
+            backgroundColor: "#8cc927",
+        }
+    }
+})

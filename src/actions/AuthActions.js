@@ -42,5 +42,29 @@ export const signUp = (newUser) => {
     }
 }
 
+export const save = (changedUser) => {
+    const user = auth.currentUser
+    return (dispatch, getState) => {
+        user.updateProfile({
+            firstName: changedUser.firstName,
+            lastName: changedUser.lastName,
+            email: changedUser.email,
+        }).then((resp) => {
+            console.log(changedUser.firstName)
+            return db.collection('users').doc(resp.user.uid).update({
+                firstName: changedUser.firstName,
+                lastName: changedUser.lastName,
+                email: changedUser.email,
+            })
+        }).then(() => {
+            dispatch({ type: 'CHANGE_SUCCESS' })
+        }).catch(error => {
+            dispatch({ type: 'SIGNUP_ERROR', error })
+        })
+    }
+
+
+}
+
 
 

@@ -37,6 +37,11 @@ const authReducer = (state = initState, action) => {
                 ...state,
                 loggedInUser: action.user
             }
+        case "CHANGE_SUCCESS":
+            return {
+                ...state,
+                authError: null
+            }
 
         default:
             return state

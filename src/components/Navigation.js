@@ -42,6 +42,9 @@ function Navigation() {
                 <Button component={Link} to="/signIn" className={classes.linkBtn} variant="contained" color="primary">
                     Sign In
                 </Button>
+                <Button component={Link} to="/user" className={classes.linkBtn} variant="contained" color="primary">
+                    Sign In
+                </Button>
             </List>
         </>
     )

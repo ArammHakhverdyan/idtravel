@@ -1,15 +1,11 @@
 import React from 'react';
-import { Container, Box, Typography, Paper, Button } from '@material-ui/core/';
 import Carousel from 'react-material-ui-carousel'
-import CarouselItem from '../CarouselItems'
 import img from '../img/1.jpg'
 import img2 from '../img/2.jpg'
 import img3 from '../img/3.jpg'
 import img4 from '../img/4.jpg'
 import img5 from '../img/5.jpg'
 import Description from '../info/description';
-
-
 
 
 
@@ -50,7 +46,7 @@ function Home(props) {
 function Item(props) {
     return (
         <div>
-            <img className="carouselItemImg" alt="photo" src={props.item.img} />
+            <img className="carouselItemImg" alt="places" src={props.item.img} />
             <p>{props.item.description}</p>
         </div>
     )

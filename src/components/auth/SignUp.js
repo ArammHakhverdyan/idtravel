@@ -1,61 +1,50 @@
-import React, { Component } from 'react';
+import { Box, Button, Container, makeStyles, TextField, Typography } from '@material-ui/core';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import { signUp } from '../../actions/AuthActions';
 
-class SignUp extends Component {
-    state = {
+const SignUp = (props) => {
+    const classes = useStyles()
+    const { auth, authError } = props;
+    const [value, setValue] = useState({
         email: "",
         password: "",
         firstName: "",
         lastName: ""
-    }
+    });
 
-    handleChange = (e) => {
-        this.setState({
+
+
+    const handleChange = (e) => {
+        setValue({
+            ...value,
             [e.target.id]: e.target.value
         })
     }
-    handleSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        this.props.signUp(this.state)
+        props.signUp(value)
     }
 
-    render() {
-        const { auth, authError } = this.props;
-        if (auth.uid) return <Redirect to='/' />
-        return (
-            <div className="container">
-                <form onSubmit={this.handleSubmit} className="white">
-                    <h5 className="grey-text text-darken-3">Sign Up</h5>
-                    <div className="input-field">
-                        <label htmlFor="email">Email</label>
-                        <input type="email" id="email" onChange={this.handleChange}></input>
-                    </div>
-                    <div className="input-field">
-                        <label htmlFor="password">Password</label>
-                        <input type="password" id="password" onChange={this.handleChange}></input>
-                    </div>
-                    <div className="input-field">
-                        <label htmlFor="firstName">First Name</label>
-                        <input type="text" id="firstName" onChange={this.handleChange}></input>
-                    </div>
-                    <div className="input-field">
-                        <label htmlFor="lastName">Last Name</label>
-                        <input type="text" id="lastName" onChange={this.handleChange}></input>
-                    </div>
-                    <div className="input-field">
-                        <button className="btn pink lighten-1 z-depth-0">Sign Up</button>
-                        <div className="red-text center">
-                            {authError ? <p>{authError}</p> : null}
-                        </div>
-                    </div>
-                </form>
+    if (auth.uid) return <Redirect to='/' />
+    return (
 
-            </div>
-        )
-    }
+        <Container>
+            <Box py={5} className={classes.loginForm} textAlign="center">
+                <Typography variant="h4" component="h1" gutterBottom>Sign Up</Typography>
+                {authError && <Typography color="secondary" gutterBottom>{authError}</Typography>}
+                <TextField id="email" fullWidth={true} label="Email" variant="outlined" value={value.email} onChange={handleChange} />
+                <TextField type="password" id="password" fullWidth={true} label="Password" variant="outlined" value={value.password} onChange={handleChange} />
+                <TextField id="firstName" fullWidth={true} label="FirstName" variant="outlined" value={value.firstName} onChange={handleChange} />
+                <TextField id="lastName" fullWidth={true} label="LastName" variant="outlined" value={value.lastName} onChange={handleChange} />
+                <Button className={classes.loginBtn} fullWidth={true} variant="contained" onClick={handleSubmit}>Sign Up</Button>
+            </Box>
+        </Container>
+
+    )
 }
+
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -72,3 +61,22 @@ const mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp)
+
+
+
+const useStyles = makeStyles({
+    loginForm: {
+        maxWidth: "400px",
+        margin: "auto",
+        '& .MuiTextField-root': {
+            marginBottom: '20px',
+        },
+    },
+    loginBtn: {
+        backgroundColor: "#94c93d",
+        color: "#fff",
+        '&:hover': {
+            backgroundColor: "#8cc927",
+        }
+    },
+});

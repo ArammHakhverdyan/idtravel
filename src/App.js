@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 import HotelsList from './components/pages/HotelsList';
 import CarRental from './components/pages/CarRental';
 import Vehicles from './Vehicles';
+import User from './components/pages/User';
 
 
 class App extends React.Component {
@@ -49,6 +50,7 @@ class App extends React.Component {
               <Route path="/hotelsList" component={HotelsList} />
               <Route path="/carRental" component={CarRental} />
               <Route path="/vehicles" component={Vehicles} />
+              <Route path="/user" component={User} />
               <Route path="/" exact component={Home} />
               <Redirect to="/" />
             </Switch>
