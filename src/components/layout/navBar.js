@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { List, makeStyles, Button } from '@material-ui/core';
+import { Box, makeStyles, Button } from '@material-ui/core';
 import { connect } from 'react-redux'
 import SignedInLInks from './signedInLInks'
 import SignedOutLInks from './signedOutLinks'
@@ -16,7 +16,7 @@ const Navbar = (props) => {
     const links = auth ? <SignedInLInks /> : <SignedOutLInks />
 
     return (
-        <List className={classes.navCont}>
+        <Box className={classes.navCont}>
             <Button component={Link} to="/aboutUs" className={classes.linkText}>
                 About Us
             </Button>
@@ -30,7 +30,7 @@ const Navbar = (props) => {
                 Contact
             </Button>
             {links}
-        </List>
+        </Box>
     )
 }
 

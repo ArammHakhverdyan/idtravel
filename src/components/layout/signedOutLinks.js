@@ -27,14 +27,14 @@ const useStyles = makeStyles({
         borderColor: "#94c93d",
         color: "#94c93d",
         '&:hover': {
-            borderColor: "#8cc927",
+            borderColor: "#9bd934",
         },
     },
     loginBtn: {
         marginLeft: "15px",
         backgroundColor: "#94c93d",
         '&:hover': {
-            backgroundColor: "#8cc927",
+            backgroundColor: "#9bd934",
         },
     }
 });

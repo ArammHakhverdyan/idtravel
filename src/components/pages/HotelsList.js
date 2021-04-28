@@ -8,7 +8,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import CommentIcon from '@material-ui/icons/Comment';
-import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,10 +16,10 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
 }));
-function info () {
+function info() {
   alert("Information about hotel")
 }
-export default function HotelsList() { 
+export default function HotelsList() {
 
   const classes = useStyles();
   const [checked, setChecked] = React.useState("");
@@ -39,7 +38,7 @@ export default function HotelsList() {
   };
 
   return (
-    <List className={classes.root} /*component={Link}*/ /*to="/HotelsList" */className={classes.linkText}>
+    <List className={classes.root} /*component={Link}*/ /*to="/HotelsList" */>
       {[0, 1, 2, 3].map((value) => {
         const labelId = `checkbox-list-label-${value}`;
 

@@ -55,7 +55,7 @@ const useStyles = makeStyles({
         backgroundColor: "#94c93d",
         color: "#fff",
         '&:hover': {
-            backgroundColor: "#8cc927",
+            backgroundColor: "#9bd934",
         }
     },
     linkText: {

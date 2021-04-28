@@ -15,7 +15,8 @@ const useStyles = makeStyles({
     root: {
         maxWidth: 400,
         marginRight: 10,
-        marginTop: 10
+        marginTop: 30,
+        marginBottom: 30,
     },
     media: {
         height: 300,
@@ -27,7 +28,10 @@ const useStyles = makeStyles({
     button: {
         backgroundColor: "#94c93d",
         color: "#fff",
-        marginLeft: "27%"
+        margin: "10px auto",
+        "&:hover": {
+            backgroundColor: "#9bd934",
+        }
     },
     pos: {
         textAlign: "left"
@@ -40,7 +44,6 @@ function Services() {
     const tourPackages = "https://c4.wallpaperflare.com/wallpaper/205/801/285/tunnel-arch-railway-bricks-wallpaper-preview.jpg"
     const hotelReservation = "https://c1.wallpaperflare.com/preview/590/449/282/forest-mountains-landscape-hotel.jpg"
     const transportImg = "https://c4.wallpaperflare.com/wallpaper/742/363/803/armenia-shaghap-wallpaper-preview.jpg"
-    const backImg = "https://c4.wallpaperflare.com/wallpaper/239/598/420/nature-landscape-hills-mist-wallpaper-preview.jpg"
 
     return (
         <>
@@ -50,15 +53,15 @@ function Services() {
             <Grid container justify="center" spacing={0} >
                 <Card className={classes.root} variant="outlined">
                     <CardActionArea component={Link} to="/tours">
-                   
+
                         <CardMedia
                             className={classes.media}
                             image={tourPackages}
                             title="See Tours"
-                            
+
                         ></CardMedia>
                         <CardContent title="See Tours">
-                        
+
                             <Typography gutterBottom variant="h5" component="h2">
                                 TOUR PACKAGES
           </Typography>
@@ -70,13 +73,13 @@ function Services() {
                                 We offer the following types of tours to Armenia:
         </Typography>
                             <br />
-                            
+
                         </CardContent>
-                        
+
                     </CardActionArea>
                     <CardActions>
-                    
-                         <Button
+
+                        <Button
                             component={Link} to="/tours"
                             variant="contained"
                             color="primary"

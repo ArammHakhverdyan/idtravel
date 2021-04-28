@@ -77,7 +77,7 @@ const User = (props) => {
                         image='../img/user.png'
                     />
                     <CardContent>
-                        <img className={classes.userImg} src={userImg} />
+                        <img className={classes.userImg} src={userImg} alt="" />
                         <Typography>
                             {fullName}
                         </Typography>
