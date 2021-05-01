@@ -1,20 +1,58 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Box, Typography, Grid } from '@material-ui/core/';
 import ImageHeader from '../shared/ImageHeader';
-import aboutHead from '../../assets/images/garni.jpg';
-import aboutUs from '../../assets/images/aboutUs.jpg';
 import { LoyaltyOutlined, ExploreOutlined, CardTravelOutlined } from '@material-ui/icons';
+import { storageRef } from '../../config/config';
+
 
 
 
 function AboutUs() {
+    const [url, setUrl] = useState(["", ""])
+
+    useEffect(() => {
+        const garni = storageRef.child('Images/aboutUs/garni.jpg')
+        const aboutUs = storageRef.child('Images/aboutUs/aboutUs.jpg')
+
+        garni.getDownloadURL().then((downloadURL) => {
+            setUrl((old) => {
+                const newSt = [...old];
+                newSt[0] = downloadURL;
+                return newSt;
+            });
+
+        }).catch((error) => {
+            switch (error.code) {
+                case 'storage/object-not-found':
+                    // File doesn't exist
+                    break;
+            }
+        });
+        aboutUs.getDownloadURL().then((downloadURL) => {
+            setUrl((old) => {
+                const newSt = [...old];
+                newSt[1] = downloadURL;
+                return newSt;
+            });
+        }).catch((error) => {
+            switch (error.code) {
+                case 'storage/object-not-found':
+                    // File doesn't exist
+                    break;
+            }
+        })
+    })
+
+
+
+
     return (
         <>
-            <ImageHeader text="About Us" backgroundImage={aboutHead} />
+            <ImageHeader text="About Us" backgroundImage={url[0]} />
             <Container>
                 <Grid style={{ padding: "60px 0" }} container spacing={3}>
                     <Grid item sm={6}>
-                        <img style={{ maxWidth: "100%" }} src={aboutUs} alt="" />
+                        <img style={{ maxWidth: "100%" }} src={url[1]} alt="" />
                     </Grid>
                     <Grid item sm={6}>
                         <Typography variant="h4" gutterBottom>

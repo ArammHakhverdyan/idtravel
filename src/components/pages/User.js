@@ -1,73 +1,45 @@
 import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Card, CardActionArea, CardContent, CardMedia, Divider, List, ListItem, ListItemIcon, ListItemText, makeStyles, TextField, Typography } from '@material-ui/core'
 import React, { useEffect, useState } from 'react';
-import { connect, useSelector } from 'react-redux';
-import { Redirect } from 'react-router';
-import { auth, db } from '../../config/config';
-import { selectLoggedInUserId } from '../../redux/selectors';
+import { connect, useDispatch, useSelector } from 'react-redux';
+import { selectLoggedInUserId, selectLoggedInUserInfo } from '../../redux/selectors';
 import userImg from '../img/user.png';
 import InboxIcon from '@material-ui/icons/Inbox';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { save } from '../../actions/AuthActions';
+import { updateLoggedInUserInfo } from '../../actions/AuthActions';
 
 
 
 const User = (props) => {
     const classes = useStyles()
+    const dispatch = useDispatch()
     const uId = useSelector(selectLoggedInUserId);
-    const [fullName, setFullName] = useState('');
-    // const [firstName, setFirstName] = useState('');
-    // const [lastName, setLastName] = useState('');
-    // const [email, setEmail] = useState('');
-    // const [value, setValue] = useState({})
-    const [value, setValue] = useState({
-        email: "",
-        password: "",
-        firstName: "",
-        lastName: ""
-    });
+    const userInfo = useSelector(selectLoggedInUserInfo) || {};
+    const [fullName, setFullName] = useState(`${userInfo.firstName} ${userInfo.lastName}`);
+    const [firstName, setFirstName] = useState(userInfo.firstName || "");
+    const [lastName, setLastName] = useState(userInfo.lastName || "");
+    const [email, setEmail] = useState(userInfo.email || "");
 
-    useEffect(() => {
-        if (uId) {
-            const docRef = db.collection('users').doc(uId);
-            docRef.get().then((doc) => {
-                setFullName(doc.data()?.firstName + " " + doc.data()?.lastName);
-                // setFirstName(doc.data()?.firstName);
-                // setLastName(doc.data()?.lastName);
-                // setEmail(doc.data()?.email)
-            })
-        }
-    }, [uId])
-
-    // const firstNameChange = (e) => {
-    //     setFirstName(e.target.firstName);
-    // }
-    // const lastNameChange = (e) => {
-    //     setLastName(e.target.lastName);
-    // }
-    // const emailChange = (e) => {
-    //     setEmail(e.target.email);
-    // }
-
-    const handleChange = (e) => {
-        setValue({
-            ...value.firstName,
-            [e.target.id]: e.target.state
-        })
+    const firstNameChange = (e) => {
+        setFirstName(e.target.value);
     }
+    const lastNameChange = (e) => {
+        setLastName(e.target.value);
+    }
+    const emailChange = (e) => {
+        setEmail(e.target.value);
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        props.save(value)
+
+        if (uId) {
+            const newInfo = { email, firstName, lastName, initials: firstName[0] + lastName[0] }
+            dispatch(updateLoggedInUserInfo(newInfo))
+        }
     }
 
 
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     props.save(firstName)
-    // }
-
-    if (auth.loggedInUser === null) return <Redirect to='/' />
     return (
         <div className="backg-img">
             <Card className={classes.userImgCont} variant="outlined">
@@ -121,9 +93,9 @@ const User = (props) => {
                     </AccordionSummary>
                     <AccordionDetails>
                         <Box py={3} textAlign="center" className={classes.loginForm}>
-                            <TextField fullWidth={true} id="name" label="Name" value={value.firstName} onChange={handleChange} variant="outlined" />
-                            <TextField fullWidth={true} id="surname" label="Surname" value={value.lastName} variant="outlined" onChange={handleChange} />
-                            <TextField fullWidth={true} id="email" label="Email" value={value.email} variant="outlined" onChange={handleChange} />
+                            <TextField id="name" label="Name" value={firstName} onChange={firstNameChange} variant="outlined" />
+                            <TextField id="surname" label="Surname" value={lastName} variant="outlined" onChange={lastNameChange} />
+                            <TextField id="email" label="Email" value={email} variant="outlined" onChange={emailChange} />
                             <Button className={classes.loginBtn} fullWidth={false} variant="contained" onClick={handleSubmit}>Save</Button>
                         </Box>
                     </AccordionDetails>
@@ -136,21 +108,8 @@ const User = (props) => {
 }
 
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        save: (creds) => dispatch(save(creds))
-    }
-}
 
-const mapStateToProps = (state) => {
-    return {
-        auth: state.auth,
-        // authError: state.auth.authError
-    }
-}
-
-
-export default connect(mapDispatchToProps, mapStateToProps)(User)
+export default User
 
 
 

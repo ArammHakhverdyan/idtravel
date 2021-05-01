@@ -37,10 +37,13 @@ const authReducer = (state = initState, action) => {
                 ...state,
                 loggedInUser: action.user
             }
-        case "CHANGE_SUCCESS":
+        case "UPDATE_LOGGEDIN_USER_INFO":
             return {
                 ...state,
-                authError: null
+                loggedInUser: {
+                    ...state.loggedInUser,
+                    info: action.payload
+                }
             }
 
         default:

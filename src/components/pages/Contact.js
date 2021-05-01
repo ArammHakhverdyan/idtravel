@@ -1,14 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles, Container, Box, TextField, Button } from '@material-ui/core/';
 import ImageHeader from '../shared/ImageHeader';
 import jermuk from '../../assets/images/jermuk.jpg';
+import { storageRef } from '../../config/config';
 
 function Contact() {
     const classes = useStyles();
+    const [url, setUrl] = useState("")
+
+    useEffect(() => {
+        const jermuk = storageRef.child('Images/jermuk.jpg')
+
+        jermuk.getDownloadURL().then((downloadURL) => {
+            setUrl(() => {
+                const newSt = downloadURL
+                return newSt;
+            });
+
+        }).catch((error) => {
+            switch (error.code) {
+                case 'storage/object-not-found':
+                    // File doesn't exist
+                    break;
+            }
+        })
+    })
+
+
 
     return (
         <>
-            <ImageHeader text="Contact Us" backgroundImage={jermuk} />
+            <ImageHeader text="Contact Us" backgroundImage={url} />
             <Container>
                 <Box py={5} className={classes.contactForm}>
                     <TextField fullWidth={true} label="Name" variant="outlined" />
