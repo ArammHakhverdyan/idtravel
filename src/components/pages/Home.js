@@ -24,7 +24,6 @@ function Home() {
                 }
             })
         }
-
         storageRef.child('/Images/carouselImg').listAll().then(function (result) {
             result.items.forEach(function (imageRef) {
                 displayImage(imageRef)

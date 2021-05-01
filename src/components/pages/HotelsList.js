@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import ImageHeader from '../shared/ImageHeader';
 import { Grid } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import { storageRef } from '../../config/config';
 
 const useStyles = makeStyles({
   root: {
@@ -26,17 +27,46 @@ const useStyles = makeStyles({
 
 export default function MediaCard() {
   const classes = useStyles();
+  const [url, setUrl] = useState(["", "", "", "", "", "", ""])
+
+  useEffect(() => {
+    const a = storageRef.child('Images/hotels/hotelsList-header.jpg')
+    const b = storageRef.child('Images/hotels/yerevan.jpg')
+    const c = storageRef.child('Images/hotels/tsaghkadzor.jpg')
+    const d = storageRef.child('Images/hotels/dilijan.jpg')
+    const e = storageRef.child('Images/hotels/sevan.jpg')
+    const f = storageRef.child('Images/hotels/jermuk.jpg')
+    const g = storageRef.child('Images/hotels/goris.jpg')
+
+    const images = [a, b, c, d, e, f, g]
+
+    images.map(function (item, index) {
+      item.getDownloadURL().then((downloadURL) => {
+        setUrl((old) => {
+          const newSt = [...old];
+          newSt[index] = downloadURL;
+          return newSt;
+        });
+      }).catch((error) => {
+        switch (error.code) {
+          case 'storage/object-not-found':
+            break;
+        }
+      })
+    })
+  }, [])
+
 
   return (
     <>
-      <ImageHeader text="Hotels, We cooperate with the following hotels:" backgroundImage={"https://c1.wallpaperflare.com/preview/590/449/282/forest-mountains-landscape-hotel.jpg"} />
+      <ImageHeader text="Hotels, We cooperate with the following hotels:" backgroundImage={url[0]} />
       <Grid container justify="center" spacing={0} >
-{/* ---------------------------Yerevan----- */}
+        {/* ---------------------------Yerevan----- */}
         <Card className={classes.root}>
           <CardActionArea component={Link} to="/yerevanHotels">
             <CardMedia
               className={classes.media}
-              image="https://wallpaperaccess.com/full/2898793.jpg"
+              image={url[1]}
               title="See hotels in Yerevan"
             />
             <CardContent>
@@ -44,12 +74,12 @@ export default function MediaCard() {
                 Yerevan
           </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
-              Friendly locals, History, City walks
+                Friendly locals, History, City walks
           </Typography>
             </CardContent>
           </CardActionArea>
           <CardActions>
-            
+
             <Button size="small" color="primary">
               Learn More
         </Button>
@@ -60,20 +90,20 @@ export default function MediaCard() {
           <CardActionArea>
             <CardMedia
               className={classes.media}
-              image="http://rimatravel.info/wp-content/uploads/2014/01/tsaghkadzor-1.jpg"
+              image={url[2]}
               title="See hotels in Tsaghkadzor"
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
-              Tsaghkadzor
+                Tsaghkadzor
           </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
-              Clean air, Mountains, Downhill skiing
+                Clean air, Mountains, Downhill skiing
           </Typography>
             </CardContent>
           </CardActionArea>
           <CardActions>
-            
+
             <Button size="small" color="primary">
               Learn More
         </Button>
@@ -84,7 +114,7 @@ export default function MediaCard() {
           <CardActionArea>
             <CardMedia
               className={classes.media}
-              image="https://img5.goodfon.com/wallpaper/nbig/a/aa/gory-armeniia-zakat-dilijan-valley.jpg"
+              image={url[3]}
               title="Contemplative Reptile"
             />
             <CardContent>
@@ -92,12 +122,12 @@ export default function MediaCard() {
                 Dilijan
           </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
-              Nature, Clean air, Mountains
+                Nature, Clean air, Mountains
           </Typography>
             </CardContent>
           </CardActionArea>
           <CardActions>
-           
+
             <Button size="small" color="primary">
               Learn More
         </Button>
@@ -108,7 +138,7 @@ export default function MediaCard() {
           <CardActionArea>
             <CardMedia
               className={classes.media}
-              image="https://img4.goodfon.com/wallpaper/nbig/f/8c/sevana-vanq-sevan-armenia-hayastan.jpg"
+              image={url[4]}
               title="Contemplative Reptile"
             />
             <CardContent>
@@ -121,7 +151,7 @@ export default function MediaCard() {
             </CardContent>
           </CardActionArea>
           <CardActions>
-           
+
             <Button size="small" color="primary">
               Learn More
         </Button>
@@ -132,7 +162,7 @@ export default function MediaCard() {
           <CardActionArea>
             <CardMedia
               className={classes.media}
-              image="https://theculturetrip.com/wp-content/uploads/2018/07/1024px-jermuk_waterfall4.jpg"
+              image={url[5]}
               title="Contemplative Reptile"
             />
             <CardContent>
@@ -145,7 +175,7 @@ export default function MediaCard() {
             </CardContent>
           </CardActionArea>
           <CardActions>
-            
+
             <Button size="small" color="primary">
               Learn More
         </Button>
@@ -156,7 +186,7 @@ export default function MediaCard() {
           <CardActionArea>
             <CardMedia
               className={classes.media}
-              image="https://img4.goodfon.com/wallpaper/nbig/2/c6/tatev-armenia-goris-hayastan-kapan.jpg"
+              image={url[6]}
               title="Contemplative Reptile"
             />
             <CardContent>
@@ -164,7 +194,7 @@ export default function MediaCard() {
                 Goris
           </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
-              Nature, Mountains, Scenery
+                Nature, Mountains, Scenery
           </Typography>
             </CardContent>
           </CardActionArea>

@@ -9,54 +9,32 @@ const Description = () => {
     const classes = useStyles();
     const [url, setUrl] = useState(["", "", ""])
 
+
     useEffect(() => {
-        const sevanLake = storageRef.child('Images/description/sevanLake.jpg')
-        const apricot = storageRef.child('Images/description/apricot.jpg')
-        const pic = storageRef.child('Images/description/pic.jpg')
+        const a = storageRef.child('Images/description/sevanLake.jpg')
+        const b = storageRef.child('Images/description/apricot.jpg')
+        const c = storageRef.child('Images/description/pic.jpg')
 
-        sevanLake.getDownloadURL().then((downloadURL) => {
-            setUrl((old) => {
-                const newSt = [...old];
-                newSt[0] = downloadURL;
-                return newSt;
-            });
+        const images = [a, b, c]
 
-        }).catch((error) => {
-            switch (error.code) {
-                case 'storage/object-not-found':
-                    // File doesn't exist
-                    break;
-            }
-        })
-        apricot.getDownloadURL().then((downloadURL) => {
-            setUrl((old) => {
-                const newSt = [...old];
-                newSt[1] = downloadURL;
-                return newSt;
-            });
-
-        }).catch((error) => {
-            switch (error.code) {
-                case 'storage/object-not-found':
-                    // File doesn't exist
-                    break;
-            }
-        })
-        pic.getDownloadURL().then((downloadURL) => {
-            setUrl((old) => {
-                const newSt = [...old];
-                newSt[2] = downloadURL;
-                return newSt;
+        images.map(function (item, index) {
+            item.getDownloadURL().then((downloadURL) => {
+                setUrl((old) => {
+                    const newSt = [...old];
+                    newSt[index] = downloadURL;
+                    return newSt;
+                });
+            }).catch((error) => {
+                switch (error.code) {
+                    case 'storage/object-not-found':
+                        break;
+                }
             })
-        }).catch((error) => {
-            switch (error.code) {
-                case 'storage/object-not-found':
-                    // File doesn't exist
-                    break;
-            }
         })
-
     }, [])
+
+
+
     return (
 
         <div className="pages">
