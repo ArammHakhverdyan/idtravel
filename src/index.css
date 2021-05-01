@@ -86,7 +86,7 @@ p{
 }
 
 .MuiGrid-justify-xs-center {
-  background-image: url("https://i.pinimg.com/originals/d1/22/17/d1221753c3148b1995d1cce12bd75694.jpg");
+  /* background-image: url("https://i.pinimg.com/originals/d1/22/17/d1221753c3148b1995d1cce12bd75694.jpg"); */
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -139,7 +139,7 @@ p{
 }
 
 .grandis:hover{
-  content: url("https://lh3.googleusercontent.com/proxy/kuW7FvCYjiWVSlryrHzRkBcMdXQXrysVBefaP9xVv-ghv2ZcMQPVp_MhmVvYaOXfv3XEQE0NEuoRg6YCQh3gj_cDVowIAzuozc6BdoZQP4MTipYiKwvcfCOyveUo07gowS4GT3l4zXb6yr3kWIVmGPptCY4");
+  content: url("https://img.drivemag.net/jato_car_photos/MITSUBISHI%2FGRANDIS%2FMinivan%2F5%2F2004%2Finterior-photos%2Fo%2Fmitsubishi-grandis-minivan-5-doors-2004-model-interior-photos-0.jpg");
   transform: scale(2);
   cursor: zoom-out;
   margin-top: 10%;

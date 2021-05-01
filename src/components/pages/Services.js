@@ -42,7 +42,7 @@ function Services() {
     const classes = useStyles();
     const servicesImg = "https://c4.wallpaperflare.com/wallpaper/348/100/853/nature-landscape-mist-trees-wallpaper-preview.jpg"
     const tourPackages = "https://c4.wallpaperflare.com/wallpaper/205/801/285/tunnel-arch-railway-bricks-wallpaper-preview.jpg"
-    const hotelReservation = "https://c1.wallpaperflare.com/preview/590/449/282/forest-mountains-landscape-hotel.jpg"
+    const hotelReservation = "https://www.studyandgoabroad.com/wp-content/uploads/2016/10/tourism.jpg"
     const transportImg = "https://c4.wallpaperflare.com/wallpaper/742/363/803/armenia-shaghap-wallpaper-preview.jpg"
 
     return (
@@ -92,7 +92,7 @@ function Services() {
                 </Card>
 
                 <Card className={classes.root} variant="outlined">
-                    <CardActionArea component={Link} to="/contact">
+                    <CardActionArea component={Link} to="/hotelsList">
                         <CardMedia
                             className={classes.media}
                             image={hotelReservation}
