@@ -10,7 +10,7 @@ const TourTimeLine = (props) => {
     return (
         <Timeline align="alternate">
             {data.map((item) =>
-                <TimelineItem>
+                <TimelineItem key={item.id}>
                     <TimelineOppositeContent>
                         <Typography variant="body1" color="textSecondary">
                             Day {item.day}

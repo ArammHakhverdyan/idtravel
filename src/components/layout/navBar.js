@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { Box, makeStyles, Button } from '@material-ui/core';
 import { connect } from 'react-redux'
 import SignedInLInks from './signedInLInks'
@@ -12,21 +12,20 @@ const Navbar = (props) => {
     const classes = useStyles();
 
     const { auth } = props;
-    console.log(auth)
     const links = auth ? <SignedInLInks /> : <SignedOutLInks />
 
     return (
         <Box className={classes.navCont}>
-            <Button component={Link} to="/aboutUs" className={classes.linkText}>
+            <Button component={NavLink} to="/aboutUs" activeClassName={classes.selt} className={classes.linkText}>
                 About Us
             </Button>
-            <Button component={Link} to="/services" className={classes.linkText}>
+            <Button component={NavLink} to="/services" activeClassName={classes.selt} className={classes.linkText}>
                 Services
             </Button>
-            <Button component={Link} to="/tours" className={classes.linkText}>
+            <Button component={NavLink} to="/tours" activeClassName={classes.selt} className={classes.linkText}>
                 Tours
             </Button>
-            <Button component={Link} to="/contact" className={classes.linkText}>
+            <Button component={NavLink} to="/contact" activeClassName={classes.selt} className={classes.linkText}>
                 Contact
             </Button>
             {links}
@@ -35,7 +34,6 @@ const Navbar = (props) => {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
         auth: state.auth.loggedInUser,
     }
@@ -51,6 +49,9 @@ const useStyles = makeStyles({
         margin: "0px 8px",
         fontSize: "18px",
         textTransform: "none",
+    },
+    selt: {
+        color: "#94c93d"
     },
     navCont: {
         display: "flex",

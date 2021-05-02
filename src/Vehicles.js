@@ -41,7 +41,7 @@ export default function ComplexGrid() {
 
     const images = [a, b, c, d, e, f]
 
-    images.map(function (item, index) {
+    images.map((item, index) =>
       item.getDownloadURL().then((downloadURL) => {
         setUrl((old) => {
           const newSt = [...old];
@@ -52,9 +52,10 @@ export default function ComplexGrid() {
         switch (error.code) {
           case 'storage/object-not-found':
             break;
+          default:
         }
       })
-    })
+    )
   }, [])
 
   return (

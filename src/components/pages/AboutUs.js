@@ -24,8 +24,8 @@ function AboutUs() {
         }).catch((error) => {
             switch (error.code) {
                 case 'storage/object-not-found':
-                    // File doesn't exist
                     break;
+                default:
             }
         });
         aboutUs.getDownloadURL().then((downloadURL) => {
@@ -37,14 +37,11 @@ function AboutUs() {
         }).catch((error) => {
             switch (error.code) {
                 case 'storage/object-not-found':
-                    // File doesn't exist
                     break;
+                default:
             }
         })
     })
-
-
-
 
     return (
         <>

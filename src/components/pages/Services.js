@@ -50,7 +50,7 @@ function Services() {
         const d = storageRef.child('Images/services/transport.jpg')
         const images = [a, b, c, d]
 
-        images.map(function (item, index) {
+        images.map((item, index) =>
             item.getDownloadURL().then((downloadURL) => {
                 setUrl((old) => {
                     const newSt = [...old];
@@ -61,9 +61,10 @@ function Services() {
                 switch (error.code) {
                     case 'storage/object-not-found':
                         break;
+                    default:
                 }
             })
-        })
+        )
     }, [])
 
     return (
@@ -85,21 +86,19 @@ function Services() {
 
                             <Typography gutterBottom variant="h5" component="h2">
                                 TOUR PACKAGES
-          </Typography>
+                            </Typography>
                             <Typography className={classes.pos} color="textSecondary">
                                 The company "ID Travel" offers travel packages designed by professionals,
                                 including accommodation in hotels in Yerevan and other Armenian regions,
                                 guide services, transfers on comfortable transport, meals,
                                 entrance tickets to museums and much more.
                                 We offer the following types of tours to Armenia:
-        </Typography>
+                            </Typography>
                             <br />
-
                         </CardContent>
 
                     </CardActionArea>
                     <CardActions>
-
                         <Button
                             component={Link} to="/tours"
                             variant="contained"
@@ -185,7 +184,4 @@ function Services() {
 
 }
 
-
-
-
-export default Services
+export default Services;

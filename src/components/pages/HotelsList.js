@@ -40,7 +40,7 @@ export default function MediaCard() {
 
     const images = [a, b, c, d, e, f, g]
 
-    images.map(function (item, index) {
+    images.map((item, index) =>
       item.getDownloadURL().then((downloadURL) => {
         setUrl((old) => {
           const newSt = [...old];
@@ -51,9 +51,10 @@ export default function MediaCard() {
         switch (error.code) {
           case 'storage/object-not-found':
             break;
+          default:
         }
       })
-    })
+    )
   }, [])
 
 
