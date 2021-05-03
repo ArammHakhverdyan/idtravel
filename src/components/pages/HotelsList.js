@@ -61,7 +61,7 @@ export default function MediaCard() {
 
   return (
     <>
-      <ImageHeader text="Hotels, We cooperate with the following hotels:" backgroundImage={url[0]} />
+      <ImageHeader text="Hotels" backgroundImage={url[0]} />
       <Grid container justify="center" spacing={0} >
         {/* ---------------------------Yerevan----- */}
         <Card className={classes.root}>
@@ -81,7 +81,6 @@ export default function MediaCard() {
             </CardContent>
           </CardActionArea>
           <CardActions>
-
             <Button size="small" color="primary">
               Learn More
         </Button>
@@ -89,7 +88,7 @@ export default function MediaCard() {
         </Card>
         {/* -----------------------------------Tsaghkadzor */}
         <Card className={classes.root}>
-          <CardActionArea>
+          <CardActionArea component={Link} to="/tsaghkadzorHotels">
             <CardMedia
               className={classes.media}
               image={url[2]}
@@ -113,7 +112,7 @@ export default function MediaCard() {
         </Card>
         {/* ----------------------Dilijan */}
         <Card className={classes.root}>
-          <CardActionArea>
+          <CardActionArea component={Link} to="/dilijanHotels">
             <CardMedia
               className={classes.media}
               image={url[3]}

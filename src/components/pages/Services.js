@@ -84,7 +84,7 @@ function Services() {
                             title="See Tours"
 
                         ></CardMedia>
-                        <CardContent title="See Tours">
+                        <CardContent title="See Tours" style={{height: "300px", overFlow: "hidden"}}>
 
                             <Typography gutterBottom variant="h5" component="h2">
                                 TOUR PACKAGES
@@ -120,7 +120,7 @@ function Services() {
                             image={url[2]}
                             title="Book Hotel"
                         />
-                        <CardContent title="Book Hotel">
+                        <CardContent title="Book Hotel" style={{height: "300px", overFlow: "hidden"}}>
                             <Typography gutterBottom variant="h5" component="h2">
                                 HOTEL RESERVATION
           </Typography>
@@ -156,7 +156,7 @@ function Services() {
                             image={url[3]}
                             title="See Vehicles"
                         />
-                        <CardContent title="See Vehicles">
+                        <CardContent title="See Vehicles" style={{height: "300px", overFlow: "hidden"}}>
                             <Typography gutterBottom variant="h5" component="h2">
                                 TRANSPORT
           </Typography>
