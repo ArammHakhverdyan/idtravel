@@ -28,6 +28,9 @@ const Description = () => {
                 switch (error.code) {
                     case 'storage/object-not-found':
                         break;
+                    default: {
+                        return
+                    }
                 }
             })
         })

@@ -51,6 +51,8 @@ export default function MediaCard() {
         switch (error.code) {
           case 'storage/object-not-found':
             break;
+          default:
+            return
         }
       })
     })

@@ -1,4 +1,3 @@
-import { createAction } from "redux-actions";
 import { auth, db } from "../config/config";
 import { selectLoggedInUserId } from "../redux/selectors";
 

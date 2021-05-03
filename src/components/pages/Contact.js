@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles, Container, Box, TextField, Button } from '@material-ui/core/';
 import ImageHeader from '../shared/ImageHeader';
-import jermuk from '../../assets/images/jermuk.jpg';
 import { db, storageRef } from '../../config/config';
 
 
@@ -24,9 +23,11 @@ function Contact() {
                 case 'storage/object-not-found':
                     // File doesn't exist
                     break;
+                default:
+                    return
             }
         })
-    })
+    }, [])
 
 
 

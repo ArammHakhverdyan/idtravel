@@ -19,8 +19,9 @@ function Home() {
             }).catch((error) => {
                 switch (error.code) {
                     case 'storage/object-not-found':
-                        // File doesn't exist
-                        break;
+                        break
+                    default:
+                        return
                 }
             })
         }
@@ -33,6 +34,9 @@ function Home() {
                 case 'storage/object-not-found':
                     // File doesn't exist
                     break;
+                default: {
+                    return
+                }
             }
         })
     }, [])

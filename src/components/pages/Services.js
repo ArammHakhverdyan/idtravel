@@ -61,6 +61,9 @@ function Services() {
                 switch (error.code) {
                     case 'storage/object-not-found':
                         break;
+                    default: {
+                        return
+                    }
                 }
             })
         })

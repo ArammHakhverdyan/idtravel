@@ -52,6 +52,8 @@ export default function ComplexGrid() {
         switch (error.code) {
           case 'storage/object-not-found':
             break;
+          default:
+            return
         }
       })
     })
