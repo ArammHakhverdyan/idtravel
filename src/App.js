@@ -16,6 +16,7 @@ import CarRental from './components/pages/CarRental';
 import Vehicles from './Vehicles';
 import User from './components/pages/User';
 import YerevanHotel from './components/hotels/YerevanHotels'
+import TourView from './components/tour/TourView';
 
 
 class App extends React.Component {
@@ -46,7 +47,8 @@ class App extends React.Component {
             <Switch>
               <Route path="/aboutUs" component={AboutUs} />
               <Route path="/services" component={Services} />
-              <Route path="/tours" component={Tours} />
+              <Route path="/tours" exact component={Tours} />
+              <Route path="/tours/:id" component={TourView} />
               <Route path="/contact" component={Contact} />
               <Route path="/vehicles" component={Vehicles} />
               <Route path="/hotelsList" component={HotelsList} />
@@ -60,7 +62,8 @@ class App extends React.Component {
             <Switch>
               <Route path="/aboutUs" component={AboutUs} />
               <Route path="/services" component={Services} />
-              <Route path="/tours" component={Tours} />
+              <Route path="/tours" exact component={Tours} />
+              <Route path="/tours/:id" component={TourView} />
               <Route path="/contact" component={Contact} />
               <Route path="/vehicles" component={Vehicles} />
               <Route path="/hotelsList" component={HotelsList} />

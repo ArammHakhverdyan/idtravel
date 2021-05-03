@@ -1,5 +1,5 @@
-import { Avatar, Box, Button, makeStyles } from '@material-ui/core'
 import React from 'react'
+import { Avatar, Box, Button, makeStyles } from '@material-ui/core'
 import { connect, useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import { signOut } from '../../actions/AuthActions'

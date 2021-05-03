@@ -14,7 +14,6 @@ function Home() {
     useEffect(() => {
         const displayImage = (images) => {
             return images.getDownloadURL().then(function (url) {
-                // console.log(url)
                 setUrlArr((old) => [...old, url]);
             }).catch((error) => {
                 switch (error.code) {
@@ -32,7 +31,6 @@ function Home() {
         }).catch((error) => {
             switch (error.code) {
                 case 'storage/object-not-found':
-                    // File doesn't exist
                     break;
                 default: {
                     return
@@ -40,8 +38,6 @@ function Home() {
             }
         })
     }, [])
-
-
 
     return (
         <>

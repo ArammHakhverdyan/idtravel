@@ -17,7 +17,7 @@ const Description = () => {
 
         const images = [a, b, c]
 
-        images.map(function (item, index) {
+        images.map((item, index) =>
             item.getDownloadURL().then((downloadURL) => {
                 setUrl((old) => {
                     const newSt = [...old];
@@ -31,9 +31,10 @@ const Description = () => {
                     default: {
                         return
                     }
+
                 }
             })
-        })
+        )
     }, [])
 
 
