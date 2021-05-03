@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles, Container, Box, TextField, Button } from '@material-ui/core/';
 import ImageHeader from '../shared/ImageHeader';
-import jermuk from '../../assets/images/jermuk.jpg';
+//import jermuk from '../../assets/images/jermuk.jpg';
 import { db } from '../../config/config';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
@@ -75,13 +75,7 @@ function Contact() {
         })
     }, [])
 
-    const handleClose = (event, reason) => {
-                if (reason === 'clickaway') {
-                    return;
-                }
-        
-                setOpen(false);
-            };
+   
 
     const [contact, setContact] = useState({
         name: "",
@@ -99,17 +93,21 @@ function Contact() {
         } catch (e) {
             console.error("Error: ", e);
         }
+        setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
         
     }
 
     const onChange = (event) => {
         let id = event.target.id;
         let value = event.target.value;
-        // setValue({
-        //     ...value,
-        //     [e.target.id]: e.target.value
-        // })
-
 
         setContact(prevState => ({
             ...prevState,

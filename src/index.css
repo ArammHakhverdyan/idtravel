@@ -67,7 +67,6 @@ p{
     left: 0;
     background-image: -webkit-linear-gradient(90deg, rgba(252, 227, 138, 0.75) 0%, rgba(243, 129, 129, 0.9) 100%);
 }
-
 .about-img{
   width: 100%;
   height: 100vh;
@@ -99,15 +98,10 @@ p{
 .MuiAccordion-rounded{
   width: 50%;
 }
-<<<<<<< HEAD
-.MuiBox-root {
-  margin-bottom: 0px !important;
-=======
 .MuiGrid-justify-xs-center {
   /* background-image: url("https://i.pinimg.com/originals/d1/22/17/d1221753c3148b1995d1cce12bd75694.jpg"); */
   background-repeat: no-repeat;
   background-size: cover;
->>>>>>> origin/develop
 }
 .backk {
   background-image: url("https://roadsup.com/wp-content/uploads/2019/01/Armenia_11_Mountains_RoadsUp.jpg");
