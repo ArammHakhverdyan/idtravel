@@ -122,8 +122,7 @@ const User = () => {
                         </Snackbar>
                         <Snackbar open={openErrorButton} autoHideDuration={6000} onClose={handleClose}>
                             <Alert onClose={handleClose} severity="error">
-                                Something went wrong!!!
-                                        </Alert>
+                            </Alert>
                         </Snackbar>
                     </AccordionDetails>
                     <Divider />
