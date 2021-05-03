@@ -10,10 +10,7 @@ import { selectLoggedInUserInfo } from '../../redux/selectors'
 const SignedInLInks = (props) => {
     const classes = useStyles()
     const history = useHistory()
-
-
     const { initials } = useSelector(selectLoggedInUserInfo) || {}
-
 
     const signOutClick = () => {
         props.signOut();
@@ -22,12 +19,14 @@ const SignedInLInks = (props) => {
 
 
     return (
+
         <Box>
             <Button className={classes.loginBtn} fullWidth={false} variant="contained" onClick={signOutClick}>Log Out</Button>
             <Button component={Link} to="/user" className={classes.linkText}>
                 <Avatar className={classes.avatar}> {initials}</Avatar>
             </Button>
         </Box>
+
     )
 }
 

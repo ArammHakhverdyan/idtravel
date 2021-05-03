@@ -9,39 +9,28 @@ import { storageRef } from '../../config/config';
 
 function AboutUs() {
     const [url, setUrl] = useState(["", ""])
-
     useEffect(() => {
-        const garni = storageRef.child('Images/aboutUs/garni.jpg')
-        const aboutUs = storageRef.child('Images/aboutUs/aboutUs.jpg')
-
-        garni.getDownloadURL().then((downloadURL) => {
-            setUrl((old) => {
-                const newSt = [...old];
-                newSt[0] = downloadURL;
-                return newSt;
-            });
-
-        }).catch((error) => {
-            switch (error.code) {
-                case 'storage/object-not-found':
-                    break;
-                default:
-            }
-        });
-        aboutUs.getDownloadURL().then((downloadURL) => {
-            setUrl((old) => {
-                const newSt = [...old];
-                newSt[1] = downloadURL;
-                return newSt;
-            });
-        }).catch((error) => {
-            switch (error.code) {
-                case 'storage/object-not-found':
-                    break;
-                default:
-            }
+        const a = storageRef.child('Images/aboutUs/garni.jpg')
+        const b = storageRef.child('Images/aboutUs/aboutUs.jpg')
+        const images = [a, b]
+        images.map(function (item, index) {
+            item.getDownloadURL().then((downloadURL) => {
+                setUrl((old) => {
+                    const newSt = [...old];
+                    newSt[index] = downloadURL;
+                    return newSt;
+                });
+            }).catch((error) => {
+                switch (error.code) {
+                    case 'storage/object-not-found':
+                        break;
+                    default: {
+                        return
+                    }
+                }
+            })
         })
-    })
+    }, [])
 
     return (
         <>

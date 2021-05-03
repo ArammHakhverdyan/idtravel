@@ -1,16 +1,17 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Card, CardActionArea, CardContent, CardMedia, Divider, List, ListItem, ListItemIcon, ListItemText, makeStyles, TextField, Typography } from '@material-ui/core'
+import { Accordion, AccordionDetails, AccordionSummary, Button, Divider, List, makeStyles, Snackbar, styled, TextField, Typography } from '@material-ui/core'
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLoggedInUserId, selectLoggedInUserInfo } from '../../redux/selectors';
 import userImg from '../img/user.png';
 import InboxIcon from '@material-ui/icons/Inbox';
 import SettingsIcon from '@material-ui/icons/Settings';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { updateLoggedInUserInfo } from '../../actions/AuthActions';
+import MuiAlert from '@material-ui/lab/Alert';
+import { compose, palette, spacing } from '@material-ui/system';
 
 
 
-const User = (props) => {
+const User = () => {
     const classes = useStyles()
     const dispatch = useDispatch()
     const uId = useSelector(selectLoggedInUserId);
@@ -19,6 +20,13 @@ const User = (props) => {
     const [firstName, setFirstName] = useState(userInfo.firstName || "");
     const [lastName, setLastName] = useState(userInfo.lastName || "");
     const [email, setEmail] = useState(userInfo.email || "");
+    const [expanded, setExpanded] = React.useState(false);
+
+
+    function Alert(props) {
+        return <MuiAlert elevation={6} variant="filled" {...props} />;
+    }
+
 
     const firstNameChange = (e) => {
         setFirstName(e.target.value);
@@ -33,76 +41,95 @@ const User = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+
         if (uId) {
             const newInfo = { email, firstName, lastName, initials: firstName[0] + lastName[0] }
-            dispatch(updateLoggedInUserInfo(newInfo))
-        }
-    }
+            dispatch(updateLoggedInUserInfo(newInfo));
+            if (userInfo.firstName === newInfo.firstName && userInfo.email === newInfo.email && userInfo.lastName === newInfo.lastName) {
+                setOpenErrorButton(true)
+            } else {
+                setOpenSuccessButton(true);
+            }
+            // if (newInfo.firstName === "" && newInfo.email === "" && newInfo.lastName === "") {
+            //     setOpenErrorButton(true)
+            // }
 
+        }
+
+    }
+    const [openSuccessButton, setOpenSuccessButton] = React.useState(false);
+    const [openErrorButton, setOpenErrorButton] = React.useState(false)
+
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpenErrorButton(false);
+        setOpenSuccessButton(false)
+    };
+    const handleChange = (panel) => (event, isExpanded) => {
+        setExpanded(isExpanded ? panel : false);
+    };
+
+    const Box = styled('div')(compose(spacing, palette));
 
     return (
         <div className="backg-img">
-            <Card className={classes.userImgCont} variant="outlined">
-                <CardActionArea>
-                    <CardMedia
-                        className={classes.media}
-                        image='../img/user.png'
-                    />
-                    <CardContent>
-                        <img className={classes.userImg} src={userImg} alt="" />
-                        <Typography>
-                            {fullName}
-                        </Typography>
-                        {/* </Typography> */}
-                    </CardContent>
-                </CardActionArea>
-            </Card>
+            <Box className={classes.user} color="white" bgcolor="" p={1}>
+                <img className={classes.userImg} src={userImg} alt="" />
+                <Typography className="text">
+                    {fullName}
+                </Typography>
+                {/* </Typography> */}
+            </Box>
 
-            <List component="nav" aria-label="main mailbox folders">
-                <Accordion>
+            <List component="nav" className={classes.accordionItems}>
+                <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
                     <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel1a-content"
-                        id="panel1a-header"
+                        expandIcon={<InboxIcon />}
+                        aria-controls="panel1bh-content"
+                        id="panel1bh-header"
                     >
-                        <ListItem button>
-                            <ListItemIcon>
-                                <InboxIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="History" />
-                        </ListItem>
+                        <Typography className={classes.heading}>History</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         <Typography>
                             You haven't booked any tour yet
-                            </Typography>
+                    </Typography>
                     </AccordionDetails>
                 </Accordion>
-                <Accordion>
+                <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
                     <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
+                        expandIcon={<SettingsIcon />}
                         aria-controls="panel1a-content"
                         id="panel1a-header"
                     >
-                        <ListItem button>
-                            <ListItemIcon>
-                                <SettingsIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Settings" />
-                        </ListItem>
+                        <Typography className={classes.heading}>Settings</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Box py={3} textAlign="center" className={classes.loginForm}>
-                            <TextField id="name" label="Name" value={firstName} onChange={firstNameChange} variant="outlined" />
-                            <TextField id="surname" label="Surname" value={lastName} variant="outlined" onChange={lastNameChange} />
-                            <TextField id="email" label="Email" value={email} variant="outlined" onChange={emailChange} />
+                        <Box py={3} className={classes.loginForm}>
+                            <TextField id="name" fullWidth label="Name" value={firstName} onChange={firstNameChange} variant="outlined" />
+                            <TextField id="surname" fullWidth label="Surname" value={lastName} variant="outlined" onChange={lastNameChange} />
+                            <TextField id="email" fullWidth label="Email" value={email} variant="outlined" onChange={emailChange} />
                             <Button className={classes.loginBtn} fullWidth={false} variant="contained" onClick={handleSubmit}>Save</Button>
                         </Box>
+
+                        <Snackbar open={openSuccessButton} autoHideDuration={6000} onClose={handleClose}>
+                            <Alert onClose={handleClose} severity="success">
+                                Settings changed!
+                                        </Alert>
+                        </Snackbar>
+                        <Snackbar open={openErrorButton} autoHideDuration={6000} onClose={handleClose}>
+                            <Alert onClose={handleClose} severity="error">
+                                Something went wrong!!!
+                                        </Alert>
+                        </Snackbar>
                     </AccordionDetails>
                     <Divider />
                 </Accordion>
             </List>
-        </div>
+        </div >
 
     )
 }
@@ -128,17 +155,28 @@ const useStyles = makeStyles({
         }
     },
     userImg: {
-        width: "150px",
-        height: "150px"
+        width: "200px",
+        height: "200px",
+        padding: "30px",
     },
     userImgCont: {
         width: "200px",
         height: "200px",
-        margin: "10px"
+        margin: "10px 50px",
     },
     root: {
         display: "flex",
         justifyContent: "space-around"
+    },
+    user: {
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column"
+    },
+    accordionItems: {
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column"
     }
 
 });

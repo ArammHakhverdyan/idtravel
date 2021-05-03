@@ -53,6 +53,7 @@ export default function ComplexGrid() {
           case 'storage/object-not-found':
             break;
           default:
+            return
         }
       })
     )

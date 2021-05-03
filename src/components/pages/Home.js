@@ -18,8 +18,9 @@ function Home() {
             }).catch((error) => {
                 switch (error.code) {
                     case 'storage/object-not-found':
-                        break;
+                        break
                     default:
+                        return
                 }
             })
         }
@@ -31,7 +32,9 @@ function Home() {
             switch (error.code) {
                 case 'storage/object-not-found':
                     break;
-                default:
+                default: {
+                    return
+                }
             }
         })
     }, [])

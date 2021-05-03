@@ -68,10 +68,12 @@ function Contact() {
                 case 'storage/object-not-found':
                     // File doesn't exist
                     break;
-                default:
+                default: {
+                    return
+                }
             }
         })
-    })
+    }, [])
 
     const handleClose = (event, reason) => {
                 if (reason === 'clickaway') {

@@ -52,6 +52,7 @@ export default function MediaCard() {
           case 'storage/object-not-found':
             break;
           default:
+            return
         }
       })
     )
