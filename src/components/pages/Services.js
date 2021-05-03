@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Typography, CardActionArea, Icon } from '@material-ui/core/';
 import NavigationIcon from '@material-ui/icons/Navigation'
 import { makeStyles } from '@material-ui/core/styles';
@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import ImageHeader from '../shared/ImageHeader';
 import Grid from '@material-ui/core/Grid';
+import { storageRef } from '../../config/config';
 const useStyles = makeStyles({
     root: {
         maxWidth: 400,
@@ -40,23 +41,44 @@ const useStyles = makeStyles({
 
 function Services() {
     const classes = useStyles();
-    const servicesImg = "https://c4.wallpaperflare.com/wallpaper/348/100/853/nature-landscape-mist-trees-wallpaper-preview.jpg"
-    const tourPackages = "https://c4.wallpaperflare.com/wallpaper/205/801/285/tunnel-arch-railway-bricks-wallpaper-preview.jpg"
-    const hotelReservation = "https://www.studyandgoabroad.com/wp-content/uploads/2016/10/tourism.jpg"
-    const transportImg = "https://c4.wallpaperflare.com/wallpaper/742/363/803/armenia-shaghap-wallpaper-preview.jpg"
+    const [url, setUrl] = useState(["", "", "", ""])
+
+    useEffect(() => {
+        const a = storageRef.child('Images/services/service-header.jpg')
+        const b = storageRef.child('Images/services/tour-packages.jpg')
+        const c = storageRef.child('Images/services/hotel-reservation.jpg')
+        const d = storageRef.child('Images/services/transport.jpg')
+        const images = [a, b, c, d]
+
+        images.map((item, index) =>
+            item.getDownloadURL().then((downloadURL) => {
+                setUrl((old) => {
+                    const newSt = [...old];
+                    newSt[index] = downloadURL;
+                    return newSt;
+                });
+            }).catch((error) => {
+                switch (error.code) {
+                    case 'storage/object-not-found':
+                        break;
+                    default:
+                }
+            })
+        )
+    }, [])
 
     return (
         <>
 
             <CssBaseline />
-            <ImageHeader text="Services" backgroundImage={servicesImg} />
+            <ImageHeader text="Services" backgroundImage={url[0]} />
             <Grid container justify="center" spacing={0} >
                 <Card className={classes.root} variant="outlined">
                     <CardActionArea component={Link} to="/tours">
 
                         <CardMedia
                             className={classes.media}
-                            image={tourPackages}
+                            image={url[1]}
                             title="See Tours"
 
                         ></CardMedia>
@@ -64,21 +86,19 @@ function Services() {
 
                             <Typography gutterBottom variant="h5" component="h2">
                                 TOUR PACKAGES
-          </Typography>
+                            </Typography>
                             <Typography className={classes.pos} color="textSecondary">
                                 The company "ID Travel" offers travel packages designed by professionals,
                                 including accommodation in hotels in Yerevan and other Armenian regions,
                                 guide services, transfers on comfortable transport, meals,
                                 entrance tickets to museums and much more.
                                 We offer the following types of tours to Armenia:
-        </Typography>
+                            </Typography>
                             <br />
-
                         </CardContent>
 
                     </CardActionArea>
                     <CardActions>
-
                         <Button
                             component={Link} to="/tours"
                             variant="contained"
@@ -95,7 +115,7 @@ function Services() {
                     <CardActionArea component={Link} to="/hotelsList">
                         <CardMedia
                             className={classes.media}
-                            image={hotelReservation}
+                            image={url[2]}
                             title="Book Hotel"
                         />
                         <CardContent title="Book Hotel" style={{height: "300px", overFlow: "hidden"}}>
@@ -131,7 +151,7 @@ function Services() {
                     <CardActionArea component={Link} to="/vehicles">
                         <CardMedia
                             className={classes.media}
-                            image={transportImg}
+                            image={url[3]}
                             title="See Vehicles"
                         />
                         <CardContent title="See Vehicles" style={{height: "300px", overFlow: "hidden"}}>
@@ -164,7 +184,4 @@ function Services() {
 
 }
 
-
-
-
-export default Services
+export default Services;

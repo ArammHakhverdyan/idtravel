@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles, Container, Box, TextField, Button } from '@material-ui/core/';
 import ImageHeader from '../shared/ImageHeader';
 import jermuk from '../../assets/images/jermuk.jpg';
@@ -7,8 +7,8 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import SimpleMap from './Map';
 //import { Map, GoogleApiWrapper } from 'google-maps-react';
+import { storageRef } from '../../config/config';
 
-// const admin = require("firebase-admin");
 
 // admin.firestore().collection('messages').add({
 //     to: 'arammyan@gmail.com',
@@ -52,15 +52,34 @@ const useStyles = makeStyles((theme) => ({
 
 function Contact() {
     const classes = useStyles();
+    const [url, setUrl] = useState("")
     const [open, setOpen] = React.useState(false);
+    useEffect(() => {
+        const jermuk = storageRef.child('Images/jermuk.jpg')
+
+        jermuk.getDownloadURL().then((downloadURL) => {
+            setUrl(() => {
+                const newSt = downloadURL
+                return newSt;
+            });
+
+        }).catch((error) => {
+            switch (error.code) {
+                case 'storage/object-not-found':
+                    // File doesn't exist
+                    break;
+                default:
+            }
+        })
+    })
 
     const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setOpen(false);
-    };
+                if (reason === 'clickaway') {
+                    return;
+                }
+        
+                setOpen(false);
+            };
 
     const [contact, setContact] = useState({
         name: "",
@@ -70,12 +89,11 @@ function Contact() {
     })
 
     const sendMessage = async (event) => {
-        setOpen(true);
+        //setOpen(true);
         event.preventDefault();
         try {
             const messages = await db.collection("messages");
             messages.doc("From: " + contact.email).set(contact);
-
         } catch (e) {
             console.error("Error: ", e);
         }
@@ -95,12 +113,11 @@ function Contact() {
             ...prevState,
             [id]: value
         }))
-
     }
 
     return (
         <>
-            <ImageHeader text="Contact Us" backgroundImage={jermuk} />
+            <ImageHeader text="Contact Us" backgroundImage={url} />
             <Container>
                 <Box py={5} className={classes.contactForm}>
                     <TextField fullWidth={true} id="name" label="Name" variant="outlined" onChange={onChange} />
@@ -119,5 +136,3 @@ function Contact() {
     )
 }
 export default Contact;
-
-

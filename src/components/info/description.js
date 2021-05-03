@@ -1,19 +1,46 @@
-import React from 'react';
-import img from '../img/sevanLake.jpg';
-import img1 from '../img/apricot.jpg';
-import pic from '../img/pic.jpg';
+import React, { useState, useEffect } from 'react';
 import { Button, makeStyles } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import { storageRef } from '../../config/config';
 
 
 
 const Description = () => {
-    const classes = useStyles()
+    const classes = useStyles();
+    const [url, setUrl] = useState(["", "", ""])
+
+
+    useEffect(() => {
+        const a = storageRef.child('Images/description/sevanLake.jpg')
+        const b = storageRef.child('Images/description/apricot.jpg')
+        const c = storageRef.child('Images/description/pic.jpg')
+
+        const images = [a, b, c]
+
+        images.map((item, index) =>
+            item.getDownloadURL().then((downloadURL) => {
+                setUrl((old) => {
+                    const newSt = [...old];
+                    newSt[index] = downloadURL;
+                    return newSt;
+                });
+            }).catch((error) => {
+                switch (error.code) {
+                    case 'storage/object-not-found':
+                        break;
+                    default:
+                }
+            })
+        )
+    }, [])
+
+
+
     return (
 
         <div className="pages">
             <div className="img-container">
-                <img className="img" src={img} alt='' />,
+                <img className="img" src={url[0]} key={0} alt='' />,
             <div className="text-container">
                     <h2>Find your perfect place to have a rest</h2>
                     <p>Experience pure serenity and see the Milky Way at night at Armenia's Sevan Lake</p>
@@ -29,11 +56,11 @@ const Description = () => {
                     and queens used special, festive dresses which were called “tsirani” as they had an apricot color.
                      The name “tsirani” came from the word “tsiran”, which means apricot.</p>
                 </div>
-                <img className="img" src={img1} alt='' />,
+                <img className="img" src={url[1]} key={1} alt='' />,
             </div>
             <div className="cover">
                 <h2>Find all of these in one place</h2>
-                <img className="about-img" src={pic} alt='' />
+                <img className="about-img" src={url[2]} key={2} alt='' />
             </div>
         </div>
 

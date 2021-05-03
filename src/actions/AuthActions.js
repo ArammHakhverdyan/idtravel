@@ -1,4 +1,5 @@
 import { auth, db } from "../config/config";
+import { selectLoggedInUserId } from "../redux/selectors";
 
 export const signIn = (credentials) => {
     return (dispatch, getState) => {
@@ -42,29 +43,16 @@ export const signUp = (newUser) => {
     }
 }
 
-export const save = (changedUser) => {
-    const user = auth.currentUser
+
+
+export const updateLoggedInUserInfo = (newInfo) => {
     return (dispatch, getState) => {
-        user.updateProfile({
-            firstName: changedUser.firstName,
-            lastName: changedUser.lastName,
-            email: changedUser.email,
-        }).then((resp) => {
-            console.log(changedUser.firstName)
-            return db.collection('users').doc(resp.user.uid).update({
-                firstName: changedUser.firstName,
-                lastName: changedUser.lastName,
-                email: changedUser.email,
-            })
-        }).then(() => {
-            dispatch({ type: 'CHANGE_SUCCESS' })
-        }).catch(error => {
-            dispatch({ type: 'SIGNUP_ERROR', error })
+        // const uId = getState().auth.loggedInUser.uid
+        const uId = selectLoggedInUserId(getState());
+        const docRef = db.collection('users').doc(uId);
+        docRef.update(newInfo).then((doc) => {
+            dispatch({ type: "UPDATE_LOGGEDIN_USER_INFO", payload: newInfo })
         })
     }
-
-
 }
-
-
 

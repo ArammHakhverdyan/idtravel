@@ -1,36 +1,33 @@
+import React from 'react'
 import { Avatar, Box, Button, makeStyles } from '@material-ui/core'
-import React, { useEffect, useState } from 'react'
 import { connect, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { signOut } from '../../actions/AuthActions'
-import { db } from '../../config/config'
-import { selectLoggedInUserId } from '../../redux/selectors'
+import { selectLoggedInUserInfo } from '../../redux/selectors'
 
 
 
 const SignedInLInks = (props) => {
     const classes = useStyles()
-    const uId = useSelector(selectLoggedInUserId);
-    console.log(uId)
-    const [initials, setInitials] = useState('')
-    useEffect(() => {
-        if (uId) {
-            const docRef = db.collection('users').doc(uId);
-            docRef.get().then((doc) => {
-                setInitials(doc.data()?.initials)
-            })
-        }
-    }, [uId])
+    const history = useHistory()
+
+
+    const { initials } = useSelector(selectLoggedInUserInfo) || {}
+
+
+    const signOutClick = () => {
+        props.signOut();
+        history.push("/")
+    }
+
 
     return (
-        // <Container>
         <Box>
-            <Button className={classes.loginBtn} fullWidth={false} variant="contained" onClick={props.signOut}>Log Out</Button>
+            <Button className={classes.loginBtn} fullWidth={false} variant="contained" onClick={signOutClick}>Log Out</Button>
             <Button component={Link} to="/user" className={classes.linkText}>
                 <Avatar className={classes.avatar}> {initials}</Avatar>
             </Button>
         </Box>
-        // </Container>
     )
 }
 

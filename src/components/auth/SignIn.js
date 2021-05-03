@@ -31,8 +31,8 @@ const SignIn = (props) => {
             <Box py={5} className={classes.loginForm} textAlign="center">
                 <Typography variant="h4" component="h1" gutterBottom>Sign In</Typography>
                 {authError && <Typography color="secondary" gutterBottom>{authError}</Typography>}
-                <TextField id="email" fullWidth={true} label="Email" variant="outlined" value={value.email} onChange={handleChange} />
-                <TextField type="password" id="password" fullWidth={true} label="Password" variant="outlined" value={value.password} onChange={handleChange} />
+                <TextField id="email" error={authError} fullWidth={true} label="Email" variant="outlined" value={value.email} onChange={handleChange} />
+                <TextField type="password" error={authError} id="password" fullWidth={true} label="Password" variant="outlined" value={value.password} onChange={handleChange} />
                 <Button className={classes.loginBtn} fullWidth={true} variant="contained" onClick={handleSubmit}>Login</Button>
             </Box>
         </Container>

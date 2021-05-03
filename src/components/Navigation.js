@@ -30,7 +30,7 @@ function Navigation() {
                 <Button component={Link} to="/services" className={classes.linkText}>
                     Services
                 </Button>
-                <Button component={Link} to="/tours" className={classes.linkText}>
+                <Button component={Link} to="/tours" activeClassName="selected" className={classes.linkText}>
                     Tours
                 </Button>
                 <Button component={Link} to="/contact" className={classes.linkText}>
