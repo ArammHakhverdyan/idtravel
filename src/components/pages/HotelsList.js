@@ -26,10 +26,16 @@ const useStyles = makeStyles({
 
 export default function MediaCard() {
   const classes = useStyles();
+  const background ="https://pix10.agoda.net/geo/city/709507/1_709507_02.jpg?s=1920x822"
 
   return (
     <>
-      <ImageHeader text="Hotels, We cooperate with the following hotels:" backgroundImage={"https://c1.wallpaperflare.com/preview/590/449/282/forest-mountains-landscape-hotel.jpg"} />
+    <ImageHeader text="Hotels" backgroundImage={"https://c1.wallpaperflare.com/preview/590/449/282/forest-mountains-landscape-hotel.jpg"} />
+    <div style={{
+        backgroundImage: `url(${background})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+    }}>      
       <Grid container justify="center" spacing={0} >
 {/* ---------------------------Yerevan----- */}
         <Card className={classes.root}>
@@ -49,7 +55,6 @@ export default function MediaCard() {
             </CardContent>
           </CardActionArea>
           <CardActions>
-            
             <Button size="small" color="primary">
               Learn More
         </Button>
@@ -57,7 +62,7 @@ export default function MediaCard() {
         </Card>
         {/* -----------------------------------Tsaghkadzor */}
         <Card className={classes.root}>
-          <CardActionArea>
+          <CardActionArea component={Link} to="/tsaghkadzorHotels">
             <CardMedia
               className={classes.media}
               image="http://rimatravel.info/wp-content/uploads/2014/01/tsaghkadzor-1.jpg"
@@ -81,7 +86,7 @@ export default function MediaCard() {
         </Card>
         {/* ----------------------Dilijan */}
         <Card className={classes.root}>
-          <CardActionArea>
+          <CardActionArea component={Link} to="/dilijanHotels">
             <CardMedia
               className={classes.media}
               image="https://img5.goodfon.com/wallpaper/nbig/a/aa/gory-armeniia-zakat-dilijan-valley.jpg"
@@ -175,6 +180,7 @@ export default function MediaCard() {
           </CardActions>
         </Card>
       </Grid>
+      </div>
     </>
   );
 }

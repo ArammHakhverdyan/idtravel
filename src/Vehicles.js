@@ -56,11 +56,11 @@ export default function ComplexGrid() {
                 </Typography>
               </Grid>
             </Grid>
-            <Grid item>
+            {/* <Grid item>
                 <ButtonBase component={Link} to="/contact">
               <ArrowForwardIosIcon></ArrowForwardIosIcon>
               </ButtonBase>
-            </Grid>
+            </Grid> */}
           </Grid>
         </Grid>
       </Paper>          
@@ -89,11 +89,6 @@ export default function ComplexGrid() {
                   The seats are quite comfortable, especially during long journeys. 
                 </Typography>
               </Grid>
-            </Grid>
-            <Grid item>
-                <ButtonBase component={Link} to="/contact">
-              <ArrowForwardIosIcon></ArrowForwardIosIcon>
-              </ButtonBase>
             </Grid>
           </Grid>
         </Grid>
@@ -127,11 +122,6 @@ export default function ComplexGrid() {
                 </Typography>
               </Grid>
             </Grid>
-            <Grid item>
-                <ButtonBase component={Link} to="/contact">
-              <ArrowForwardIosIcon></ArrowForwardIosIcon>
-              </ButtonBase>
-            </Grid>
           </Grid>
         </Grid>
       </Paper>          
@@ -162,11 +152,6 @@ export default function ComplexGrid() {
                 </Typography>
               </Grid>
             </Grid>
-            <Grid item>
-                <ButtonBase component={Link} to="/contact">
-              <ArrowForwardIosIcon></ArrowForwardIosIcon>
-              </ButtonBase>
-            </Grid>
           </Grid>
         </Grid>
       </Paper>          
@@ -196,11 +181,6 @@ export default function ComplexGrid() {
                  A sloping roofline intrudes on headroom for taller people in the third row.
                 </Typography>
               </Grid>
-            </Grid>
-            <Grid item>
-                <ButtonBase component={Link} to="/contact">
-              <ArrowForwardIosIcon></ArrowForwardIosIcon>
-              </ButtonBase>
             </Grid>
           </Grid>
         </Grid>
