@@ -5,42 +5,46 @@ import { Link } from 'react-router-dom';
 import { db } from '../../config/config';
 
 
-const TourLists = (props) => {
+const TourLists = () => {
     let { url } = useRouteMatch();
 
-    // const [tours, setTours] = useState([])
+    const [tours, setTours] = useState([])
 
-    // const fetchTours = async () => {
-    //     const response = db.collection('tours');
-    //     const data = await response.get();
-    //     data.docs.forEach(item => {
-    //         setTours([...tours, item.data()])
-    //     })
-    // }
-    // useEffect(() => {
-    //     fetchTours();
-    // }, [])
+    const fetchTours = async () => {
+        const response = db.collection('tours');
+        const data = await response.get();
+        const asd = []
+        data.docs.forEach(item => {
+            asd.push(item.data())
+        })
+        setTours(asd)
+    }
+    useEffect(() => {
+        fetchTours();
+    }, [])
 
-    const tours = [
-        {
-            id: 1,
-            imgUrl: "http://fairytour.am/upload/nyuter/40b265.jpg",
-            title: "Georgia, Armenia and Iran",
-            date: "15.03.2021-22.03.2021",
-            description: "This tour shows you all the treasures of these 3 amazing countries – from the legendary UNESCO World Heritage Sites, spectacular natural beauty, mountain monasteries, ancient trade route caravanseries and unique cuisines, to the hidden gems of local lives. They are the iconic witnesses of time long past, this is where Europe and the Middle East meet with Central Asia. Follow in pilgrims’ footsteps and explore the history, spirit and the diversity of this incredible region. It’s time to discover amazing countries of the Silk Road!",
-            price: "300$",
-            day: 1,
-        },
-        {
-            id: 2,
-            imgUrl: "https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png",
-            title: "asd",
-            date: "dsa",
-            description: "gfhgfhgfhf!",
-            price: "10$",
-            day: 2,
-        },
-    ]
+    console.log(tours)
+
+    // const tours = [
+    //     {
+    //         id: 1,
+    //         imgUrl: "http://fairytour.am/upload/nyuter/40b265.jpg",
+    //         title: "Georgia, Armenia and Iran",
+    //         date: "15.03.2021-22.03.2021",
+    //         description: "This tour shows you all the treasures of these 3 amazing countries – from the legendary UNESCO World Heritage Sites, spectacular natural beauty, mountain monasteries, ancient trade route caravanseries and unique cuisines, to the hidden gems of local lives. They are the iconic witnesses of time long past, this is where Europe and the Middle East meet with Central Asia. Follow in pilgrims’ footsteps and explore the history, spirit and the diversity of this incredible region. It’s time to discover amazing countries of the Silk Road!",
+    //         price: "300$",
+    //         day: 1,
+    //     },
+    //     {
+    //         id: 2,
+    //         imgUrl: "https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png",
+    //         title: "asd",
+    //         date: "dsa",
+    //         description: "gfhgfhgfhf!",
+    //         price: "10$",
+    //         day: 2,
+    //     },
+    // ]
 
     return (
         <Grid container spacing={3}>
