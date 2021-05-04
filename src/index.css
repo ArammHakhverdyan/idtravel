@@ -72,9 +72,9 @@ p{
   height: 100vh;
 }
 
-.MuiTypography-body1{
+/* .MuiTypography-body1{
  text-align: center;
-  }
+  } */
 
 .MuiCard-root {
   width: 100%;
@@ -129,6 +129,9 @@ p{
   width: 100%;
   color: black;
   font-size: 32px !important;
+}
+.MuiBox-root {
+  margin-bottom: 0px !important;
 }
 .sprinter {
   margin: auto;
@@ -208,9 +211,21 @@ p{
 .viano:hover{
   content: url("https://artourbus.com/img/cars/9/2.jpg");
   transform: scale(2);
-  cursor: zoom-out;
+  cursor: zoom-in;
   margin-top: 10%;
   z-index: 999;
 }
 
+.hotelImg {
+      margin: auto;
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      transition: transform .2s;
+}
 
+.hotelImg:hover {
+  transform: scale(2);
+  cursor: zoom-in;
+  z-index: 999
+}

@@ -18,6 +18,9 @@ import User from './components/pages/User';
 import YerevanHotels from './components/hotels/YerevanHotels'
 import TsaghkadzorHotels from './components/hotels/TsaghkadzorHotels'
 import DilijanHotels from './components/hotels/DilijanHotels'
+import SevanHotels from './components/hotels/SevanHotels'
+import JermukHotels from './components/hotels/JermukHotels'
+import GorisHotels from './components/hotels/GorisHotels';
 import TourView from './components/tour/TourView';
 
 
@@ -58,6 +61,9 @@ class App extends React.Component {
               <Route path="/yerevanHotels" component={YerevanHotels} />
               <Route path="/tsaghkadzorHotels" component={TsaghkadzorHotels} />
               <Route path="/dilijanHotels" component={DilijanHotels} />
+              <Route path="/sevanHotels" component={SevanHotels} />
+              <Route path="/jermukHotels" component={JermukHotels} />
+              <Route path="/gorisHotels" component={GorisHotels} />
               <Route path="/carRental" component={CarRental} />
               <Route path="/user" component={User} />
               <Route path="/" exact component={Home} />
@@ -72,6 +78,12 @@ class App extends React.Component {
               <Route path="/contact" component={Contact} />
               <Route path="/vehicles" component={Vehicles} />
               <Route path="/hotelsList" component={HotelsList} />
+              <Route path="/yerevanHotels" component={YerevanHotels} />
+              <Route path="/tsaghkadzorHotels" component={TsaghkadzorHotels} />
+              <Route path="/dilijanHotels" component={DilijanHotels} />
+              <Route path="/sevanHotels" component={SevanHotels} />
+              <Route path="/jermukHotels" component={JermukHotels} />
+              <Route path="/gorisHotels" component={GorisHotels} />
               <Route path='/signin' component={SignIn} />
               <Route path='/signup' component={SignUp} />
               <Route path="/" exact component={Home} />

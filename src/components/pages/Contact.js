@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles, Container, Box, TextField, Button } from '@material-ui/core/';
+import { makeStyles, Container, Box, TextField, Button, Grid } from '@material-ui/core/';
 import ImageHeader from '../shared/ImageHeader';
 //import jermuk from '../../assets/images/jermuk.jpg';
 import { db } from '../../config/config';
@@ -34,6 +34,9 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     contactForm: {
+        //backgroundColor: "rgb(185 178 178 / 60%)",
+        float: "right",
+        marginRight: "150px",
         maxWidth: "400px",
         margin: "auto",
         '& .MuiTextField-root': {
@@ -52,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Contact() {
     const classes = useStyles();
+    const background ="https://wallpaperaccess.com/full/3200384.jpg"
     const [url, setUrl] = useState("")
     const [open, setOpen] = React.useState(false);
     useEffect(() => {
@@ -118,20 +122,28 @@ function Contact() {
     return (
         <>
             <ImageHeader text="Contact Us" backgroundImage={url} />
+            <div style={{
+                backgroundImage: `url(${background})`,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+            }}>
             <Container>
                 <Box py={5} className={classes.contactForm}>
-                    <TextField fullWidth={true} id="name" label="Name" variant="outlined" onChange={onChange} />
-                    <TextField fullWidth={true} id="email" label="Email" variant="outlined" onChange={onChange} />
-                    <TextField fullWidth={true} id="phone" label="Phone Number" variant="outlined" onChange={onChange} />
-                    <TextField fullWidth={true} id="message" label="Message" variant="outlined" multiline rows={4} onChange={onChange} />
+                    <TextField style={{backgroundColor: "white"}} fullWidth={true} id="name" label="Name" variant="outlined" onChange={onChange} />
+                    <TextField style={{backgroundColor: "white"}} fullWidth={true} id="email" label="Email" variant="outlined" onChange={onChange} />
+                    <TextField style={{backgroundColor: "white"}} fullWidth={true} id="phone" label="Phone Number" variant="outlined" onChange={onChange} />
+                    <TextField style={{backgroundColor: "white"}} fullWidth={true} id="message" label="Message" variant="outlined" multiline rows={4} onChange={onChange} />
                     <Button className={classes.sendBtn} fullWidth={true} variant="contained" onClick={sendMessage}>Send</Button>
                     <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                         <Alert onClose={handleClose} severity="success">Your message sent successfully</Alert>
                     </Snackbar>
-
-                    <SimpleMap></SimpleMap>
+                    
                 </Box>
+                <Grid item style={{float: "left"}}>
+                    <SimpleMap></SimpleMap>
+                </Grid>
             </Container>
+            </div>
         </>
     )
 }
