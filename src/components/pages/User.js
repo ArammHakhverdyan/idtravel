@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, Button, Divider, List, makeStyles, Snackbar, styled, TextField, Typography } from '@material-ui/core'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Divider, List, makeStyles, Snackbar, styled, TextField, Typography } from '@material-ui/core'
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLoggedInUserId, selectLoggedInUserInfo } from '../../redux/selectors';
@@ -21,6 +21,9 @@ const User = () => {
     const [lastName, setLastName] = useState(userInfo.lastName || "");
     const [email, setEmail] = useState(userInfo.email || "");
     const [expanded, setExpanded] = React.useState(false);
+    const [openSuccessButton, setOpenSuccessButton] = React.useState(false);
+    const [openErrorButton, setOpenErrorButton] = React.useState(false)
+    const [openWarningButton, setWarningButton] = React.useState(false)
 
 
     function Alert(props) {
@@ -39,40 +42,39 @@ const User = () => {
     }
 
     const handleSubmit = (e) => {
+        console.log('asd')
         e.preventDefault();
-
-
         if (uId) {
             const newInfo = { email, firstName, lastName, initials: firstName[0] + lastName[0] }
-            dispatch(updateLoggedInUserInfo(newInfo));
             if (userInfo.firstName === newInfo.firstName && userInfo.email === newInfo.email && userInfo.lastName === newInfo.lastName) {
                 setOpenErrorButton(true)
+            } else if (newInfo.firstName === "" || newInfo.email === "" || newInfo.lastName === "") {
+                setWarningButton(true)
             } else {
                 setOpenSuccessButton(true);
+                dispatch(updateLoggedInUserInfo(newInfo));
             }
-            // if (newInfo.firstName === "" && newInfo.email === "" && newInfo.lastName === "") {
-            //     setOpenErrorButton(true)
-            // }
-
         }
-
     }
-    const [openSuccessButton, setOpenSuccessButton] = React.useState(false);
-    const [openErrorButton, setOpenErrorButton] = React.useState(false)
+
 
 
     const handleClose = (event, reason) => {
+
         if (reason === 'clickaway') {
             return;
         }
         setOpenErrorButton(false);
         setOpenSuccessButton(false)
+        setWarningButton(false)
     };
     const handleChange = (panel) => (event, isExpanded) => {
+
+
         setExpanded(isExpanded ? panel : false);
     };
 
-    const Box = styled('div')(compose(spacing, palette));
+
 
     return (
         <div className="backg-img">
@@ -118,17 +120,23 @@ const User = () => {
                         <Snackbar open={openSuccessButton} autoHideDuration={6000} onClose={handleClose}>
                             <Alert onClose={handleClose} severity="success">
                                 Settings changed!
-                                        </Alert>
+                            </Alert>
                         </Snackbar>
                         <Snackbar open={openErrorButton} autoHideDuration={6000} onClose={handleClose}>
                             <Alert onClose={handleClose} severity="error">
+                                You haven't changed anything yet!!!
+                            </Alert>
+                        </Snackbar>
+                        <Snackbar open={openWarningButton} autoHideDuration={6000} onClose={handleClose}>
+                            <Alert onClose={handleClose} severity="warning">
+                                The fields can't be blank!!!
                             </Alert>
                         </Snackbar>
                     </AccordionDetails>
                     <Divider />
                 </Accordion>
             </List>
-        </div >
+        </div>
 
     )
 }

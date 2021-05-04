@@ -75,7 +75,7 @@ function Contact() {
         })
     }, [])
 
-   
+
 
     const [contact, setContact] = useState({
         name: "",
@@ -94,15 +94,21 @@ function Contact() {
             console.error("Error: ", e);
         }
         setOpen(true);
-  };
+        setContact({
+            name: "",
+            email: "",
+            phone: "",
+            message: "",
+        })
+    };
 
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
 
-    setOpen(false);
-        
+        setOpen(false);
+
     }
 
     const onChange = (event) => {
@@ -120,10 +126,10 @@ function Contact() {
             <ImageHeader text="Contact Us" backgroundImage={url} />
             <Container>
                 <Box py={5} className={classes.contactForm}>
-                    <TextField fullWidth={true} id="name" label="Name" variant="outlined" onChange={onChange} />
-                    <TextField fullWidth={true} id="email" label="Email" variant="outlined" onChange={onChange} />
-                    <TextField fullWidth={true} id="phone" label="Phone Number" variant="outlined" onChange={onChange} />
-                    <TextField fullWidth={true} id="message" label="Message" variant="outlined" multiline rows={4} onChange={onChange} />
+                    <TextField fullWidth={true} value={contact.name} id="name" label="Name" variant="outlined" onChange={onChange} />
+                    <TextField fullWidth={true} value={contact.email} id="email" label="Email" variant="outlined" onChange={onChange} />
+                    <TextField fullWidth={true} value={contact.phone} id="phone" label="Phone Number" variant="outlined" onChange={onChange} />
+                    <TextField fullWidth={true} value={contact.message} id="message" label="Message" variant="outlined" multiline rows={4} onChange={onChange} />
                     <Button className={classes.sendBtn} fullWidth={true} variant="contained" onClick={sendMessage}>Send</Button>
                     <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                         <Alert onClose={handleClose} severity="success">Your message sent successfully</Alert>
