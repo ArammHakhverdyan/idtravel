@@ -27,6 +27,7 @@ const useStyles = makeStyles({
 
 export default function MediaCard() {
   const classes = useStyles();
+  const background = "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/f2/42/38/caption.jpg?w=1000&h=600&s=1"
   const [url, setUrl] = useState(["", "", "", "", "", "", ""])
 
   useEffect(() => {
@@ -62,150 +63,156 @@ export default function MediaCard() {
   return (
     <>
       <ImageHeader text="Hotels" backgroundImage={url[0]} />
-      <Grid container justify="center" spacing={0} >
-        {/* ---------------------------Yerevan----- */}
-        <Card className={classes.root}>
-          <CardActionArea component={Link} to="/yerevanHotels">
-            <CardMedia
-              className={classes.media}
-              image={url[1]}
-              title="See hotels in Yerevan"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
-                Yerevan
+      <div style={{
+        backgroundImage: `url(${background})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+      }}>
+        <Grid container justify="center" spacing={0} >
+          {/* ---------------------------Yerevan----- */}
+          <Card className={classes.root}>
+            <CardActionArea component={Link} to="/yerevanHotels">
+              <CardMedia
+                className={classes.media}
+                image={url[1]}
+                title="See hotels in Yerevan"
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                  Yerevan
           </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                Friendly locals, History, City walks
+                <Typography variant="body2" color="textSecondary" component="p">
+                  Friendly locals, History, City walks
           </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions>
-            <Button size="small" color="primary">
-              Learn More
+              </CardContent>
+            </CardActionArea>
+            <CardActions style={{marginLeft: "65%"}}>
+              <Button size="small" color="primary">
+                Learn More
         </Button>
-          </CardActions>
-        </Card>
-        {/* -----------------------------------Tsaghkadzor */}
-        <Card className={classes.root}>
-          <CardActionArea component={Link} to="/tsaghkadzorHotels">
-            <CardMedia
-              className={classes.media}
-              image={url[2]}
-              title="See hotels in Tsaghkadzor"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
-                Tsaghkadzor
+            </CardActions>
+          </Card>
+          {/* -----------------------------------Tsaghkadzor */}
+          <Card className={classes.root}>
+            <CardActionArea component={Link} to="/tsaghkadzorHotels">
+              <CardMedia
+                className={classes.media}
+                image={url[2]}
+                title="See hotels in Tsaghkadzor"
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                  Tsaghkadzor
           </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                Clean air, Mountains, Downhill skiing
+                <Typography variant="body2" color="textSecondary" component="p">
+                  Clean air, Mountains, Downhill skiing
           </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions>
+              </CardContent>
+            </CardActionArea>
+            <CardActions style={{marginLeft: "65%"}}>
 
-            <Button size="small" color="primary">
-              Learn More
+              <Button size="small" color="primary">
+                Learn More
         </Button>
-          </CardActions>
-        </Card>
-        {/* ----------------------Dilijan */}
-        <Card className={classes.root}>
-          <CardActionArea component={Link} to="/dilijanHotels">
-            <CardMedia
-              className={classes.media}
-              image={url[3]}
-              title="Contemplative Reptile"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
-                Dilijan
+            </CardActions>
+          </Card>
+          {/* ----------------------Dilijan */}
+          <Card className={classes.root}>
+            <CardActionArea component={Link} to="/dilijanHotels">
+              <CardMedia
+                className={classes.media}
+                image={url[3]}
+                title="Contemplative Reptile"
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                  Dilijan
           </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                Nature, Clean air, Mountains
+                <Typography variant="body2" color="textSecondary" component="p">
+                  Nature, Clean air, Mountains
           </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions>
+              </CardContent>
+            </CardActionArea>
+            <CardActions style={{marginLeft: "65%"}}>
 
-            <Button size="small" color="primary">
-              Learn More
+              <Button size="small" color="primary">
+                Learn More
         </Button>
-          </CardActions>
-        </Card>
-        {/* ---------------------Sevan */}
-        <Card className={classes.root}>
-          <CardActionArea>
-            <CardMedia
-              className={classes.media}
-              image={url[4]}
-              title="Contemplative Reptile"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
-                Sevan
+            </CardActions>
+          </Card>
+          {/* ---------------------Sevan */}
+          <Card className={classes.root}>
+            <CardActionArea component={Link} to="/sevanHotels">
+              <CardMedia
+                className={classes.media}
+                image={url[4]}
+                title="Contemplative Reptile"
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                  Sevan
           </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                Lakes, Scenery, Nature
+                <Typography variant="body2" color="textSecondary" component="p">
+                  Lakes, Scenery, Nature
           </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions>
+              </CardContent>
+            </CardActionArea>
+            <CardActions style={{marginLeft: "65%"}}>
 
-            <Button size="small" color="primary">
-              Learn More
+              <Button size="small" color="primary">
+                Learn More
         </Button>
-          </CardActions>
-        </Card>
-        {/* ----------------------Jermuk */}
-        <Card className={classes.root}>
-          <CardActionArea>
-            <CardMedia
-              className={classes.media}
-              image={url[5]}
-              title="Contemplative Reptile"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
-                Jermuk
+            </CardActions>
+          </Card>
+          {/* ----------------------Jermuk */}
+          <Card className={classes.root}>
+            <CardActionArea component={Link} to="/jermukHotels">
+              <CardMedia
+                className={classes.media}
+                image={url[5]}
+                title="Contemplative Reptile"
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                  Jermuk
           </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                Clean air, Nature, Mountains
+                <Typography variant="body2" color="textSecondary" component="p">
+                  Clean air, Nature, Mountains
           </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions>
+              </CardContent>
+            </CardActionArea>
+            <CardActions style={{marginLeft: "65%"}}>
 
-            <Button size="small" color="primary">
-              Learn More
+              <Button size="small" color="primary">
+                Learn More
         </Button>
-          </CardActions>
-        </Card>
-        {/* ----------------------------Goris */}
-        <Card className={classes.root}>
-          <CardActionArea>
-            <CardMedia
-              className={classes.media}
-              image={url[6]}
-              title="Contemplative Reptile"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
-                Goris
+            </CardActions>
+          </Card>
+          {/* ----------------------------Goris */}
+          <Card className={classes.root}>
+            <CardActionArea component={Link} to="/gorisHotels">
+              <CardMedia
+                className={classes.media}
+                image={url[6]}
+                title="Contemplative Reptile"
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                  Goris
           </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                Nature, Mountains, Scenery
+                <Typography variant="body2" color="textSecondary" component="p">
+                  Nature, Mountains, Scenery
           </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions>
-            <Button size="small" color="primary">
-              Learn More
+              </CardContent>
+            </CardActionArea>
+            <CardActions style={{marginLeft: "65%"}}>
+              <Button size="small" color="primary">
+                Learn More
         </Button>
-          </CardActions>
-        </Card>
-      </Grid>
+            </CardActions>
+          </Card>
+        </Grid>
+      </div>
     </>
   );
 }

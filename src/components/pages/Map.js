@@ -1,30 +1,35 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
  
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
  
 class SimpleMap extends Component {
   static defaultProps = {
     center: {
-      lat: 59.95,
-      lng: 30.33
+      lat: 40.198961332346066,
+      lng: 44.49069758177285
     },
-    zoom: 11
+    zoom: 16
   };
  
   render() {
     return (
-      // Important! Always set the container height explicitly
-      <div style={{ height: '100vh', width: '100%' }}>
+      <div style={{
+        height: '400px', 
+        width: '500px',
+        marginTop: "40px",
+        }}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: "key" }}
+          bootstrapURLKeys={{ key: "AIzaSyBabXGDNHaGD1A-xNxkW-hxDVGXL2-PZf4" }}
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
         >
           <AnyReactComponent
-            lat={59.955413}
-            lng={30.337844}
-            text="My Marker"
+            lat={40.198961332346066}
+            lng={44.49069758177285}
+            text= {<LocationOnIcon></LocationOnIcon>}
+            
           />
         </GoogleMapReact>
       </div>

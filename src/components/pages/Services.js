@@ -41,6 +41,7 @@ const useStyles = makeStyles({
 
 function Services() {
     const classes = useStyles();
+    const background = "https://lh3.googleusercontent.com/proxy/S0jvHnJavvByZKlmzsuQ2Wcsp199DdeAZgFc_BZQVHaQOcTPL845x9nWlp-LULK0NK-GvtU5EmMdbsO5305xUKB4HKXmY20xLINzauOwkkl7cy0XLVNS4wrmJZicCcSfbuFePMKCsT0"
     const [url, setUrl] = useState(["", "", "", ""])
 
     useEffect(() => {
@@ -71,116 +72,121 @@ function Services() {
 
     return (
         <>
-
             <CssBaseline />
             <ImageHeader text="Services" backgroundImage={url[0]} />
-            <Grid container justify="center" spacing={0} >
-                <Card className={classes.root} variant="outlined">
-                    <CardActionArea component={Link} to="/tours">
+            <div style={{
+                backgroundImage: `url(${background})`,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+            }}>
+                <Grid container justify="center" spacing={0} >
+                    <Card className={classes.root} variant="outlined">
+                        <CardActionArea component={Link} to="/tours">
 
-                        <CardMedia
-                            className={classes.media}
-                            image={url[1]}
-                            title="See Tours"
+                            <CardMedia
+                                className={classes.media}
+                                image={url[1]}
+                                title="See Tours"
 
-                        ></CardMedia>
-                        <CardContent title="See Tours" style={{height: "300px", overFlow: "hidden"}}>
+                            ></CardMedia>
+                            <CardContent title="See Tours" style={{ height: "300px", overFlow: "hidden" }}>
 
-                            <Typography gutterBottom variant="h5" component="h2">
-                                TOUR PACKAGES
+                                <Typography gutterBottom variant="h5" component="h2">
+                                    TOUR PACKAGES
                             </Typography>
-                            <Typography className={classes.pos} color="textSecondary">
-                                The company "ID Travel" offers travel packages designed by professionals,
-                                including accommodation in hotels in Yerevan and other Armenian regions,
-                                guide services, transfers on comfortable transport, meals,
-                                entrance tickets to museums and much more.
-                                We offer the following types of tours to Armenia:
+                                <Typography className={classes.pos} color="textSecondary">
+                                    The company "ID Travel" offers travel packages designed by professionals,
+                                    including accommodation in hotels in Yerevan and other Armenian regions,
+                                    guide services, transfers on comfortable transport, meals,
+                                    entrance tickets to museums and much more.
+                                    We offer the following types of tours to Armenia:
                             </Typography>
-                            <br />
-                        </CardContent>
+                                <br />
+                            </CardContent>
 
-                    </CardActionArea>
-                    <CardActions>
-                        <Button
-                            component={Link} to="/tours"
-                            variant="contained"
-                            color="primary"
-                            className={classes.button}
-                        >
-                            Our Tours
+                        </CardActionArea>
+                        <CardActions>
+                            <Button
+                                component={Link} to="/tours"
+                                variant="contained"
+                                color="primary"
+                                className={classes.button}
+                            >
+                                Our Tours
         <NavigationIcon className={classes.extendedIcon} />
-                        </Button>
-                    </CardActions>
-                </Card>
+                            </Button>
+                        </CardActions>
+                    </Card>
 
-                <Card className={classes.root} variant="outlined">
-                    <CardActionArea component={Link} to="/hotelsList">
-                        <CardMedia
-                            className={classes.media}
-                            image={url[2]}
-                            title="Book Hotel"
-                        />
-                        <CardContent title="Book Hotel" style={{height: "300px", overFlow: "hidden"}}>
-                            <Typography gutterBottom variant="h5" component="h2">
-                                HOTEL RESERVATION
+                    <Card className={classes.root} variant="outlined">
+                        <CardActionArea component={Link} to="/hotelsList">
+                            <CardMedia
+                                className={classes.media}
+                                image={url[2]}
+                                title="Book Hotel"
+                            />
+                            <CardContent title="Book Hotel" style={{ height: "300px", overFlow: "hidden" }}>
+                                <Typography gutterBottom variant="h5" component="h2">
+                                    HOTEL RESERVATION
           </Typography>
-                            <Typography className={classes.pos} color="textSecondary">
-                                We have been working in the tourism market of Armenia for many years
-                                and we have concluded contracts at special prices with leading hotels in the country.
-                                Our experience and knowledge of the market allows us to professionally guided in the hotel industry of Armenia
-                                and recommend the best accommodation options in Yerevan and outside the capital.
-                                You can book through us one of the proposed accommodation options.
+                                <Typography className={classes.pos} color="textSecondary">
+                                    We have been working in the tourism market of Armenia for many years
+                                    and we have concluded contracts at special prices with leading hotels in the country.
+                                    Our experience and knowledge of the market allows us to professionally guided in the hotel industry of Armenia
+                                    and recommend the best accommodation options in Yerevan and outside the capital.
+                                    You can book through us one of the proposed accommodation options.
         </Typography>
-                        </CardContent>
-                    </CardActionArea>
-                    <CardActions>
-                        <Button
-                            component={Link} to="/contact"
-                            variant="contained"
-                            //color="primary"
-                            className={classes.button}
-                            endIcon={<Icon>send</Icon>}
-                        >
-                            Send Request
+                            </CardContent>
+                        </CardActionArea>
+                        <CardActions>
+                            <Button
+                                component={Link} to="/contact"
+                                variant="contained"
+                                //color="primary"
+                                className={classes.button}
+                                endIcon={<Icon>send</Icon>}
+                            >
+                                Send Request
       </Button>
-                    </CardActions>
-                </Card>
+                        </CardActions>
+                    </Card>
 
-                {/* /////////////////////////////////////// */}
+                    {/* /////////////////////////////////////// */}
 
 
-                <Card className={classes.root} variant="outlined">
-                    <CardActionArea component={Link} to="/vehicles">
-                        <CardMedia
-                            className={classes.media}
-                            image={url[3]}
-                            title="See Vehicles"
-                        />
-                        <CardContent title="See Vehicles" style={{height: "300px", overFlow: "hidden"}}>
-                            <Typography gutterBottom variant="h5" component="h2">
-                                TRANSPORT
+                    <Card className={classes.root} variant="outlined">
+                        <CardActionArea component={Link} to="/vehicles">
+                            <CardMedia
+                                className={classes.media}
+                                image={url[3]}
+                                title="See Vehicles"
+                            />
+                            <CardContent title="See Vehicles" style={{ height: "300px", overFlow: "hidden" }}>
+                                <Typography gutterBottom variant="h5" component="h2">
+                                    TRANSPORT
           </Typography>
-                            <Typography className={classes.pos} color="textSecondary">
-                                Here you can order airport-hotel-airport transfers,
-                                transport for trips to Armenia. We offer modern cars and buses of various categories that meet all necessary safety requirements.
-                                All vehicles provided by us are equipped with air conditioning. Our drivers are experienced professionals.
+                                <Typography className={classes.pos} color="textSecondary">
+                                    Here you can order airport-hotel-airport transfers,
+                                    transport for trips to Armenia. We offer modern cars and buses of various categories that meet all necessary safety requirements.
+                                    All vehicles provided by us are equipped with air conditioning. Our drivers are experienced professionals.
         </Typography>
-                        </CardContent>
-                    </CardActionArea>
-                    <CardActions>
-                        {/* <Button variant="contained" size="small" component={Link} to="/carRental">CAR RENTAL</Button> */}
-                        <Button
-                            component={Link} to="/vehicles"
-                            variant="contained"
-                            color="primary"
-                            className={classes.button}
-                        >
-                            Our Vehicles
+                            </CardContent>
+                        </CardActionArea>
+                        <CardActions>
+                            {/* <Button variant="contained" size="small" component={Link} to="/carRental">CAR RENTAL</Button> */}
+                            <Button
+                                component={Link} to="/vehicles"
+                                variant="contained"
+                                color="primary"
+                                className={classes.button}
+                            >
+                                Our Vehicles
         <NavigationIcon className={classes.extendedIcon} />
-                        </Button>
-                    </CardActions>
-                </Card>
-            </Grid>
+                            </Button>
+                        </CardActions>
+                    </Card>
+                </Grid>
+            </div>
         </>
     );
 
