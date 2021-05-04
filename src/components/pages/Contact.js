@@ -79,7 +79,7 @@ function Contact() {
         })
     }, [])
 
-   
+
 
     const [contact, setContact] = useState({
         name: "",
@@ -98,15 +98,21 @@ function Contact() {
             console.error("Error: ", e);
         }
         setOpen(true);
-  };
+        setContact({
+            name: "",
+            email: "",
+            phone: "",
+            message: "",
+        })
+    };
 
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
 
-    setOpen(false);
-        
+        setOpen(false);
+
     }
 
     const onChange = (event) => {

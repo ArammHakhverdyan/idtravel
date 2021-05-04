@@ -72,7 +72,6 @@ function Services() {
 
     return (
         <>
-
             <CssBaseline />
             <ImageHeader text="Services" backgroundImage={url[0]} />
             <div style={{
