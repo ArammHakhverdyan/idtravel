@@ -8,7 +8,7 @@ const authReducer = (state = initState, action) => {
         case 'LOGIN_ERROR':
             return {
                 ...state,
-                authError: 'Login or password is incorrect'
+                authError: 'Login or password is incorrect`'
             }
         case 'LOGIN_SUCCESS':
             console.log('login success')

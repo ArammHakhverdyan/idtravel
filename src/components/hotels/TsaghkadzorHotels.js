@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -9,6 +9,7 @@ import { Box } from '@material-ui/core';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { Link } from 'react-router-dom';
 import ReactReadMoreReadLess from "react-read-more-read-less";
+import { storageRef } from '../../config/config';
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -24,18 +25,51 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+
 export default function TsaghkadzorHotels() {
+    const [url, setUrl] = useState(["", "", "", "", "", "", ""])
+
+    useEffect(() => {
+        const a = storageRef.child('Images/hotels/TsaghkadzorHotels/header.jpg')
+        const d = storageRef.child('Images/hotels/TsaghkadzorHotels/1.jpg')
+        const b = storageRef.child('Images/hotels/TsaghkadzorHotels/2.jpg')
+        const c = storageRef.child('Images/hotels/TsaghkadzorHotels/3.jpg')
+        const e = storageRef.child('Images/hotels/TsaghkadzorHotels/4.jpg')
+        const f = storageRef.child('Images/hotels/TsaghkadzorHotels/5.jpg')
+        const g = storageRef.child('Images/hotels/TsaghkadzorHotels/6.jpg')
+
+
+        const images = [a, b, c, d, e, f, g]
+
+        images.map((item, index) =>
+            item.getDownloadURL().then((downloadURL) => {
+                setUrl((old) => {
+                    const newSt = [...old];
+                    newSt[index] = downloadURL;
+                    return newSt;
+                });
+            }).catch((error) => {
+                switch (error.code) {
+                    case 'storage/object-not-found':
+                        break;
+                    default:
+                        return
+                }
+            })
+        )
+    }, [])
+
     const classes = useStyles();
     const [five] = React.useState(5)
     const [four] = React.useState(4)
     const [three] = React.useState(3)
-    const [two] = React.useState(2)
-    const [one] = React.useState(1)
+    // const [two] = React.useState(2)
+    // const [one] = React.useState(1)
     const [zero] = React.useState(0)
-    const background = "http://alpina.am/wp-content/uploads/2017/08/sl1alp.jpg"
+    const background = url[0]
     const hotels = [
         {
-            imgUrl: "https://cf.bstatic.com/images/hotel/max1024x768/222/222814670.jpg",
+            imgUrl: url[1],
             imgText: "complex",
             hotelName: "Tsaghkadzor Marriott Hotel",
             location: "Tandzaghpyur Street 2 4/1, 2310 Tsaghkadzor, Armenia",
@@ -46,7 +80,7 @@ export default function TsaghkadzorHotels() {
             star: five
         },
         {
-            imgUrl: "https://cf.bstatic.com/images/hotel/max1024x768/117/117775022.jpg",
+            imgUrl: url[2],
             imgText: "complex",
             hotelName: "Ararat Resort Tsaghkadzor",
             location: "Nazarbekyan 25/5, 0057 Yerevan, Armenia",
@@ -57,7 +91,7 @@ export default function TsaghkadzorHotels() {
             star: five
         },
         {
-            imgUrl: "https://cf.bstatic.com/images/hotel/max1024x768/284/284844661.jpg",
+            imgUrl: url[3],
             imgText: "complex",
             hotelName: "Kecharis Hotel and Resort",
             location: "Orbeli Brothers Street 20, 2310 Tsaghkadzor, Armenia",
@@ -68,7 +102,7 @@ export default function TsaghkadzorHotels() {
             star: four
         },
         {
-            imgUrl: "https://cf.bstatic.com/images/hotel/max1024x768/105/105191938.jpg",
+            imgUrl: url[4],
             imgText: "complex",
             hotelName: "Hotel Edem",
             location: "19 Tandzaghbyur Street, 2310 Tsaghkadzor, Armenia",
@@ -80,7 +114,7 @@ export default function TsaghkadzorHotels() {
             star: zero
         },
         {
-            imgUrl: "https://cf.bstatic.com/images/hotel/max1024x768/283/283675555.jpg",
+            imgUrl: url[5],
             imgText: "complex",
             hotelName: "Alaska Resort",
             location: "Saralanji 53/1, 2310 Tsaghkadzor, Armenia",
@@ -91,7 +125,7 @@ export default function TsaghkadzorHotels() {
             star: zero
         },
         {
-            imgUrl: "https://cf.bstatic.com/images/hotel/max1024x768/242/242596691.jpg",
+            imgUrl: url[6],
             imgText: "complex",
             hotelName: "Hotel - Saya",
             location: "Grigor Magistros Street 1/1, 2310 Tsaghkadzor, Armenia",

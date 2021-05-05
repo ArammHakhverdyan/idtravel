@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -9,6 +9,7 @@ import { Box } from '@material-ui/core';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { Link } from 'react-router-dom';
 import ReactReadMoreReadLess from "react-read-more-read-less";
+import { storageRef } from '../../config/config';
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -30,14 +31,50 @@ export default function YerevanHotels() {
     const [five] = React.useState(5)
     const [four] = React.useState(4)
     const [three] = React.useState(3)
-    const [two] = React.useState(2)
-    const [one] = React.useState(1)
-    const [zero] = React.useState(0)
+    // const [two] = React.useState(2)
+    // const [one] = React.useState(1)
+    // const [zero] = React.useState(0)
 
-    const background = "https://wallpaperaccess.com/full/1382744.jpg"
+    const [url, setUrl] = useState(["", "", "", "", "", "", ""])
+
+    useEffect(() => {
+        const a = storageRef.child('Images/hotels/YerevanHotels/header.jpg')
+        const b = storageRef.child('Images/hotels/YerevanHotels/1.jpg')
+        const d = storageRef.child('Images/hotels/YerevanHotels/2.jpg')
+        const c = storageRef.child('Images/hotels/YerevanHotels/3.jpg')
+        const e = storageRef.child('Images/hotels/YerevanHotels/4.jpg')
+        const f = storageRef.child('Images/hotels/YerevanHotels/5.jpg')
+        const g = storageRef.child('Images/hotels/YerevanHotels/6.jpg')
+        const h = storageRef.child('Images/hotels/YerevanHotels/7.jpg')
+        const i = storageRef.child('Images/hotels/YerevanHotels/8.jpg')
+
+        const images = [a, b, c, d, e, f, g, h, i]
+
+        images.map((item, index) =>
+            item.getDownloadURL().then((downloadURL) => {
+                setUrl((old) => {
+                    const newSt = [...old];
+                    newSt[index] = downloadURL;
+                    return newSt;
+                });
+            }).catch((error) => {
+                switch (error.code) {
+                    case 'storage/object-not-found':
+                        break;
+                    default:
+                        return
+                }
+            })
+        )
+    }, [])
+
+
+
+    console.log(url[8])
+    const background = url[0]
     const hotels = [
         {
-            imgUrl: "https://cf.bstatic.com/images/hotel/max1024x768/232/232826141.jpg",
+            imgUrl: url[1],
             imgText: "complex",
             hotelName: "Radisson BLU Hotel Yerevan",
             location: "Azatutyan Avenue 2/2, 0037 Yerevan, Armenia",
@@ -48,7 +85,7 @@ export default function YerevanHotels() {
             star: five
         },
         {
-            imgUrl: "https://cf.bstatic.com/images/hotel/max1024x768/186/186015338.jpg",
+            imgUrl: url[2],
             imgText: "complex",
             hotelName: "Aghababyan's Hotel",
             location: "Nazarbekyan 25/5, 0057 Yerevan, Armenia",
@@ -59,7 +96,7 @@ export default function YerevanHotels() {
             star: five
         },
         {
-            imgUrl: "https://cf.bstatic.com/images/hotel/max1024x768/283/283816843.jpg",
+            imgUrl: url[3],
             imgText: "complex",
             hotelName: "Armenia Mariott Hotel Yerevan",
             location: "Amiryan Street 1, 0010 Yerevan, Armenia",
@@ -70,7 +107,7 @@ export default function YerevanHotels() {
             star: four
         },
         {
-            imgUrl: "https://cf.bstatic.com/images/hotel/max1024x768/208/208662419.jpg",
+            imgUrl: url[4],
             imgText: "complex",
             hotelName: "Ramada Hotel & Suites by Wyndham Yerevan",
             location: "15 Pavstos Busand St, 00010 Yerevan, Armenia",
@@ -81,7 +118,7 @@ export default function YerevanHotels() {
             star: four
         },
         {
-            imgUrl: "https://m02.tury.ru/hotel/91/91322/2210362_1600.jpg",
+            imgUrl: url[5],
             imgText: "complex",
             hotelName: "Erebuni Hotel Yerevan",
             location: "Vazgen Sargsyan Street 26/4, 0010 Yerevan, Armenia",
@@ -92,7 +129,7 @@ export default function YerevanHotels() {
             star: four
         },
         {
-            imgUrl: "https://cf.bstatic.com/images/hotel/max1024x768/350/35052276.jpg",
+            imgUrl: url[6],
             imgText: "complex",
             hotelName: "Paris Hotel Yerevan",
             location: "4/6, Amiryan Street, 0010 Yerevan, Armenia ",
@@ -103,7 +140,7 @@ export default function YerevanHotels() {
             star: four
         },
         {
-            imgUrl: "https://cf.bstatic.com/images/hotel/max1024x768/115/115058136.jpg",
+            imgUrl: url[7],
             imgText: "complex",
             hotelName: "Ibis Yerevan Center",
             location: "Northern Avenue 5/1, 0001 Yerevan, Armenia",
@@ -114,7 +151,7 @@ export default function YerevanHotels() {
             star: three
         },
         {
-            imgUrl: "https://cf.bstatic.com/images/hotel/max1024x768/508/50853241.jpg",
+            imgUrl: url[8],
             imgText: "complex",
             hotelName: "Elysium Gallery Hotel",
             location: "75/5 Yeznik Koghbatsi Str., 0002 Yerevan, Armenia",
@@ -135,7 +172,7 @@ export default function YerevanHotels() {
             }}>
                 <div className={classes.root}>
                     <h1 style={{ textAlign: "center" }}>We cooperate with the following hotels:</h1>
-                    <h1 style={{ textAlign: "center" }}>We cooperate with the following hotels:</h1>
+                    {/* <h1 style={{ textAlign: "center" }}>We cooperate with the following hotels:</h1> */}
                     {hotels.map((value, index) => (
                         <Paper key={index} className={classes.paper}>
                             <Grid container spacing={2}>

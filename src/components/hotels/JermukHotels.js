@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -9,7 +9,7 @@ import { Box } from '@material-ui/core';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { Link } from 'react-router-dom';
 import ReactReadMoreReadLess from "react-read-more-read-less";
-import { ThreeSixtyTwoTone } from '@material-ui/icons';
+import { storageRef } from '../../config/config';
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -26,17 +26,53 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function JermukHotels() {
+
+    const [url, setUrl] = useState(["", "", "", "", "", "", ""])
+
+    useEffect(() => {
+        const a = storageRef.child('Images/hotels/JermukHotels/header.jpeg')
+        const d = storageRef.child('Images/hotels/JermukHotels/1.jpg')
+        const b = storageRef.child('Images/hotels/JermukHotels/2.jpg')
+        const c = storageRef.child('Images/hotels/JermukHotels/3.jpg')
+        const e = storageRef.child('Images/hotels/JermukHotels/4.jpg')
+        const f = storageRef.child('Images/hotels/JermukHotels/5.jpg')
+        const g = storageRef.child('Images/hotels/JermukHotels/6.jpg')
+
+
+        const images = [a, b, c, d, e, f, g]
+
+        images.map((item, index) =>
+            item.getDownloadURL().then((downloadURL) => {
+                setUrl((old) => {
+                    const newSt = [...old];
+                    newSt[index] = downloadURL;
+                    return newSt;
+                });
+            }).catch((error) => {
+                switch (error.code) {
+                    case 'storage/object-not-found':
+                        break;
+                    default:
+                        return
+                }
+            })
+        )
+    }, [])
+
+
+
+
     const classes = useStyles();
-    const [five] = React.useState(5)
+    // const [five] = React.useState(5)
     const [four] = React.useState(4)
     const [three] = React.useState(3)
-    const [two] = React.useState(2)
+    // const [two] = React.useState(2)
     const [one] = React.useState(1)
     const [zero] = React.useState(0)
-    const background = "https://1.bp.blogspot.com/-MsP7KzMSIrs/X0c5y1nzD6I/AAAAAAAAgvU/n7ycyJdoUTUxEzt-hogUP0_e54mlR-8dQCNcBGAsYHQ/s1600/IMG_20171015_100443832_HDR-02.jpeg"
+    const background = url[0];
     const hotels = [
         {
-            imgUrl: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/210084287.jpg?k=555824d646ec630884eebc667d05572ff9887b62127dd337e09cbefb4583daea&o=&hp=1",
+            imgUrl: url[1],
             imgText: "complex",
             hotelName: "Sanatory Moskva",
             location: "Melik - Adamyan Street 6, 3701 Jermuk, Armenia",
@@ -47,7 +83,7 @@ export default function JermukHotels() {
             star: four
         },
         {
-            imgUrl: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/155029490.jpg?k=68e8d50eebf853d90c1ed0ea99a93ae08fa4640b1f27485b5b4915c7e0864b61&o=&hp=1",
+            imgUrl: url[2],
             imgText: "complex",
             hotelName: "Jermuk Verona Resort",
             location: "Shaumyan Street 9/1, 3701 Jermuk, Armenia",
@@ -58,7 +94,7 @@ export default function JermukHotels() {
             star: three
         },
         {
-            imgUrl: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/135742216.jpg?k=573f97b8aeda9b3220fd466cf594c6ab07b7aab1ad40e15fd6fdf737538915cc&o=&hp=1",
+            imgUrl: url[3],
             imgText: "complex",
             hotelName: "Jermuk Olympia Sanatorium",
             location: "Shahumyan Street, 16, 3701 Jermuk, Armenia ",
@@ -69,7 +105,7 @@ export default function JermukHotels() {
             star: three
         },
         {
-            imgUrl: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/196771901.jpg?k=a98a31267892712f769d3530d1be98d7ee50560ff29c53daea73dc46d959e1a2&o=&hp=1",
+            imgUrl: url[4],
             imgText: "complex",
             hotelName: "Grand Resort Jermuk",
             location: "7/5 Shahumyan Street, 3701 Jermuk, Armenia",
@@ -80,7 +116,7 @@ export default function JermukHotels() {
             star: three
         },
         {
-            imgUrl: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/80220247.jpg?k=72bfba4b2cb6246b83ed11124701a95a3572e34646e8567bb04b244467fb9d4a&o=&hp=1",
+            imgUrl: url[5],
             imgText: "complex",
             hotelName: "Jermuk Villa Imperial",
             location: "Sarvorneri 5, 3702 Jermuk, Armenia",
@@ -91,7 +127,7 @@ export default function JermukHotels() {
             star: one
         },
         {
-            imgUrl: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/78220715.jpg?k=4c72c9d7d1d9d87303413ca2bdb745eb577865bac642daddcddb35b3e29d45e1&o=&hp=1",
+            imgUrl: url[6],
             imgText: "complex",
             hotelName: "Hotel Central",
             location: "Shahumyan Street 12, 3701 Jermuk, Armenia ",
