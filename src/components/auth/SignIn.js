@@ -66,15 +66,17 @@ const SignIn = (props) => {
     return (
         <>
             <ImageHeader text="" backgroundImage={url} />
-            <Container>
-                <Box py={5} className={classes.loginForm} textAlign="center">
-                    <Typography variant="h4" component="h1" gutterBottom>Sign In</Typography>
-                    {authError && <Typography color="secondary" gutterBottom>{authError}</Typography>}
-                    <TextField id="email" helperText={emailError} error={emailError ? true : false} fullWidth={true} label="Email" variant="outlined" value={value.email} onChange={handleChange} />
-                    <TextField helperText={passwordError} error={passwordError ? true : false} type="password" id="password" fullWidth={true} label="Password" variant="outlined" value={value.password} onChange={handleChange} />
-                    <Button className={classes.loginBtn} fullWidth={true} variant="contained" onClick={handleSubmit}>Login</Button>
-                </Box>
-            </Container>
+            <div className={classes.bg}>
+                <Container>
+                    <Box py={5} className={classes.loginForm} textAlign="center">
+                        <Typography variant="h4" component="h1" gutterBottom>Sign In</Typography>
+                        {authError && <Typography color="secondary" gutterBottom>{authError}</Typography>}
+                        <TextField id="email" helperText={emailError} error={emailError ? true : false} fullWidth={true} label="Email" variant="outlined" value={value.email} onChange={handleChange} />
+                        <TextField helperText={passwordError} error={passwordError ? true : false} type="password" id="password" fullWidth={true} label="Password" variant="outlined" value={value.password} onChange={handleChange} />
+                        <Button className={classes.loginBtn} fullWidth={true} variant="contained" onClick={handleSubmit}>Login</Button>
+                    </Box>
+                </Container>
+            </div>
         </>
     )
 }
@@ -111,4 +113,11 @@ const useStyles = makeStyles({
             backgroundColor: "#8cc927",
         }
     },
+    bg: {
+        backgroundImage: "url(https://wanderers.qodeinteractive.com/wp-content/uploads/2018/02/h1-background-1.png?id=125)",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        padding: "30px 0",
+    }
 });
