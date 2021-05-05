@@ -1,13 +1,16 @@
 import { Box, Button, Container, makeStyles, TextField, Typography } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import { signUp } from '../../actions/AuthActions';
+import { storageRef } from '../../config/config';
+import ImageHeader from '../shared/ImageHeader';
 
 
 export const SignUp = (props) => {
     const classes = useStyles()
-    const { auth, authError } = props;
+    const { auth } = props;
+    const [url, setUrl] = useState([""])
     const [value, setValue] = useState({
         email: "",
         password: "",
@@ -39,7 +42,7 @@ export const SignUp = (props) => {
         }
         if (!value.email) {
             setEmailError("This field can't be blank");
-        } else if (!value.email.includes("@")) {
+        } else if (!value.email.includes("@" && ".")) {
             setEmailError("Invalid email");
         }
         if (!value.password) {
@@ -55,23 +58,47 @@ export const SignUp = (props) => {
 
     }
 
+
+    useEffect(() => {
+        const a = storageRef.child('Images/signIn/pic.jpg')
+
+        a.getDownloadURL().then((downloadURL) => {
+            setUrl(() => {
+                const newSt = downloadURL
+                return newSt;
+            });
+
+        }).catch((error) => {
+            switch (error.code) {
+                case 'storage/object-not-found':
+                    // File doesn't exist
+                    break;
+                default: {
+                    return
+                }
+            }
+        })
+    }, [])
+
+
     if (auth.uid) return <Redirect to='/' />
 
 
     return (
-
-        <Container>
-            <Box py={5} className={classes.loginForm} textAlign="center">
-                <Typography variant="h4" component="h1" gutterBottom>Sign Up</Typography>
-                {/* {authError && <Typography color="secondary" gutterBottom>{authError}</Typography>} */}
-                <TextField id="email" fullWidth={true} label="Email" helperText={emailError} error={emailError ? true : false} variant="outlined" value={value.email} onChange={handleChange} />
-                <TextField type="password" helperText={passwordError} error={passwordError ? true : false} id="password" fullWidth={true} label="Password" variant="outlined" value={value.password} onChange={handleChange} />
-                <TextField id="firstName" helperText={firstNameError} error={firstNameError ? true : false} fullWidth={true} label="FirstName" variant="outlined" value={value.firstName} onChange={handleChange} />
-                <TextField id="lastName" helperText={lastNameError} error={lastNameError ? true : false} fullWidth={true} label="LastName" variant="outlined" value={value.lastName} onChange={handleChange} />
-                <Button className={classes.loginBtn} fullWidth={true} variant="contained" onClick={handleSubmit}>Sign Up</Button>
-            </Box>
-        </Container>
-
+        <>
+            <ImageHeader text="" backgroundImage={url} />
+            <Container>
+                <Box py={5} className={classes.loginForm} textAlign="center">
+                    <Typography variant="h4" component="h1" gutterBottom>Sign Up</Typography>
+                    {/* {authError && <Typography color="secondary" gutterBottom>{authError}</Typography>} */}
+                    <TextField id="email" fullWidth={true} label="Email" helperText={emailError} error={emailError ? true : false} variant="outlined" value={value.email} onChange={handleChange} />
+                    <TextField type="password" helperText={passwordError} error={passwordError ? true : false} id="password" fullWidth={true} label="Password" variant="outlined" value={value.password} onChange={handleChange} />
+                    <TextField id="firstName" helperText={firstNameError} error={firstNameError ? true : false} fullWidth={true} label="FirstName" variant="outlined" value={value.firstName} onChange={handleChange} />
+                    <TextField id="lastName" helperText={lastNameError} error={lastNameError ? true : false} fullWidth={true} label="LastName" variant="outlined" value={value.lastName} onChange={handleChange} />
+                    <Button className={classes.loginBtn} fullWidth={true} variant="contained" onClick={handleSubmit}>Sign Up</Button>
+                </Box>
+            </Container>
+        </>
     )
 }
 
