@@ -1,14 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Rating from '@material-ui/lab/Rating';
-import { Box } from '@material-ui/core';
+import { Alert, Badge, Box, Button, ButtonGroup, Snackbar, TextField } from '@material-ui/core';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { Link } from 'react-router-dom';
 import ReactReadMoreReadLess from "react-read-more-read-less";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import { db } from '../../config/config';
+import addWeeks from 'date-fns/addWeeks';
+import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
+import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
+import MobileDateRangePicker from '@material-ui/lab/MobileDateRangePicker';
+import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
+import PersonIcon from '@material-ui/icons/Person';
+import HotelIcon from '@material-ui/icons/Hotel';
+
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -23,8 +38,70 @@ const useStyles = makeStyles((theme) => ({
         height: "128px",
     }
 }));
-
+// --------------------------
+function getWeeksAfter(date, amount) {
+    return date ? addWeeks(date, amount) : undefined;
+  }
 export default function GorisHotels() {
+const [open, setOpen] = React.useState(false);
+const [date, setDate] = React.useState([null, null]);
+const [countPerson, setCountPerson] = React.useState(1);
+const [countHotel, setCountHotel] = React.useState(1);
+const [invisible, setInvisible] = React.useState(false);
+
+  const handleBadgeVisibility = () => {
+    setInvisible(!invisible);
+  }
+const [reserve, setReserve] = useState({
+    fullName: "",
+    emailAdress: "",
+    phoneNumber: "",
+    textMessage: "",
+    hotelId: "",
+    startDate: "",
+    endDate: "",
+})
+
+const hotelReserve = async (event) => {
+    event.preventDefault();
+    try {
+        const hotels = await db.collection("hotels");
+        hotels.doc("From: " + reserve.emailAdress).set(reserve);
+    } catch (e) {
+        console.error("Error: ", e);
+    }
+    setOpen(true);
+    setReserve({
+        fullName: "",
+        emailAdress: "",
+        phoneNumber: "",
+        textMessage: "",
+        hotelId: "",
+        startDate: "",
+        endDate: "",
+    })
+};
+
+const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+        return;
+    }
+
+    setOpen(false);
+
+}
+
+const handleChange = (event) => {
+    let id = event.target.id;
+    let value = event.target.value;
+
+    setReserve(prevState => ({
+        ...prevState,
+        [id]: value
+    }))
+}
+
+
     const classes = useStyles();
     const [five] = React.useState(5)
     const [four] = React.useState(4)
@@ -35,6 +112,7 @@ export default function GorisHotels() {
     const background = "https://i.ytimg.com/vi/Xqw05yQEzGQ/maxresdefault.jpg"
     const hotels = [
         {
+            hotelId: "Diana Hotel",
             imgUrl: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/37724799.jpg?k=c460f96f37b52a7a7e9f556902aba385a3ef093c0811422e85b842d806cb4433&o=&hp=1",
             imgText: "complex",
             hotelName: "Diana Hotel",
@@ -103,6 +181,17 @@ export default function GorisHotels() {
 
 
     ]
+
+    const [ToOpen, setToOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setToOpen(true);
+  };
+
+  const handleClickClose = () => {
+    setToOpen(false);
+  };
+    
     return (
         <>
             <div style={{
@@ -119,6 +208,94 @@ export default function GorisHotels() {
                                     <ButtonBase className={classes.image}>
                                         <img className="hotelImg" alt={value.imgText} src={value.imgUrl} />
                                     </ButtonBase>
+                                    {/* ---------------------- */}
+                                    <Dialog open={ToOpen} onClose={handleClickClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">Order processing</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Please fill in the details․
+          </DialogContentText>
+          <TextField fullWidth={true} id="fullName" label="Full Name" variant="outlined" onChange={handleChange} />
+                    <TextField fullWidth={true} style={{marginTop: "20px"}} id="emailAdress" label="Email" variant="outlined" onChange={handleChange} />
+                    <TextField fullWidth={true} style={{marginTop: "20px"}} id="phoneNumber" label="Phone Number" variant="outlined" onChange={handleChange} />
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <MobileDateRangePicker
+        startText="Start"
+        value={date}
+        onChange={(newValue) => {
+        setDate(newValue);
+        }}
+        renderInput={(startProps, endProps) => (
+          <React.Fragment>
+            <TextField {...startProps} style={{marginTop: "20px"}} variant="standard" fullWidth={true} id="startDate" label="Start" onChange={handleChange}/>
+            <Box sx={{ mx: 2 }}> to </Box>
+            <TextField {...endProps} variant="standard" fullWidth={true} id="endDate" label="End" onChange={handleChange}/>
+          </React.Fragment>
+        )}
+      />
+      </LocalizationProvider>
+<div style={{marginTop: "20px", display: "flex"}}>
+      <div>
+        <Badge color="secondary" badgeContent={countPerson}>
+        <PersonIcon />
+        </Badge>
+        <ButtonGroup>
+          <Button
+            aria-label="reduce"
+            onClick={() => {
+              setCountPerson(Math.max(countPerson - 1, 0));
+            }}
+          >
+            <RemoveIcon fontSize="small" />
+          </Button>
+          <Button
+            aria-label="increase"
+            onClick={() => {
+              setCountPerson(countPerson + 1);
+            }}
+          >
+            <AddIcon fontSize="small" />
+          </Button>
+        </ButtonGroup>
+      </div>
+      <div style={{marginLeft: "70px"}}>
+        <Badge color="secondary" badgeContent={countHotel}>
+        <HotelIcon />
+        </Badge>
+        <ButtonGroup>
+          <Button
+            aria-label="reduce"
+            onClick={() => {
+              setCountHotel(Math.max(countHotel - 1, 0));
+            }}
+          >
+            <RemoveIcon fontSize="small" />
+          </Button>
+          <Button
+            aria-label="increase"
+            onClick={() => {
+              setCountHotel(countHotel + 1);
+            }}
+          >
+            <AddIcon fontSize="small" />
+          </Button>
+        </ButtonGroup>
+      </div>
+</div>
+      <TextField fullWidth={true} style={{marginTop: "20px"}} id="hotelId" label="Hotel Name" defaultValue={value.hotelId} variant="outlined" onChange={handleChange} />
+                    <TextField fullWidth={true} style={{marginTop: "20px"}} id="textMessage" label="Message" variant="outlined" multiline rows={4} onChange={handleChange} />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClickClose} color="primary">
+            Cancel
+          </Button>
+          <Button style={{backgroundColor: "#94c93d"}} fullWidth={true} variant="contained" onClick={hotelReserve}>Book</Button>
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                        <Alert onClose={handleClose} severity="success">Your order is successfully done.We will contact with you soon</Alert>
+                    </Snackbar>
+        </DialogActions>
+      </Dialog>
+      {/* ------------------- */}
                                 </Grid>
 
                                 <Grid item xs={12} sm container>
@@ -148,19 +325,24 @@ export default function GorisHotels() {
                                         <Typography style={{ fontSize: "12px", color: "black" }}>{value.night}</Typography>
                                         <Typography style={{ fontSize: "25px", color: "#94c93d" }}>{value.price}</Typography>
                                         <Typography style={{ fontSize: "10px", color: "black" }}>{value.includes}</Typography>
+                                        <Button style={{marginTop: "15px", backgroundColor: "#94c93d"}} variant="contained" onClick={handleClickOpen}>
+                                         Book this hotel
+                                        </Button>
                                     </Grid>
-                                    <Grid item style={{ marginTop: "15%" }}>
+                                    {/* <Grid item style={{ marginTop: "15%" }}>
                                         <Grid item style={{ width: "70px" }}>
+                                        
                                             <ButtonBase component={Link} to="/contact">
-                                                <Typography variant="caption" display="block">
+                                            <Typography variant="caption" display="block">
                                                     For details please contact with us
                                 </Typography>
 
 
                                                 <ArrowForwardIosIcon></ArrowForwardIosIcon>
+                                                
                                             </ButtonBase>
                                         </Grid>
-                                    </Grid>
+                                    </Grid> */}
                                 </Grid>
                             </Grid>
                         </Paper>
@@ -170,3 +352,4 @@ export default function GorisHotels() {
         </>
     );
 }
+

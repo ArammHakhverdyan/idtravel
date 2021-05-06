@@ -87,8 +87,8 @@ export default function MediaCard() {
               </CardContent>
             </CardActionArea>
             <CardActions style={{marginLeft: "65%"}}>
-              <Button size="small" color="primary">
-                Learn More
+              <Button size="small" color="primary" component={Link} to="/yerevanHotels">
+                See Hotels
         </Button>
             </CardActions>
           </Card>
@@ -111,8 +111,8 @@ export default function MediaCard() {
             </CardActionArea>
             <CardActions style={{marginLeft: "65%"}}>
 
-              <Button size="small" color="primary">
-                Learn More
+              <Button size="small" color="primary" component={Link} to="/tsaghkadzorHotels">
+              See Hotels
         </Button>
             </CardActions>
           </Card>
@@ -122,7 +122,7 @@ export default function MediaCard() {
               <CardMedia
                 className={classes.media}
                 image={url[3]}
-                title="Contemplative Reptile"
+                title="See Hotels in Dilijan"
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
@@ -135,8 +135,8 @@ export default function MediaCard() {
             </CardActionArea>
             <CardActions style={{marginLeft: "65%"}}>
 
-              <Button size="small" color="primary">
-                Learn More
+              <Button size="small" color="primary" component={Link} to="/dilijanHotels">
+              See Hotels
         </Button>
             </CardActions>
           </Card>
@@ -146,7 +146,7 @@ export default function MediaCard() {
               <CardMedia
                 className={classes.media}
                 image={url[4]}
-                title="Contemplative Reptile"
+                title="See Hotels in Sevan"
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
@@ -159,8 +159,8 @@ export default function MediaCard() {
             </CardActionArea>
             <CardActions style={{marginLeft: "65%"}}>
 
-              <Button size="small" color="primary">
-                Learn More
+              <Button size="small" color="primary" component={Link} to="/sevanHotels">
+              See Hotels
         </Button>
             </CardActions>
           </Card>
@@ -170,7 +170,7 @@ export default function MediaCard() {
               <CardMedia
                 className={classes.media}
                 image={url[5]}
-                title="Contemplative Reptile"
+                title="See Hotels in Jermuk"
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
@@ -183,8 +183,8 @@ export default function MediaCard() {
             </CardActionArea>
             <CardActions style={{marginLeft: "65%"}}>
 
-              <Button size="small" color="primary">
-                Learn More
+              <Button size="small" color="primary" component={Link} to="/jermukHotels">
+              See Hotels
         </Button>
             </CardActions>
           </Card>
@@ -194,7 +194,7 @@ export default function MediaCard() {
               <CardMedia
                 className={classes.media}
                 image={url[6]}
-                title="Contemplative Reptile"
+                title="See Hotels in Goris"
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
@@ -206,8 +206,8 @@ export default function MediaCard() {
               </CardContent>
             </CardActionArea>
             <CardActions style={{marginLeft: "65%"}}>
-              <Button size="small" color="primary">
-                Learn More
+              <Button size="small" color="primary"  component={Link} to="/gorisHotels">
+              See Hotels
         </Button>
             </CardActions>
           </Card>

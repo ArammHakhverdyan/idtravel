@@ -135,7 +135,6 @@ export default function YerevanHotels() {
             }}>
                 <div className={classes.root}>
                     <h1 style={{ textAlign: "center" }}>We cooperate with the following hotels:</h1>
-                    <h1 style={{ textAlign: "center" }}>We cooperate with the following hotels:</h1>
                     {hotels.map((value, index) => (
                         <Paper key={index} className={classes.paper}>
                             <Grid container spacing={2}>

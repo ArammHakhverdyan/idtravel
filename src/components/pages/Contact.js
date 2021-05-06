@@ -89,7 +89,6 @@ function Contact() {
     })
 
     const sendMessage = async (event) => {
-        //setOpen(true);
         event.preventDefault();
         try {
             const messages = await db.collection("messages");

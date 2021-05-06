@@ -145,7 +145,7 @@ p{
 .sprinter:hover{
   content: url("https://artourbus.com/img/cars/8/4.jpg");
   transform: scale(2);
-  cursor: zoom-out;
+  cursor: zoom-in;
   margin-top: 10%;
   z-index: 999;
 }
@@ -161,7 +161,7 @@ p{
 .grandis:hover{
   content: url("https://img.drivemag.net/jato_car_photos/MITSUBISHI%2FGRANDIS%2FMinivan%2F5%2F2004%2Finterior-photos%2Fo%2Fmitsubishi-grandis-minivan-5-doors-2004-model-interior-photos-0.jpg");
   transform: scale(2);
-  cursor: zoom-out;
+  cursor: zoom-in;
   margin-top: 10%;
   z-index: 999;
 }
@@ -178,7 +178,7 @@ p{
 .sienna:hover{
   content: url("https://i.pinimg.com/originals/39/f0/ba/39f0ba031266d329fdfbe34d9c101db9.jpg");
   transform: scale(2);
-  cursor: zoom-out;
+  cursor: zoom-in;
   margin-top: 10%;
   z-index: 999;
 }
@@ -195,7 +195,7 @@ p{
 .travego:hover{
   content: url("https://artourbus.com/img/cars/16/4.jpg");
   transform: scale(2);
-  cursor: zoom-out;
+  cursor: zoom-in;
   margin-top: 10%;
   z-index: 999;
 }
