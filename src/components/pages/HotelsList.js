@@ -27,7 +27,7 @@ const useStyles = makeStyles({
 
 export default function MediaCard() {
   const classes = useStyles();
-  const background = "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/f2/42/38/caption.jpg?w=1000&h=600&s=1"
+  // const background = "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/f2/42/38/caption.jpg?w=1000&h=600&s=1"
   const [url, setUrl] = useState(["", "", "", "", "", "", ""])
 
   useEffect(() => {
@@ -58,13 +58,18 @@ export default function MediaCard() {
       })
     )
   }, [])
-
+  const yerevan = url[1];
+  const tsaghkadzor = url[2];
+  const dilijan = url[3];
+  const sevan = url[4];
+  const jermuk = url[5];
+  const goris = url[6];
 
   return (
     <>
       <ImageHeader text="Hotels" backgroundImage={url[0]} />
       <div style={{
-        backgroundImage: `url(${background})`,
+        // backgroundImage: `url(${background})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
       }}>
@@ -72,11 +77,9 @@ export default function MediaCard() {
           {/* ---------------------------Yerevan----- */}
           <Card className={classes.root}>
             <CardActionArea component={Link} to="/yerevanHotels">
-              <CardMedia
-                className={classes.media}
-                image={url[1]}
-                title="See hotels in Yerevan"
-              />
+              <CardMedia title="See hotels in Yerevan">
+                <img src={yerevan} className={classes.media} alt="services" />
+              </CardMedia>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
                   Yerevan
@@ -95,11 +98,9 @@ export default function MediaCard() {
           {/* -----------------------------------Tsaghkadzor */}
           <Card className={classes.root}>
             <CardActionArea component={Link} to="/tsaghkadzorHotels">
-              <CardMedia
-                className={classes.media}
-                image={url[2]}
-                title="See hotels in Tsaghkadzor"
-              />
+              <CardMedia title="See hotels in Tsaghkadzor">
+                <img src={tsaghkadzor} className={classes.media} alt="services" />
+              </CardMedia>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
                   Tsaghkadzor
@@ -109,7 +110,7 @@ export default function MediaCard() {
           </Typography>
               </CardContent>
             </CardActionArea>
-            <CardActions style={{marginLeft: "65%"}}>
+            <CardActions style={{ marginLeft: "65%" }}>
 
               <Button size="small" color="primary" component={Link} to="/tsaghkadzorHotels">
               See Hotels
@@ -133,7 +134,7 @@ export default function MediaCard() {
           </Typography>
               </CardContent>
             </CardActionArea>
-            <CardActions style={{marginLeft: "65%"}}>
+            <CardActions style={{ marginLeft: "65%" }}>
 
               <Button size="small" color="primary" component={Link} to="/dilijanHotels">
               See Hotels
@@ -157,7 +158,7 @@ export default function MediaCard() {
           </Typography>
               </CardContent>
             </CardActionArea>
-            <CardActions style={{marginLeft: "65%"}}>
+            <CardActions style={{ marginLeft: "65%" }}>
 
               <Button size="small" color="primary" component={Link} to="/sevanHotels">
               See Hotels
@@ -181,7 +182,7 @@ export default function MediaCard() {
           </Typography>
               </CardContent>
             </CardActionArea>
-            <CardActions style={{marginLeft: "65%"}}>
+            <CardActions style={{ marginLeft: "65%" }}>
 
               <Button size="small" color="primary" component={Link} to="/jermukHotels">
               See Hotels

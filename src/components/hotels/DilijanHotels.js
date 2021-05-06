@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -9,6 +9,7 @@ import { Box } from '@material-ui/core';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { Link } from 'react-router-dom';
 import ReactReadMoreReadLess from "react-read-more-read-less";
+import { storageRef } from '../../config/config';
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -25,17 +26,53 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function DilijanHotels() {
+    const [url, setUrl] = useState(["", "", "", "", "", "", ""])
+
+    useEffect(() => {
+        const a = storageRef.child('Images/hotels/DilijanHotels/header.jpeg')
+        const d = storageRef.child('Images/hotels/DilijanHotels/1.jpg')
+        const b = storageRef.child('Images/hotels/DilijanHotels/2.jpg')
+        const c = storageRef.child('Images/hotels/DilijanHotels/3.jpg')
+        const e = storageRef.child('Images/hotels/DilijanHotels/4.jpg')
+        const f = storageRef.child('Images/hotels/DilijanHotels/5.jpg')
+        const g = storageRef.child('Images/hotels/DilijanHotels/6.jpg')
+
+
+        const images = [a, b, c, d, e, f, g]
+
+        images.map((item, index) =>
+            item.getDownloadURL().then((downloadURL) => {
+                setUrl((old) => {
+                    const newSt = [...old];
+                    newSt[index] = downloadURL;
+                    return newSt;
+                });
+            }).catch((error) => {
+                switch (error.code) {
+                    case 'storage/object-not-found':
+                        break;
+                    default:
+                        return
+                }
+            })
+        )
+    }, [])
+
+
+
+
+
     const classes = useStyles();
-    const [five] = React.useState(5)
+    // const [five] = React.useState(5)
     const [four] = React.useState(4)
     const [three] = React.useState(3)
-    const [two] = React.useState(2)
+    // const [two] = React.useState(2)
     const [one] = React.useState(1)
     const [zero] = React.useState(0)
-    const background = 'https://mztresizer-b7c5.kxcdn.com/userfiles/hotels/original/6134497/6134497_ecokayan-dilijan-hotel_190794.jpeg?preset=b'
+    const background = url[0]
     const hotels = [
         {
-            imgUrl: "https://cf.bstatic.com/images/hotel/max1024x768/256/256913510.jpg",
+            imgUrl: url[1],
             imgText: "complex",
             hotelName: "DiliJazz Hotel & Restaurant",
             location: "1/1 Teghut 2nd Street, 3902 Dilijan, Armenia",
@@ -46,7 +83,7 @@ export default function DilijanHotels() {
             star: four
         },
         {
-            imgUrl: "https://cf.bstatic.com/images/hotel/max1024x768/563/56357201.jpg",
+            imgUrl: url[2],
             imgText: "complex",
             hotelName: "Tufenkian Old Dilijan Complex",
             location: "Sharambeyan Street, 3901 Dilijan, Armenia",
@@ -57,7 +94,7 @@ export default function DilijanHotels() {
             star: three
         },
         {
-            imgUrl: "https://cf.bstatic.com/images/hotel/max1024x768/113/113555275.jpg",
+            imgUrl: url[3],
             imgText: "complex",
             hotelName: "Guest house Dilijan Orran",
             location: "str. Hovsepyan 26, 0010 Dilijan, Armenia",
@@ -68,7 +105,7 @@ export default function DilijanHotels() {
             star: three
         },
         {
-            imgUrl: "https://cf.bstatic.com/images/hotel/max1024x768/638/63886945.jpg",
+            imgUrl: url[4],
             imgText: "complex",
             hotelName: "ECO GARDEN",
             location: "Kamo Street 146, 3741 Dilijan, Armenia",
@@ -79,7 +116,7 @@ export default function DilijanHotels() {
             star: one
         },
         {
-            imgUrl: "https://cf.bstatic.com/images/hotel/max1024x768/265/265173007.jpg",
+            imgUrl: url[5],
             imgText: "complex",
             hotelName: "Nran Hatik",
             location: "Myasnikyan St. 12/3, 3906 Dilijan, Armenia",
@@ -90,7 +127,7 @@ export default function DilijanHotels() {
             star: zero
         },
         {
-            imgUrl: "https://cf.bstatic.com/images/hotel/max1024x768/150/150923093.jpg",
+            imgUrl: url[6],
             imgText: "complex",
             hotelName: "Ojakh",
             location: "Miasnikian street house number 5, 3906 Dilijan, Armenia",

@@ -55,31 +55,37 @@ const useStyles = makeStyles((theme) => ({
 
 function Contact() {
     const classes = useStyles();
-    const background ="https://wallpaperaccess.com/full/3200384.jpg"
-    const [url, setUrl] = useState("")
+    const [url, setUrl] = useState(["", ""])
     const [open, setOpen] = React.useState(false);
+    const [openErrorButton, setOpenErrorButton] = React.useState(false)
+
+
     useEffect(() => {
-        const jermuk = storageRef.child('Images/jermuk.jpg')
 
-        jermuk.getDownloadURL().then((downloadURL) => {
-            setUrl(() => {
-                const newSt = downloadURL
-                return newSt;
-            });
+        const a = storageRef.child('Images/Contact/header.jpg')
+        const b = storageRef.child('Images/Contact/Sevan-5.jpg');
+        const images = [a, b]
 
-        }).catch((error) => {
-            switch (error.code) {
-                case 'storage/object-not-found':
-                    // File doesn't exist
-                    break;
-                default: {
-                    return
+        images.map((item, index) =>
+            item.getDownloadURL().then((downloadURL) => {
+                setUrl((old) => {
+                    const newSt = [...old];
+                    newSt[index] = downloadURL;
+                    return newSt;
+                });
+            }).catch((error) => {
+                switch (error.code) {
+                    case 'storage/object-not-found':
+                        break;
+                    default: {
+                        return
+                    }
                 }
-            }
-        })
-    }, [])
+            })
+        )
+    }, []);
 
-
+    const background = url[1]
 
     const [contact, setContact] = useState({
         name: "",
@@ -89,20 +95,27 @@ function Contact() {
     })
 
     const sendMessage = async (event) => {
-        event.preventDefault();
-        try {
-            const messages = await db.collection("messages");
-            messages.doc("From: " + contact.email).set(contact);
-        } catch (e) {
-            console.error("Error: ", e);
+        if (contact.name && contact.email && contact.phone && contact.message) {
+            event.preventDefault();
+            try {
+                const messages = await db.collection("messages");
+                messages.doc("From: " + contact.email).set(contact);
+            } catch (e) {
+                console.error("Error: ", e);
+            }
+            setOpen(true);
+            setContact({
+                name: "",
+                email: "",
+                phone: "",
+                message: "",
+            })
+        } else {
+            setOpenErrorButton(true)
         }
-        setOpen(true);
-        setContact({
-            name: "",
-            email: "",
-            phone: "",
-            message: "",
-        })
+        //setOpen(true);
+
+
     };
 
     const handleClose = (event, reason) => {
@@ -111,7 +124,7 @@ function Contact() {
         }
 
         setOpen(false);
-
+        setOpenErrorButton(false);
     }
 
     const onChange = (event) => {
@@ -126,28 +139,33 @@ function Contact() {
 
     return (
         <>
-            <ImageHeader text="Contact Us" backgroundImage={url} />
+            <ImageHeader text="Contact Us" backgroundImage={url[0]} />
             <div style={{
-                backgroundImage: `url(${background})`,
+                // backgroundImage: `url(${background})`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
+                backgroundColor: "#404040",
             }}>
-            <Container>
-                <Box py={5} className={classes.contactForm}>
-                    <TextField style={{backgroundColor: "white"}} fullWidth={true} id="name" label="Name" variant="outlined" onChange={onChange} />
-                    <TextField style={{backgroundColor: "white"}} fullWidth={true} id="email" label="Email" variant="outlined" onChange={onChange} />
-                    <TextField style={{backgroundColor: "white"}} fullWidth={true} id="phone" label="Phone Number" variant="outlined" onChange={onChange} />
-                    <TextField style={{backgroundColor: "white"}} fullWidth={true} id="message" label="Message" variant="outlined" multiline rows={4} onChange={onChange} />
-                    <Button className={classes.sendBtn} fullWidth={true} variant="contained" onClick={sendMessage}>Send</Button>
-                    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                        <Alert onClose={handleClose} severity="success">Your message sent successfully</Alert>
-                    </Snackbar>
-                    
-                </Box>
-                <Grid item style={{float: "left"}}>
-                    <SimpleMap></SimpleMap>
-                </Grid>
-            </Container>
+                <Container>
+                    <Box py={5} className={classes.contactForm}>
+                        <TextField style={{ backgroundColor: "white" }} value={contact.name} fullWidth={true} id="name" label="Name" variant="outlined" onChange={onChange} />
+                        <TextField style={{ backgroundColor: "white" }} value={contact.email} fullWidth={true} id="email" label="Email" variant="outlined" onChange={onChange} />
+                        <TextField style={{ backgroundColor: "white" }} value={contact.phone} fullWidth={true} id="phone" label="Phone Number" variant="outlined" onChange={onChange} />
+                        <TextField style={{ backgroundColor: "white" }} value={contact.message} fullWidth={true} id="message" label="Message" variant="outlined" multiline rows={4} onChange={onChange} />
+                        <Button className={classes.sendBtn} fullWidth={true} variant="contained" onClick={sendMessage}>Send</Button>
+                        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                            <Alert onClose={handleClose} severity="success">Your message sent successfully</Alert>
+                        </Snackbar>
+                        <Snackbar open={openErrorButton} autoHideDuration={6000} onClose={handleClose}>
+                            <Alert onClose={handleClose} severity="error">
+                                Fields can't be blank
+                            </Alert>
+                        </Snackbar>
+                    </Box>
+                    <Grid item style={{ float: "left" }}>
+                        <SimpleMap></SimpleMap>
+                    </Grid>
+                </Container>
             </div>
         </>
     )

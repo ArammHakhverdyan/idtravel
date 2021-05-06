@@ -41,7 +41,7 @@ const useStyles = makeStyles({
 
 function Services() {
     const classes = useStyles();
-    const background = "https://lh3.googleusercontent.com/proxy/S0jvHnJavvByZKlmzsuQ2Wcsp199DdeAZgFc_BZQVHaQOcTPL845x9nWlp-LULK0NK-GvtU5EmMdbsO5305xUKB4HKXmY20xLINzauOwkkl7cy0XLVNS4wrmJZicCcSfbuFePMKCsT0"
+    // const background = 
     const [url, setUrl] = useState(["", "", "", ""])
 
     useEffect(() => {
@@ -69,13 +69,15 @@ function Services() {
             })
         )
     }, [])
-
+    const img1 = url[1]
+    const img2 = url[2]
+    const img3 = url[3]
     return (
         <>
             <CssBaseline />
             <ImageHeader text="Services" backgroundImage={url[0]} />
             <div style={{
-                backgroundImage: `url(${background})`,
+                // backgroundImage: `url(${background})`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
             }}>
@@ -83,12 +85,9 @@ function Services() {
                     <Card className={classes.root} variant="outlined">
                         <CardActionArea component={Link} to="/tours">
 
-                            <CardMedia
-                                className={classes.media}
-                                image={url[1]}
-                                title="See Tours"
-
-                            ></CardMedia>
+                            <CardMedia title="See Tours">
+                                <img src={img1} className={classes.media} alt="services" />
+                            </CardMedia>
                             <CardContent title="See Tours" style={{ height: "300px", overFlow: "hidden" }}>
 
                                 <Typography gutterBottom variant="h5" component="h2">
@@ -120,11 +119,9 @@ function Services() {
 
                     <Card className={classes.root} variant="outlined">
                         <CardActionArea component={Link} to="/hotelsList">
-                            <CardMedia
-                                className={classes.media}
-                                image={url[2]}
-                                title="Book Hotel"
-                            />
+                            <CardMedia title="Book Hotel">
+                                <img src={img2} className={classes.media} alt="services" />
+                            </CardMedia>
                             <CardContent title="Book Hotel" style={{ height: "300px", overFlow: "hidden" }}>
                                 <Typography gutterBottom variant="h5" component="h2">
                                     HOTEL RESERVATION
@@ -156,11 +153,8 @@ function Services() {
 
                     <Card className={classes.root} variant="outlined">
                         <CardActionArea component={Link} to="/vehicles">
-                            <CardMedia
-                                className={classes.media}
-                                image={url[3]}
-                                title="See Vehicles"
-                            />
+                            <CardMedia title="See Vehicles">
+                                <img src={img3} className={classes.media} alt="services" /> </CardMedia>
                             <CardContent title="See Vehicles" style={{ height: "300px", overFlow: "hidden" }}>
                                 <Typography gutterBottom variant="h5" component="h2">
                                     TRANSPORT

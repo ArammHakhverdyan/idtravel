@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Divider, List, makeStyles, Snackbar, styled, TextField, Typography } from '@material-ui/core'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Divider, List, makeStyles, Snackbar, TextField, Typography } from '@material-ui/core'
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLoggedInUserId, selectLoggedInUserInfo } from '../../redux/selectors';
@@ -7,7 +7,7 @@ import InboxIcon from '@material-ui/icons/Inbox';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { updateLoggedInUserInfo } from '../../actions/AuthActions';
 import MuiAlert from '@material-ui/lab/Alert';
-import { compose, palette, spacing } from '@material-ui/system';
+
 
 
 
@@ -16,7 +16,7 @@ const User = () => {
     const dispatch = useDispatch()
     const uId = useSelector(selectLoggedInUserId);
     const userInfo = useSelector(selectLoggedInUserInfo) || {};
-    const [fullName, setFullName] = useState(`${userInfo.firstName} ${userInfo.lastName}`);
+    const [fullName] = useState(`${userInfo.firstName} ${userInfo.lastName}`);
     const [firstName, setFirstName] = useState(userInfo.firstName || "");
     const [lastName, setLastName] = useState(userInfo.lastName || "");
     const [email, setEmail] = useState(userInfo.email || "");
@@ -29,8 +29,6 @@ const User = () => {
     function Alert(props) {
         return <MuiAlert elevation={6} variant="filled" {...props} />;
     }
-
-
     const firstNameChange = (e) => {
         setFirstName(e.target.value);
     }
@@ -81,7 +79,8 @@ const User = () => {
             <Box className={classes.user} color="white" bgcolor="" p={1}>
                 <img className={classes.userImg} src={userImg} alt="" />
                 <Typography className="text">
-                    {fullName}
+                    <div style={{ textAlign: "center" }}>{fullName}</div>
+
                 </Typography>
                 {/* </Typography> */}
             </Box>

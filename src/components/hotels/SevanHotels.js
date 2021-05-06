@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -9,6 +9,7 @@ import { Box } from '@material-ui/core';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { Link } from 'react-router-dom';
 import ReactReadMoreReadLess from "react-read-more-read-less";
+import { storageRef } from '../../config/config';
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -26,17 +27,53 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SevanHotels() {
+
+    const [url, setUrl] = useState(["", "", "", "", "", ""])
+
+    useEffect(() => {
+        const a = storageRef.child('Images/hotels/SevanHotels/header.jpg')
+        const d = storageRef.child('Images/hotels/SevanHotels/1.jpg')
+        const b = storageRef.child('Images/hotels/SevanHotels/2.jpg')
+        const c = storageRef.child('Images/hotels/SevanHotels/3.jpg')
+        const e = storageRef.child('Images/hotels/SevanHotels/4.jpg')
+        const f = storageRef.child('Images/hotels/SevanHotels/5.jpg')
+
+
+
+        const images = [a, b, c, d, e, f]
+
+        images.map((item, index) =>
+            item.getDownloadURL().then((downloadURL) => {
+                setUrl((old) => {
+                    const newSt = [...old];
+                    newSt[index] = downloadURL;
+                    return newSt;
+                });
+            }).catch((error) => {
+                switch (error.code) {
+                    case 'storage/object-not-found':
+                        break;
+                    default:
+                        return
+                }
+            })
+        )
+    }, [])
+
+
+
+
     const classes = useStyles();
-    const [five] = React.useState(5)
+    // const [five] = React.useState(5)
     const [four] = React.useState(4)
     const [three] = React.useState(3)
     const [two] = React.useState(2)
-    const [one] = React.useState(1)
+    // const [one] = React.useState(1)
     const [zero] = React.useState(0)
-    const background = "https://cf.bstatic.com/images/hotel/max1280x900/990/99039149.jpg"
+    const background = url[0]
     const hotels = [
         {
-            imgUrl: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/43195688.jpg?k=f0b85530db0c24f80eef2c809879c022faf1d9b4900853c7357b82e55e03dd8f&o=&hp=1",
+            imgUrl: url[1],
             imgText: "complex",
             hotelName: "Tsovasar Family Rest Complex",
             location: "Gegharkunik, Norashen, Armenia, 0411 Sevan, Armenia",
@@ -47,7 +84,7 @@ export default function SevanHotels() {
             star: four
         },
         {
-            imgUrl: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/99039513.jpg?k=bbc583a1f224ff28398981a5b9c9589247ce56f576161f66ab06184f6283da39&o=&hp=1",
+            imgUrl: url[2],
             imgText: "complex",
             hotelName: "Blue Sevan Hotel",
             location: "Gegharkunik Marz Chambarak, 0004 Sevan, Armenia",
@@ -58,7 +95,7 @@ export default function SevanHotels() {
             star: three
         },
         {
-            imgUrl: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/215045211.jpg?k=26c4cc2f1344676e17be26a4d58a6508eef8d7fc4969dad65c626d9c8d978a28&o=&hp=1",
+            imgUrl: url[3],
             imgText: "complex",
             hotelName: "Edem Sevan",
             location: "M14 ,7KM, 1512 Sevan, Armenia",
@@ -69,7 +106,7 @@ export default function SevanHotels() {
             star: three
         },
         {
-            imgUrl: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/77991423.jpg?k=06df3156cc53d460ee9f4b72637afec98a18bb454a9ab39864b03892725ed867&o=&hp=1",
+            imgUrl: url[4],
             imgText: "complex",
             hotelName: "Sevan Writers House",
             location: "Peninsula, 1505 Sevan, Armenia",
@@ -80,7 +117,7 @@ export default function SevanHotels() {
             star: two
         },
         {
-            imgUrl: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/172577025.jpg?k=11fdfb988c2401a6e1b355f5073dae1286709ada19dfccd397fa40e936901fbd&o=&hp=1",
+            imgUrl: url[5],
             imgText: "complex",
             hotelName: "Mountain Lake Villa B&B",
             location: "Ashota erkata 29, 1502 Sevan, Armenia",

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -101,19 +101,51 @@ const handleChange = (event) => {
     }))
 }
 
+    const [url, setUrl] = useState(["", "", "", "", "", "", ""])
+
+    useEffect(() => {
+        const a = storageRef.child('Images/hotels/GorisHotels/header.jpg')
+        const d = storageRef.child('Images/hotels/GorisHotels/1.jpg')
+        const b = storageRef.child('Images/hotels/GorisHotels/2.jpg')
+        const c = storageRef.child('Images/hotels/GorisHotels/3.jpg')
+        const e = storageRef.child('Images/hotels/GorisHotels/4.jpg')
+        const f = storageRef.child('Images/hotels/GorisHotels/5.jpg')
+        const g = storageRef.child('Images/hotels/GorisHotels/6.jpg')
+
+
+        const images = [a, b, c, d, e, f, g]
+
+        images.map((item, index) =>
+            item.getDownloadURL().then((downloadURL) => {
+                setUrl((old) => {
+                    const newSt = [...old];
+                    newSt[index] = downloadURL;
+                    return newSt;
+                });
+            }).catch((error) => {
+                switch (error.code) {
+                    case 'storage/object-not-found':
+                        break;
+                    default:
+                        return
+                }
+            })
+        )
+    }, [])
+
 
     const classes = useStyles();
-    const [five] = React.useState(5)
-    const [four] = React.useState(4)
+    // const [five] = React.useState(5)
+    // const [four] = React.useState(4)
     const [three] = React.useState(3)
     const [two] = React.useState(2)
-    const [one] = React.useState(1)
+    // const [one] = React.useState(1)
     const [zero] = React.useState(0)
-    const background = "https://i.ytimg.com/vi/Xqw05yQEzGQ/maxresdefault.jpg"
+    const background = url[0];
     const hotels = [
         {
             hotelId: "Diana Hotel",
-            imgUrl: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/37724799.jpg?k=c460f96f37b52a7a7e9f556902aba385a3ef093c0811422e85b842d806cb4433&o=&hp=1",
+            imgUrl: url[1],
             imgText: "complex",
             hotelName: "Diana Hotel",
             location: "Artsakhyan Highway 30, 3201 Goris, Armenia",
@@ -124,7 +156,7 @@ const handleChange = (event) => {
             star: three
         },
         {
-            imgUrl: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/225022719.jpg?k=79d6529976f140424679ee9b09adb241f3d70905219a6ce1fa9c7ae555de40eb&o=&hp=1",
+            imgUrl: url[2],
             imgText: "complex",
             hotelName: "Goris Hotel",
             location: "Khorenatsi 53, 3201 Goris, Armenia",
@@ -135,7 +167,7 @@ const handleChange = (event) => {
             star: two
         },
         {
-            imgUrl: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/243146272.jpg?k=b82d0b640cafb074f26de7ca61c8dff8f7c7774ccce0743c5230c5b893092d95&o=&hp=1",
+            imgUrl: url[3],
             imgText: "complex",
             hotelName: "Asour Hotel",
             location: "95/1 Mashtots Street, 3201 Goris, Armenia",
@@ -146,7 +178,7 @@ const handleChange = (event) => {
             star: zero
         },
         {
-            imgUrl: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/215356845.jpg?k=8e827f46b0c552fc70134abd5312c3d9cabc87d4238b6d3f5ffbbac42541d089&o=&hp=1",
+            imgUrl: url[4],
             imgText: "complex",
             hotelName: "Sofya",
             location: "165 Mashtots Street, 3201 Goris, Armenia",
@@ -157,7 +189,7 @@ const handleChange = (event) => {
             star: zero
         },
         {
-            imgUrl: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/202514638.jpg?k=389392258ff7818a035b3aaeec47d4f636f0232d347effff0a64aca669b63089&o=&hp=1",
+            imgUrl: url[5],
             imgText: "complex",
             hotelName: "Yeghevnut Hotel",
             location: "Yerevanskoe Shosse 7, 3201 Goris, Armenia",
@@ -168,7 +200,7 @@ const handleChange = (event) => {
             star: two
         },
         {
-            imgUrl: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/155258111.jpg?k=a0dc824b5f18afdc8e2f1eb65a24ccbdcd8602a36708576ac97be3af95549e29&o=&hp=1",
+            imgUrl: url[6],
             imgText: "complex",
             hotelName: "Aregak B&B and Tours",
             location: "Getapny Str, 4 Bld,Apartment-16, 3201 Goris, Armenia",
