@@ -120,11 +120,11 @@ export default function MediaCard() {
           {/* ----------------------Dilijan */}
           <Card className={classes.root}>
             <CardActionArea component={Link} to="/dilijanHotels">
-              <CardMedia>
-                className={classes.media}
+              <CardMedia title="See Hotels in Dilijan">
+
                 <img src={dilijan} className={classes.media} alt="services" />
-                title="See Hotels in Dilijan"
-                </CardMedia>
+
+              </CardMedia>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
                   Dilijan
@@ -144,11 +144,11 @@ export default function MediaCard() {
           {/* ---------------------Sevan */}
           <Card className={classes.root}>
             <CardActionArea component={Link} to="/sevanHotels">
-              <CardMedia>
-                className={classes.media}
+              <CardMedia title="See Hotels in Sevan">
+
                 <img src={sevan} className={classes.media} alt="services" />
-                title="See Hotels in Sevan"
-                </CardMedia>
+
+              </CardMedia>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
                   Sevan
@@ -168,11 +168,11 @@ export default function MediaCard() {
           {/* ----------------------Jermuk */}
           <Card className={classes.root}>
             <CardActionArea component={Link} to="/jermukHotels">
-              <CardMedia>
-                className={classes.media}
+              <CardMedia title="See Hotels in Jermuk">
+
                 <img src={jermuk} className={classes.media} alt="services" />
-                title="See Hotels in Jermuk"
-                </CardMedia>
+
+              </CardMedia>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
                   Jermuk
@@ -192,11 +192,11 @@ export default function MediaCard() {
           {/* ----------------------------Goris */}
           <Card className={classes.root}>
             <CardActionArea component={Link} to="/gorisHotels">
-              <CardMedia>
-                className={classes.media}
+              <CardMedia title="See Hotels in Goris">
+
                 <img src={goris} className={classes.media} alt="services" />
-                title="See Hotels in Goris"
-                </CardMedia>
+
+              </CardMedia>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
                   Goris
