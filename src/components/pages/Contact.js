@@ -10,6 +10,7 @@ import SimpleMap from './Map';
 import { storageRef } from '../../config/config';
 
 
+
 // admin.firestore().collection('messages').add({
 //     to: 'arammyan@gmail.com',
 //     message: {
@@ -21,10 +22,9 @@ import { storageRef } from '../../config/config';
     
     },
 });*/
-
-function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -50,6 +50,9 @@ const useStyles = makeStyles((theme) => ({
             backgroundColor: "#8cc927",
         }
     },
+    alert: {
+        width: '100%',
+      },
 }));
 
 
