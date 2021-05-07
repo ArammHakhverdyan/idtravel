@@ -10,6 +10,7 @@ import SimpleMap from './Map';
 import { storageRef } from '../../config/config';
 
 
+
 // admin.firestore().collection('messages').add({
 //     to: 'arammyan@gmail.com',
 //     message: {
@@ -23,153 +24,156 @@ import { storageRef } from '../../config/config';
 });*/
 
 const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 const useStyles = makeStyles((theme) => ({
-    root: {
-        width: '100%',
-        '& > * + *': {
-            marginTop: theme.spacing(2),
-        },
+  root: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
     },
-    alert: {
-        width: '100%',
+  },
+  alert: {
+    width: '100%',
+  },
+  contactForm: {
+    //backgroundColor: "rgb(185 178 178 / 60%)",
+    float: "right",
+    marginRight: "150px",
+    maxWidth: "400px",
+    margin: "auto",
+    '& .MuiTextField-root': {
+      marginBottom: '20px',
     },
-    contactForm: {
-        //backgroundColor: "rgb(185 178 178 / 60%)",
-        float: "right",
-        marginRight: "150px",
-        maxWidth: "400px",
-        margin: "auto",
-        '& .MuiTextField-root': {
-            marginBottom: '20px',
-        },
-    },
-    sendBtn: {
-        backgroundColor: "#94c93d",
-        color: "#fff",
-        '&:hover': {
-            backgroundColor: "#8cc927",
-        }
-    },
+  },
+  sendBtn: {
+    backgroundColor: "#94c93d",
+    color: "#fff",
+    '&:hover': {
+      backgroundColor: "#8cc927",
+    }
+  },
+  alert: {
+    width: '100%',
+  },
 }));
 
 
 function Contact() {
-    const classes = useStyles();
-    const [url, setUrl] = useState(["", ""])
-    const [open, setOpen] = React.useState(false);
-    const [openErrorButton, setOpenErrorButton] = React.useState(false)
+  const classes = useStyles();
+  const [url, setUrl] = useState(["", ""])
+  const [open, setOpen] = React.useState(false);
+  const [openErrorButton, setOpenErrorButton] = React.useState(false)
 
 
-    useEffect(() => {
+  useEffect(() => {
 
-        const a = storageRef.child('Images/Contact/header.jpg')
-        const b = storageRef.child('Images/Contact/Sevan-5.jpg');
-        const images = [a, b]
+    const a = storageRef.child('Images/Contact/header.jpg')
+    const b = storageRef.child('Images/Contact/Sevan-5.jpg');
+    const images = [a, b]
 
-        images.map((item, index) =>
-            item.getDownloadURL().then((downloadURL) => {
-                setUrl((old) => {
-                    const newSt = [...old];
-                    newSt[index] = downloadURL;
-                    return newSt;
-                });
-            }).catch((error) => {
-                switch (error.code) {
-                    case 'storage/object-not-found':
-                        break;
-                    default: {
-                        return
-                    }
-                }
-            })
-        )
-    }, []);
+    images.map((item, index) =>
+      item.getDownloadURL().then((downloadURL) => {
+        setUrl((old) => {
+          const newSt = [...old];
+          newSt[index] = downloadURL;
+          return newSt;
+        });
+      }).catch((error) => {
+        switch (error.code) {
+          case 'storage/object-not-found':
+            break;
+          default: {
+            return
+          }
+        }
+      })
+    )
+  }, []);
 
-    const background = url[1]
+  const background = url[1]
 
-    const [contact, setContact] = useState({
+  const [contact, setContact] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  })
+
+  const sendMessage = async (event) => {
+    if (contact.name && contact.email && contact.phone && contact.message) {
+      event.preventDefault();
+      try {
+        const messages = await db.collection("messages");
+        messages.doc("From: " + contact.email).set(contact);
+      } catch (e) {
+        console.error("Error: ", e);
+      }
+      setOpen(true);
+      setContact({
         name: "",
         email: "",
         phone: "",
         message: "",
-    })
-
-    const sendMessage = async (event) => {
-        if (contact.name && contact.email && contact.phone && contact.message) {
-            event.preventDefault();
-            try {
-                const messages = await db.collection("messages");
-                messages.doc("From: " + contact.email).set(contact);
-            } catch (e) {
-                console.error("Error: ", e);
-            }
-            setOpen(true);
-            setContact({
-                name: "",
-                email: "",
-                phone: "",
-                message: "",
-            })
-        } else {
-            setOpenErrorButton(true)
-        }
-        //setOpen(true);
+      })
+    } else {
+      setOpenErrorButton(true)
+    }
+    //setOpen(true);
 
 
-    };
+  };
 
-    const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setOpen(false);
-        setOpenErrorButton(false);
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
     }
 
-    const onChange = (event) => {
-        let id = event.target.id;
-        let value = event.target.value;
+    setOpen(false);
+    setOpenErrorButton(false);
+  }
 
-        setContact(prevState => ({
-            ...prevState,
-            [id]: value
-        }))
-    }
+  const onChange = (event) => {
+    let id = event.target.id;
+    let value = event.target.value;
 
-    return (
-        <>
-            <ImageHeader text="Contact Us" backgroundImage={url[0]} />
-            <div style={{
-                // backgroundImage: `url(${background})`,
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",
-                backgroundColor: "#404040",
-            }}>
-                <Container>
-                    <Box py={5} className={classes.contactForm}>
-                        <TextField style={{ backgroundColor: "white" }} value={contact.name} fullWidth={true} id="name" label="Name" variant="outlined" onChange={onChange} />
-                        <TextField style={{ backgroundColor: "white" }} value={contact.email} fullWidth={true} id="email" label="Email" variant="outlined" onChange={onChange} />
-                        <TextField style={{ backgroundColor: "white" }} value={contact.phone} fullWidth={true} id="phone" label="Phone Number" variant="outlined" onChange={onChange} />
-                        <TextField style={{ backgroundColor: "white" }} value={contact.message} fullWidth={true} id="message" label="Message" variant="outlined" multiline rows={4} onChange={onChange} />
-                        <Button className={classes.sendBtn} fullWidth={true} variant="contained" onClick={sendMessage}>Send</Button>
-                        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                            <Alert onClose={handleClose} severity="success" className={classes.alert}>Your message sent successfully</Alert>
-                        </Snackbar>
-                        <Snackbar open={openErrorButton} autoHideDuration={6000} onClose={handleClose}>
-                            <Alert onClose={handleClose} severity="error">
-                                Fields can't be blank
+    setContact(prevState => ({
+      ...prevState,
+      [id]: value
+    }))
+  }
+
+  return (
+    <>
+      <ImageHeader text="Contact Us" backgroundImage={url[0]} />
+      <div style={{
+        // backgroundImage: `url(${background})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundColor: "#404040",
+      }}>
+        <Container>
+          <Box py={5} className={classes.contactForm}>
+            <TextField style={{ backgroundColor: "white" }} value={contact.name} fullWidth={true} id="name" label="Name" variant="outlined" onChange={onChange} />
+            <TextField style={{ backgroundColor: "white" }} value={contact.email} fullWidth={true} id="email" label="Email" variant="outlined" onChange={onChange} />
+            <TextField style={{ backgroundColor: "white" }} value={contact.phone} fullWidth={true} id="phone" label="Phone Number" variant="outlined" onChange={onChange} />
+            <TextField style={{ backgroundColor: "white" }} value={contact.message} fullWidth={true} id="message" label="Message" variant="outlined" multiline rows={4} onChange={onChange} />
+            <Button className={classes.sendBtn} fullWidth={true} variant="contained" onClick={sendMessage}>Send</Button>
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+              <Alert onClose={handleClose} severity="success" className={classes.alert}>Your message sent successfully</Alert>
+            </Snackbar>
+            <Snackbar open={openErrorButton} autoHideDuration={6000} onClose={handleClose}>
+              <Alert onClose={handleClose} severity="error">
+                Fields can't be blank
                             </Alert>
-                        </Snackbar>
-                    </Box>
-                    <Grid item style={{ float: "left" }}>
-                        <SimpleMap></SimpleMap>
-                    </Grid>
-                </Container>
-            </div>
-        </>
-    )
+            </Snackbar>
+          </Box>
+          <Grid item style={{ float: "left" }}>
+            <SimpleMap></SimpleMap>
+          </Grid>
+        </Container>
+      </div>
+    </>
+  )
 }
 export default Contact;

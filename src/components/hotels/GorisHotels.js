@@ -6,9 +6,6 @@ import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Rating from '@material-ui/lab/Rating';
 import { Badge, Box, Button, ButtonGroup, Snackbar, TextField } from '@material-ui/core';
-import Alert from '@material-ui/lab/Alert';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import { Link } from 'react-router-dom';
 import ReactReadMoreReadLess from "react-read-more-read-less";
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -24,6 +21,7 @@ import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import PersonIcon from '@material-ui/icons/Person';
 import HotelIcon from '@material-ui/icons/Hotel';
+import MuiAlert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,19 +31,25 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     margin: 'auto',
     maxWidth: 800,
+    maxWidth: "1000px",
+    marginTop: "15px"
   },
   image: {
     width: "200px",
     height: "128px",
   }
 }));
-// --------------------------
+
 function getWeeksAfter(date, amount) {
   return date ? addWeeks(date, amount) : undefined;
 }
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 export default function GorisHotels() {
   const [open, setOpen] = React.useState(false);
   const [date, setDate] = React.useState([null, null]);
+  const [ToOpen, setToOpen] = React.useState(false);
   const [countPerson, setCountPerson] = React.useState(1);
   const [countHotel, setCountHotel] = React.useState(1);
   const [invisible, setInvisible] = React.useState(false);
@@ -58,16 +62,21 @@ export default function GorisHotels() {
     emailAdress: "",
     phoneNumber: "",
     textMessage: "",
-    hotelId: "",
-    startDate: "",
-    endDate: "",
   })
 
-  const hotelReserve = async (event) => {
+  const hotelReserve = async (event, hotel) => {
     event.preventDefault();
     try {
-      const hotels = await db.collection("hotels");
-      hotels.doc("From: " + reserve.emailAdress).set(reserve);
+      const hotels = await db.collection("hotelOrders");
+      hotels.doc().set({
+        ...reserve,
+        startDate: date[0],
+        endDate: date[1],
+        persons: countPerson,
+        rooms: countHotel,
+        hotel: ToOpen.hotelName
+
+      });
     } catch (e) {
       console.error("Error: ", e);
     }
@@ -77,10 +86,10 @@ export default function GorisHotels() {
       emailAdress: "",
       phoneNumber: "",
       textMessage: "",
-      hotelId: "",
-      startDate: "",
-      endDate: "",
     })
+
+    handleClickClose()
+    setOpen(true);
   };
 
   const handleClose = (event, reason) => {
@@ -145,7 +154,6 @@ export default function GorisHotels() {
   const background = url[0];
   const hotels = [
     {
-      hotelId: "Diana Hotel",
       imgUrl: url[1],
       imgText: "complex",
       hotelName: "Diana Hotel",
@@ -215,10 +223,8 @@ export default function GorisHotels() {
 
   ]
 
-  const [ToOpen, setToOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setToOpen(true);
+  const handleClickOpen = (hotel) => {
+    setToOpen(hotel);
   };
 
   const handleClickClose = () => {
@@ -241,96 +247,7 @@ export default function GorisHotels() {
                   <ButtonBase className={classes.image}>
                     <img className="hotelImg" alt={value.imgText} src={value.imgUrl} />
                   </ButtonBase>
-                  {/* ---------------------- */}
-                  <Dialog open={ToOpen} onClose={handleClickClose} aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title">Order processing</DialogTitle>
-                    <DialogContent>
-                      <DialogContentText>
-                        Please fill in the details․
-          </DialogContentText>
-                      <TextField fullWidth={true} id="fullName" label="Full Name" variant="outlined" onChange={handleChange} />
-                      <TextField fullWidth={true} style={{ marginTop: "20px" }} id="emailAdress" label="Email" variant="outlined" onChange={handleChange} />
-                      <TextField fullWidth={true} style={{ marginTop: "20px" }} id="phoneNumber" label="Phone Number" variant="outlined" onChange={handleChange} />
-                      <LocalizationProvider dateAdapter={AdapterDateFns}>
-                        <MobileDateRangePicker
-                          startText="Start"
-                          value={date}
-                          onChange={(newValue) => {
-                            setDate(newValue);
-                          }}
-                          renderInput={(startProps, endProps) => (
-                            <React.Fragment>
-                              <TextField {...startProps} style={{ marginTop: "20px" }} variant="standard" fullWidth={true} id="startDate" label="Start" onChange={handleChange} />
-                              <Box sx={{ mx: 2 }}> to </Box>
-                              <TextField {...endProps} variant="standard" fullWidth={true} id="endDate" label="End" onChange={handleChange} />
-                            </React.Fragment>
-                          )}
-                        />
-                      </LocalizationProvider>
-                      <div style={{ marginTop: "20px", display: "flex" }}>
-                        <div>
-                          <Badge color="secondary" badgeContent={countPerson}>
-                            <PersonIcon />
-                          </Badge>
-                          <ButtonGroup>
-                            <Button
-                              aria-label="reduce"
-                              onClick={() => {
-                                setCountPerson(Math.max(countPerson - 1, 0));
-                              }}
-                            >
-                              <RemoveIcon fontSize="small" />
-                            </Button>
-                            <Button
-                              aria-label="increase"
-                              onClick={() => {
-                                setCountPerson(countPerson + 1);
-                              }}
-                            >
-                              <AddIcon fontSize="small" />
-                            </Button>
-                          </ButtonGroup>
-                        </div>
-                        <div style={{ marginLeft: "70px" }}>
-                          <Badge color="secondary" badgeContent={countHotel}>
-                            <HotelIcon />
-                          </Badge>
-                          <ButtonGroup>
-                            <Button
-                              aria-label="reduce"
-                              onClick={() => {
-                                setCountHotel(Math.max(countHotel - 1, 0));
-                              }}
-                            >
-                              <RemoveIcon fontSize="small" />
-                            </Button>
-                            <Button
-                              aria-label="increase"
-                              onClick={() => {
-                                setCountHotel(countHotel + 1);
-                              }}
-                            >
-                              <AddIcon fontSize="small" />
-                            </Button>
-                          </ButtonGroup>
-                        </div>
-                      </div>
-                      <TextField fullWidth={true} style={{ marginTop: "20px" }} id="hotelId" label="Hotel Name" defaultValue={value.hotelId} variant="outlined" onChange={handleChange} />
-                      <TextField fullWidth={true} style={{ marginTop: "20px" }} id="textMessage" label="Message" variant="outlined" multiline rows={4} onChange={handleChange} />
-                    </DialogContent>
-                    <DialogActions>
-                      <Button onClick={handleClickClose} color="primary">
-                        Cancel
-          </Button>
-                      <Button style={{ backgroundColor: "#94c93d" }} fullWidth={true} variant="contained" onClick={hotelReserve}>Book</Button>
-                      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                        <Alert onClose={handleClose} severity="success">Your order is successfully done.We will contact with you soon</Alert>
-                      </Snackbar>
-                    </DialogActions>
-                  </Dialog>
-                  {/* ------------------- */}
                 </Grid>
-
                 <Grid item xs={12} sm container>
                   <Grid item xs container direction="column" spacing={2}>
                     <Grid item xs>
@@ -344,7 +261,7 @@ export default function GorisHotels() {
                         {value.location}
                       </Typography>
                       <ReactReadMoreReadLess
-                        charLimit={200}
+                        charLimit={150}
                         readMoreText={"Read more ▼"}
                         readLessText={"Read less ▲"}
                         readMoreClassName="read-more-less--more"
@@ -358,30 +275,101 @@ export default function GorisHotels() {
                     <Typography style={{ fontSize: "12px", color: "black" }}>{value.night}</Typography>
                     <Typography style={{ fontSize: "25px", color: "#94c93d" }}>{value.price}</Typography>
                     <Typography style={{ fontSize: "10px", color: "black" }}>{value.includes}</Typography>
-                    <Button style={{ marginTop: "15px", backgroundColor: "#94c93d" }} variant="contained" onClick={handleClickOpen}>
+                    <Button style={{ marginTop: "15px", backgroundColor: "#94c93d" }} variant="contained" onClick={() => handleClickOpen(value)}>
                       Book this hotel
-                                        </Button>
+                    </Button>
                   </Grid>
-                  {/* <Grid item style={{ marginTop: "15%" }}>
-                                        <Grid item style={{ width: "70px" }}>
-                                        
-                                            <ButtonBase component={Link} to="/contact">
-                                            <Typography variant="caption" display="block">
-                                                    For details please contact with us
-                                </Typography>
-
-
-                                                <ArrowForwardIosIcon></ArrowForwardIosIcon>
-                                                
-                                            </ButtonBase>
-                                        </Grid>
-                                    </Grid> */}
                 </Grid>
               </Grid>
             </Paper>
           ))}
         </div>
       </div>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success">Your order is successfully done.We will contact with you soon</Alert>
+      </Snackbar>
+      <Dialog open={ToOpen} onClose={handleClickClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">Booking {ToOpen.hotelName}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Please fill in the details․
+          </DialogContentText>
+          <TextField fullWidth={true} id="fullName" label="Full Name" variant="outlined" onChange={handleChange} />
+          <TextField fullWidth={true} style={{ marginTop: "20px" }} id="emailAdress" label="Email" variant="outlined" onChange={handleChange} />
+          <TextField fullWidth={true} style={{ marginTop: "20px" }} id="phoneNumber" label="Phone Number" variant="outlined" onChange={handleChange} />
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <MobileDateRangePicker
+              startText="Start"
+              value={date}
+              onChange={(newValue) => {
+                setDate(newValue);
+              }}
+              renderInput={(startProps, endProps) => (
+                <React.Fragment>
+                  <TextField {...startProps} style={{ marginTop: "20px" }} variant="standard" fullWidth={true} id="startDate" label="Start" />
+                  <Box sx={{ mx: 2 }}> to </Box>
+                  <TextField {...endProps} variant="standard" fullWidth={true} id="endDate" label="End" />
+                </React.Fragment>
+              )}
+            />
+          </LocalizationProvider>
+          <div style={{ marginTop: "20px", display: "flex" }}>
+            <div>
+              <Badge color="secondary" badgeContent={countPerson}>
+                <PersonIcon />
+              </Badge>
+              <ButtonGroup>
+                <Button
+                  aria-label="reduce"
+                  onClick={() => {
+                    setCountPerson(Math.max(countPerson - 1, 0));
+                  }}
+                >
+                  <RemoveIcon fontSize="small" />
+                </Button>
+                <Button
+                  aria-label="increase"
+                  onClick={() => {
+                    setCountPerson(countPerson + 1);
+                  }}
+                >
+                  <AddIcon fontSize="small" />
+                </Button>
+              </ButtonGroup>
+            </div>
+            <div style={{ marginLeft: "70px" }}>
+              <Badge color="secondary" badgeContent={countHotel}>
+                <HotelIcon />
+              </Badge>
+              <ButtonGroup>
+                <Button
+                  aria-label="reduce"
+                  onClick={() => {
+                    setCountHotel(Math.max(countHotel - 1, 0));
+                  }}
+                >
+                  <RemoveIcon fontSize="small" />
+                </Button>
+                <Button
+                  aria-label="increase"
+                  onClick={() => {
+                    setCountHotel(countHotel + 1);
+                  }}
+                >
+                  <AddIcon fontSize="small" />
+                </Button>
+              </ButtonGroup>
+            </div>
+          </div>
+          <TextField fullWidth={true} style={{ marginTop: "20px" }} id="textMessage" label="Message" variant="outlined" multiline rows={4} onChange={handleChange} />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClickClose} color="primary">
+            Cancel
+          </Button>
+          <Button style={{ backgroundColor: "#94c93d" }} fullWidth={true} variant="contained" onClick={hotelReserve}>Book</Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }

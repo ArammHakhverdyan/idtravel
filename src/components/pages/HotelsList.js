@@ -27,7 +27,7 @@ const useStyles = makeStyles({
 
 export default function MediaCard() {
   const classes = useStyles();
-  // const background = "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/f2/42/38/caption.jpg?w=1000&h=600&s=1"
+  const background = "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/f2/42/38/caption.jpg?w=1000&h=600&s=1"
   const [url, setUrl] = useState(["", "", "", "", "", "", ""])
 
   useEffect(() => {
@@ -69,7 +69,7 @@ export default function MediaCard() {
     <>
       <ImageHeader text="Hotels" backgroundImage={url[0]} />
       <div style={{
-        // backgroundImage: `url(${background})`,
+        backgroundImage: `url(${background})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
       }}>
