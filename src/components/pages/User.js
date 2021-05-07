@@ -136,7 +136,6 @@ const User = () => {
                 </Accordion>
             </List>
         </div>
-
     )
 }
 

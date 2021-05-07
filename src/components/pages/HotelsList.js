@@ -89,7 +89,7 @@ export default function MediaCard() {
           </Typography>
               </CardContent>
             </CardActionArea>
-            <CardActions style={{marginLeft: "65%"}}>
+            <CardActions style={{ marginLeft: "65%" }}>
               <Button size="small" color="primary" component={Link} to="/yerevanHotels">
                 See Hotels
         </Button>
@@ -113,18 +113,18 @@ export default function MediaCard() {
             <CardActions style={{ marginLeft: "65%" }}>
 
               <Button size="small" color="primary" component={Link} to="/tsaghkadzorHotels">
-              See Hotels
+                See Hotels
         </Button>
             </CardActions>
           </Card>
           {/* ----------------------Dilijan */}
           <Card className={classes.root}>
             <CardActionArea component={Link} to="/dilijanHotels">
-              <CardMedia
-                className={classes.media}
-                image={url[3]}
-                title="See Hotels in Dilijan"
-              />
+              <CardMedia title="See Hotels in Dilijan">
+
+                <img src={dilijan} className={classes.media} alt="services" />
+
+              </CardMedia>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
                   Dilijan
@@ -137,18 +137,18 @@ export default function MediaCard() {
             <CardActions style={{ marginLeft: "65%" }}>
 
               <Button size="small" color="primary" component={Link} to="/dilijanHotels">
-              See Hotels
+                See Hotels
         </Button>
             </CardActions>
           </Card>
           {/* ---------------------Sevan */}
           <Card className={classes.root}>
             <CardActionArea component={Link} to="/sevanHotels">
-              <CardMedia
-                className={classes.media}
-                image={url[4]}
-                title="See Hotels in Sevan"
-              />
+              <CardMedia title="See Hotels in Sevan">
+
+                <img src={sevan} className={classes.media} alt="services" />
+
+              </CardMedia>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
                   Sevan
@@ -161,18 +161,18 @@ export default function MediaCard() {
             <CardActions style={{ marginLeft: "65%" }}>
 
               <Button size="small" color="primary" component={Link} to="/sevanHotels">
-              See Hotels
+                See Hotels
         </Button>
             </CardActions>
           </Card>
           {/* ----------------------Jermuk */}
           <Card className={classes.root}>
             <CardActionArea component={Link} to="/jermukHotels">
-              <CardMedia
-                className={classes.media}
-                image={url[5]}
-                title="See Hotels in Jermuk"
-              />
+              <CardMedia title="See Hotels in Jermuk">
+
+                <img src={jermuk} className={classes.media} alt="services" />
+
+              </CardMedia>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
                   Jermuk
@@ -185,18 +185,18 @@ export default function MediaCard() {
             <CardActions style={{ marginLeft: "65%" }}>
 
               <Button size="small" color="primary" component={Link} to="/jermukHotels">
-              See Hotels
+                See Hotels
         </Button>
             </CardActions>
           </Card>
           {/* ----------------------------Goris */}
           <Card className={classes.root}>
             <CardActionArea component={Link} to="/gorisHotels">
-              <CardMedia
-                className={classes.media}
-                image={url[6]}
-                title="See Hotels in Goris"
-              />
+              <CardMedia title="See Hotels in Goris">
+
+                <img src={goris} className={classes.media} alt="services" />
+
+              </CardMedia>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
                   Goris
@@ -206,9 +206,9 @@ export default function MediaCard() {
           </Typography>
               </CardContent>
             </CardActionArea>
-            <CardActions style={{marginLeft: "65%"}}>
-              <Button size="small" color="primary"  component={Link} to="/gorisHotels">
-              See Hotels
+            <CardActions style={{ marginLeft: "65%" }}>
+              <Button size="small" color="primary" component={Link} to="/gorisHotels">
+                See Hotels
         </Button>
             </CardActions>
           </Card>
