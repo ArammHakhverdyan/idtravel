@@ -22,16 +22,18 @@ import { storageRef } from '../../config/config';
     },
 });*/
 
-function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
-
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
         '& > * + *': {
             marginTop: theme.spacing(2),
         },
+    },
+    alert: {
+        width: '100%',
     },
     contactForm: {
         //backgroundColor: "rgb(185 178 178 / 60%)",
@@ -154,7 +156,7 @@ function Contact() {
                         <TextField style={{ backgroundColor: "white" }} value={contact.message} fullWidth={true} id="message" label="Message" variant="outlined" multiline rows={4} onChange={onChange} />
                         <Button className={classes.sendBtn} fullWidth={true} variant="contained" onClick={sendMessage}>Send</Button>
                         <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                            <Alert onClose={handleClose} severity="success">Your message sent successfully</Alert>
+                            <Alert onClose={handleClose} severity="success" className={classes.alert}>Your message sent successfully</Alert>
                         </Snackbar>
                         <Snackbar open={openErrorButton} autoHideDuration={6000} onClose={handleClose}>
                             <Alert onClose={handleClose} severity="error">

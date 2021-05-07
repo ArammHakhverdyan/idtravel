@@ -12,6 +12,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import ImageHeader from '../shared/ImageHeader';
 import Grid from '@material-ui/core/Grid';
 import { storageRef } from '../../config/config';
+
 const useStyles = makeStyles({
     root: {
         maxWidth: 400,

@@ -113,11 +113,4 @@ const useStyles = makeStyles({
             backgroundColor: "#8cc927",
         }
     },
-    bg: {
-        backgroundImage: "url(https://wanderers.qodeinteractive.com/wp-content/uploads/2018/02/h1-background-1.png?id=125)",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        padding: "30px 0",
-    }
 });

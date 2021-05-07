@@ -26,9 +26,9 @@ const User = () => {
     const [openWarningButton, setWarningButton] = React.useState(false)
 
 
-    function Alert(props) {
-        return <MuiAlert elevation={6} variant="filled" {...props} />;
-    }
+    const Alert = React.forwardRef(function Alert(props, ref) {
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    });
     const firstNameChange = (e) => {
         setFirstName(e.target.value);
     }
@@ -40,7 +40,6 @@ const User = () => {
     }
 
     const handleSubmit = (e) => {
-        console.log('asd')
         e.preventDefault();
         if (uId) {
             const newInfo = { email, firstName, lastName, initials: firstName[0] + lastName[0] }
@@ -82,7 +81,6 @@ const User = () => {
                     <div style={{ textAlign: "center" }}>{fullName}</div>
 
                 </Typography>
-                {/* </Typography> */}
             </Box>
 
             <List component="nav" className={classes.accordionItems}>
@@ -117,17 +115,17 @@ const User = () => {
                         </Box>
 
                         <Snackbar open={openSuccessButton} autoHideDuration={6000} onClose={handleClose}>
-                            <Alert onClose={handleClose} severity="success">
+                            <Alert onClose={handleClose} severity="success" className={classes.alert}>
                                 Settings changed!
                             </Alert>
                         </Snackbar>
                         <Snackbar open={openErrorButton} autoHideDuration={6000} onClose={handleClose}>
-                            <Alert onClose={handleClose} severity="error">
+                            <Alert onClose={handleClose} severity="error" className={classes.alert}>
                                 You haven't changed anything yet!!!
                             </Alert>
                         </Snackbar>
                         <Snackbar open={openWarningButton} autoHideDuration={6000} onClose={handleClose}>
-                            <Alert onClose={handleClose} severity="warning">
+                            <Alert onClose={handleClose} severity="warning" className={classes.alert}>
                                 The fields can't be blank!!!
                             </Alert>
                         </Snackbar>
@@ -151,6 +149,9 @@ const useStyles = makeStyles({
         '& .MuiTextField-root': {
             marginBottom: '20px',
         },
+    },
+    alert: {
+        width: '100%',
     },
     loginBtn: {
         backgroundColor: "#94c93d",

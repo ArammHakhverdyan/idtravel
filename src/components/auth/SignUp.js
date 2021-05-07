@@ -87,19 +87,17 @@ export const SignUp = (props) => {
     return (
         <>
             <ImageHeader text="" backgroundImage={url} />
-            <div className={classes.bg}>
-                <Container className>
-                    <Box py={5} className={classes.loginForm} textAlign="center">
-                        <Typography variant="h4" component="h1" gutterBottom>Sign Up</Typography>
-                        {/* {authError && <Typography color="secondary" gutterBottom>{authError}</Typography>} */}
-                        <TextField id="email" fullWidth={true} label="Email" helperText={emailError} error={emailError ? true : false} variant="outlined" value={value.email} onChange={handleChange} />
-                        <TextField type="password" helperText={passwordError} error={passwordError ? true : false} id="password" fullWidth={true} label="Password" variant="outlined" value={value.password} onChange={handleChange} />
-                        <TextField id="firstName" helperText={firstNameError} error={firstNameError ? true : false} fullWidth={true} label="FirstName" variant="outlined" value={value.firstName} onChange={handleChange} />
-                        <TextField id="lastName" helperText={lastNameError} error={lastNameError ? true : false} fullWidth={true} label="LastName" variant="outlined" value={value.lastName} onChange={handleChange} />
-                        <Button className={classes.loginBtn} fullWidth={true} variant="contained" onClick={handleSubmit}>Sign Up</Button>
-                    </Box>
-                </Container>
-            </div>
+            <Container >
+                <Box py={5} className={classes.loginForm} textAlign="center">
+                    <Typography variant="h4" component="h1" gutterBottom>Sign Up</Typography>
+                    {/* {authError && <Typography color="secondary" gutterBottom>{authError}</Typography>} */}
+                    <TextField id="email" fullWidth={true} label="Email" helperText={emailError} error={emailError ? true : false} variant="outlined" value={value.email} onChange={handleChange} />
+                    <TextField type="password" helperText={passwordError} error={passwordError ? true : false} id="password" fullWidth={true} label="Password" variant="outlined" value={value.password} onChange={handleChange} />
+                    <TextField id="firstName" helperText={firstNameError} error={firstNameError ? true : false} fullWidth={true} label="FirstName" variant="outlined" value={value.firstName} onChange={handleChange} />
+                    <TextField id="lastName" helperText={lastNameError} error={lastNameError ? true : false} fullWidth={true} label="LastName" variant="outlined" value={value.lastName} onChange={handleChange} />
+                    <Button className={classes.loginBtn} fullWidth={true} variant="contained" onClick={handleSubmit}>Sign Up</Button>
+                </Box>
+            </Container>
         </>
     )
 }
@@ -138,11 +136,4 @@ const useStyles = makeStyles({
             backgroundColor: "#8cc927",
         }
     },
-    bg: {
-        backgroundImage: "url(https://wanderers.qodeinteractive.com/wp-content/uploads/2018/02/h1-background-1.png?id=125)",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        padding: "30px 0",
-    }
 });

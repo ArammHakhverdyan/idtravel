@@ -70,7 +70,6 @@ export default function YerevanHotels() {
 
 
 
-    console.log(url[8])
     const background = url[0]
     const hotels = [
         {
