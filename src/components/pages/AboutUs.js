@@ -7,8 +7,6 @@ import HomeWorkIcon from '@material-ui/icons/HomeWork';
 import { storageRef } from '../../config/config';
 
 
-
-
 function AboutUs() {
   const classes = useStyles();
   const [url, setUrl] = useState(["", "", "", "", "", ""])
@@ -52,7 +50,7 @@ function AboutUs() {
               The Story About Us
                         </Typography>
             <Typography>
-              Travel ID is is one of the leading travel agencies in Armenia.We have an extensive experience in tourism business. We do have special rates as for hotels all over Armenia.Our services include Hotel Reservation,Qualified Guide Service, Transportation Service, Transfers from/to Airport/Hotel, Car Rental with/without Driver.Your guest is our guest and your problem is our problem! Organize your trip with professionals…
+              Travel ID is one of the leading travel agencies in Armenia.We have an extensive experience in tourism business. We do have special rates as for hotels all over Armenia.Our services include Hotel Reservation,Qualified Guide Service, Transportation Service, Transfers from/to Airport/Hotel, Car Rental with/without Driver.Your guest is our guest and your problem is our problem! Organize your trip with professionals…
               Organize your trips with ID Travel.
                         </Typography>
           </Grid>
@@ -93,14 +91,6 @@ function AboutUs() {
       </Box>
       <div>
         <img src={url[2]} alt='' className={classes.imgCity} />
-        <Box >
-          {/* <h1 style={{
-            position: "relative", textAlign: "center", color: "white", top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-          }}>The best place in the world</h1> */}
-        </Box>
         <Grid className={classes.imgContainer}>
           <img className={classes.imgStyle} src={url[3]} />
           <img className={classes.imgStyle} src={url[4]} />

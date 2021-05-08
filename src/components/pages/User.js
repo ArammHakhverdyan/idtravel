@@ -56,13 +56,13 @@ const User = () => {
     }
   }, [snackPack, messageInfo, open]);
 
+
   const handleSubmit = (e, message) => {
     e.preventDefault();
     if (uId) {
       const newInfo = { email, firstName, lastName, initials: firstName[0] + lastName[0] }
       setSnackPack((prev) => [...prev, { message, key: new Date().getTime() }]);
       if (userInfo.firstName === newInfo.firstName && userInfo.email === newInfo.email && userInfo.lastName === newInfo.lastName) {
-
         setOpenErrorButton(true)
       } else if (newInfo.firstName === "" || newInfo.email === "" || newInfo.lastName === "") {
         setWarningButton(true)

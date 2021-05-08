@@ -9,18 +9,6 @@ import { storageRef } from '../../config/config';
 
 
 
-// admin.firestore().collection('messages').add({
-//     to: 'arammyan@gmail.com',
-//     message: {
-//       subject: 'Hello from Firebase!',
-//       html: 'This is an <code>HTML</code> email body.',
-//     },
-//   })
-/*const useStyles = makeStyles({
-    
-    },
-});*/
-
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -61,6 +49,8 @@ function Contact() {
   const [url, setUrl] = useState(["", ""])
   const [open, setOpen] = React.useState(false);
   const [openErrorButton, setOpenErrorButton] = React.useState(false)
+  const [snackPack, setSnackPack] = React.useState([]);
+  const [messageInfo, setMessageInfo] = React.useState(undefined);
 
 
   useEffect(() => {
@@ -97,11 +87,25 @@ function Contact() {
     message: "",
   })
 
-  const sendMessage = async (event) => {
+  React.useEffect(() => {
+    if (snackPack.length && !messageInfo) {
+      // Set a new snack when we don't have an active one
+      setMessageInfo({ ...snackPack[0] });
+      setSnackPack((prev) => prev.slice(1));
+      setOpen(true);
+    } else if (snackPack.length && messageInfo && open) {
+      // Close an active snack when a new one is added
+      setOpen(false);
+    }
+  }, [snackPack, messageInfo, open]);
+
+
+  const sendMessage = (event, message) => {
     if (contact.name && contact.email && contact.phone && contact.message) {
       event.preventDefault();
+      setSnackPack((prev) => [...prev, { message, key: new Date().getTime() }]);
       try {
-        const messages = await db.collection("messages");
+        const messages = db.collection("messages");
         messages.doc("From: " + contact.email).set(contact);
       } catch (e) {
         console.error("Error: ", e);
