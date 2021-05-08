@@ -45,12 +45,13 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 export default function YerevanHotels() {
-  const [open, setOpen] = React.useState(false);
-  const [date, setDate] = React.useState([null, null]);
-  const [ToOpen, setToOpen] = React.useState(false);
-  const [countPerson, setCountPerson] = React.useState(2);
-  const [countHotel, setCountHotel] = React.useState(1);
-  const [invisible, setInvisible] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [date, setDate] = useState([null, null]);
+  const [ToOpen, setToOpen] = useState(false);
+  const [countPerson, setCountPerson] = useState(2);
+  const [countHotel, setCountHotel] = useState(1);
+  const [invisible, setInvisible] = useState(false);
+  const [getData, setGetData] = useState([])
 
   const handleBadgeVisibility = () => {
     setInvisible(!invisible);
@@ -149,6 +150,28 @@ export default function YerevanHotels() {
       })
     )
   }, [])
+  useEffect(() => {
+
+    const hotelsRef = db.collection("yerevanHotels").doc();
+    const hotelsArr = []
+    hotelsRef.get().then((doc) => {
+      if (doc.exists) {
+        console.log("Document data:", doc.data());
+        //setGetData(doc.data())
+        doc.data().forEach(item => {
+          hotelsArr.push(item.data())
+        })
+      } else {
+        console.log("No such document!");
+      }
+    }).catch((error) => {
+      console.log("Error getting document:", error);
+    });
+
+
+  }, [])
+
+  console.log(getData, "getDataaa")
 
   const handleClickOpen = (hotel) => {
     setToOpen(hotel);
@@ -252,17 +275,7 @@ export default function YerevanHotels() {
 
   ]
 
-  const hotelsRef = db.collection("yerevanHotels").doc("JlnpCdp3CbGlljRnyJmo");
 
-  hotelsRef.get().then((doc) => {
-    if (doc.exists) {
-      console.log("Document data:", doc.data());
-    } else {
-      console.log("No such document!");
-    }
-  }).catch((error) => {
-    console.log("Error getting document:", error);
-  });
   return (
     <>
       <div style={{
@@ -284,7 +297,7 @@ export default function YerevanHotels() {
                 <Grid item xs={12} sm container>
                   <Grid item xs container direction="column" spacing={2}>
                     <Grid item xs>
-                      <Box component="fieldset" mb={3} borderColor="transparent">
+                      <Box component="fieldset" borderColor="transparent">
                         <Rating name="read-only" value={value.star} readOnly />
                       </Box>
                       <Typography gutterBottom style={{ fontSize: "20px", color: "black" }}>
