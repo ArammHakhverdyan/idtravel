@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import ButtonBase from '@material-ui/core/ButtonBase';
+import { makeStyles, Grid, Paper, Typography, ButtonBase, DialogTitle, DialogContent, Dialog, DialogActions } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
 import { Badge, Box, Button, ButtonGroup, Snackbar, TextField } from '@material-ui/core';
 import ReactReadMoreReadLess from "react-read-more-read-less";
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import { db, storageRef } from '../../config/config';
 import addWeeks from 'date-fns/addWeeks';
 import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
@@ -51,7 +43,7 @@ export default function YerevanHotels() {
   const [countPerson, setCountPerson] = useState(2);
   const [countHotel, setCountHotel] = useState(1);
   const [invisible, setInvisible] = useState(false);
-  const [hotels, setHotels] = useState([])
+  const [hotel, setHotels] = useState([])
 
   const handleBadgeVisibility = () => {
     setInvisible(!invisible);
@@ -172,22 +164,40 @@ export default function YerevanHotels() {
   // }, [])
 
 
+  // useEffect(() => {
+  //   try {
+  //     const hotelsRef = db.collection("hotels");
+  //     hotelsRef.get().then((document) => {
+  //       const data = [];
+  //       console.log(data, "data")
+  //       document.forEach((item) => {
+  //         data.push(item.data());
+  //       });
+  //       setHotels(data);
+  //     });
+  //   } catch (e) {
+  //     console.error("Error: ", e);
+  //   }
+  // }, []);
+
+
+  const fetchHotels = async () => {
+    const response = db.collection('hotels');
+    const data = await response.get();
+    const dataArr = [];
+    data.docs.forEach(item => {
+      dataArr.push(item.data())
+    })
+    setHotels(dataArr);
+  }
   useEffect(() => {
-    try {
-      const hotelsRef = db.collection("hotels");
-      hotelsRef.get().then((document) => {
-        const data = [];
-        console.log(data, "data")
-        document.forEach((item) => {
-          data.push(item.data());
-        });
-        setHotels(data);
-      });
-    } catch (e) {
-      console.error("Error: ", e);
-    }
-  }, []);
-  console.log(hotels, "hotels")
+    fetchHotels();
+  }, [])
+
+
+  console.log(hotel, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+
+
 
   const handleClickOpen = (hotel) => {
     setToOpen(hotel);
@@ -302,31 +312,28 @@ export default function YerevanHotels() {
       }}>
         <div className={classes.root}>
           <h1 style={{ textAlign: "center" }}>We cooperate with the following hotels:</h1>
-          {hotelss.map((value, index) => (
-            // <div style={{ backgroundColor: "red" }}>
-            //   {hotels && hotels[0]}
-            // </div>
-            <Paper key={value} className={classes.paper}>
+          {hotel && hotel.map((value, index) => (
+            <Paper key={index} className={classes.paper}>
               <Grid container spacing={2}>
                 <Grid item>
-                  <ButtonBase className={classes.image}>
-                    <img className="hotelImg" alt={value.imgText} src={value.imgUrl} />
-                  </ButtonBase>
+                  {/* <ButtonBase className={classes.image}>
+                    <img className="hotelImg" alt={value.YerevanHotels.imgText} src={value.YerevanHotels.imgUrl} />
+                  </ButtonBase> */}
                 </Grid>
-
                 <Grid item xs={12} sm container>
                   <Grid item xs container direction="column" spacing={2}>
                     <Grid item xs>
-                      <Box component="fieldset" borderColor="transparent">
-                        <Rating name="read-only" value={value.star} readOnly />
-                      </Box>
-                      <Typography gutterBottom style={{ fontSize: "20px", color: "black" }}>
+                      {/* <Box component="fieldset" borderColor="transparent">
+                        <Rating name="read-only" value={value.description} readOnly />
+                      </Box> */}
+                      <h1>{value.description}</h1>
+                      {/* <Typography gutterBottom style={{ fontSize: "20px", color: "black" }}>
+                        {value.YerevanHotels.hotelName}
+                      </Typography> */}
+                      <Typography variant="body2" gutterBottom style={{ fontSize: "12px", color: "black" }}>
                         {value.hotelName}
                       </Typography>
-                      <Typography variant="body2" gutterBottom style={{ fontSize: "12px", color: "black" }}>
-                        {value.location}
-                      </Typography>
-                      <ReactReadMoreReadLess
+                      {/* <ReactReadMoreReadLess
                         charLimit={200}
                         readMoreText={"Read more ▼"}
                         readLessText={"Read less ▲"}
@@ -334,17 +341,17 @@ export default function YerevanHotels() {
                         readLessClassName="read-more-less--less"
                       >
                         {value.describtion}
-                      </ReactReadMoreReadLess>
+                      </ReactReadMoreReadLess> */}
                     </Grid>
                   </Grid>
-                  <Grid item>
-                    <Typography style={{ fontSize: "12px", color: "black" }}>{value.night}</Typography>
-                    <Typography style={{ fontSize: "25px", color: "#94c93d" }}>{value.price}</Typography>
-                    <Typography style={{ fontSize: "10px", color: "black" }}>{value.includes}</Typography>
+                  {/* <Grid item>
+                    <Typography style={{ fontSize: "12px", color: "black" }}>{value.YerevanHotels.night}</Typography>
+                    <Typography style={{ fontSize: "25px", color: "#94c93d" }}>{value.YerevanHotels.price}</Typography>
+                    <Typography style={{ fontSize: "10px", color: "black" }}>{value.YerevanHotels.includes}</Typography>
                     <Button style={{ marginTop: "15px", backgroundColor: "#94c93d" }} variant="contained" onClick={() => handleClickOpen(value)}>
                       Book this hotel
                     </Button>
-                  </Grid>
+                  </Grid> */}
                 </Grid>
               </Grid>
             </Paper>
