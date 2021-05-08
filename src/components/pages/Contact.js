@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles, Container, Box, TextField, Button, Grid } from '@material-ui/core/';
 import ImageHeader from '../shared/ImageHeader';
-//import jermuk from '../../assets/images/jermuk.jpg';
 import { db } from '../../config/config';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import SimpleMap from './Map';
-//import { Map, GoogleApiWrapper } from 'google-maps-react';
 import { storageRef } from '../../config/config';
 
 
@@ -37,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   contactForm: {
-    //backgroundColor: "rgb(185 178 178 / 60%)",
     float: "right",
     marginRight: "150px",
     maxWidth: "400px",

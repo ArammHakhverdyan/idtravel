@@ -4,10 +4,8 @@
     "javascript.format.enable": true,
     "typescript.format.enable": true,
     "json.format.enable": true,
-    "workbench.iconTheme": "vs-minimal",
     "editor.wordWrap": "on",
     "editor.mouseWheelZoom": true,
-    "editor.renderWhitespace": "all",
     "editor.tabSize": 2,
 		"editor.detectIndentation": false
 }

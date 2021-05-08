@@ -72,9 +72,7 @@ p{
   height: 100vh;
 }
 
-/* .MuiTypography-body1{
- text-align: center;
-  } */
+
 
 .MuiCard-root {
   width: 100%;
@@ -90,17 +88,13 @@ p{
 .MuiList-padding{
   opacity: 0.8;
   padding-top: 8px;
-  /* padding-bottom: 8px;
-  display: flex;
-  flex-direction: column;
-  margin: 10px */
+  
 }
 .MuiAccordion-rounded{
   width: 50%;
 }
 .MuiGrid-justify-xs-center {
-  /* background-image: url("https://i.pinimg.com/originals/d1/22/17/d1221753c3148b1995d1cce12bd75694.jpg"); */
-  background-repeat: no-repeat;
+    background-repeat: no-repeat;
   background-size: cover;
 }
 .backk {
