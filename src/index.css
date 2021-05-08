@@ -124,9 +124,6 @@ p{
   color: black;
   font-size: 32px !important;
 }
-.MuiBox-root {
-  margin-bottom: 0px !important;
-}
 .sprinter {
   margin: auto;
   display: block;
