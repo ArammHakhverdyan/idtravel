@@ -185,7 +185,7 @@ export default function YerevanHotels() {
                         {value.hotelName}
                       </Typography>
                       <Typography variant="body2" gutterBottom style={{ fontSize: "12px", color: "black" }}>
-                        {value.hotelName}
+                        {value.location}
                       </Typography>
                       <ReactReadMoreReadLess
                         charLimit={200}

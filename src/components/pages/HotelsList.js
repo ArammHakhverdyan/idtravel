@@ -73,7 +73,7 @@ export default function MediaCard() {
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
       }}>
-        <Grid container justify="center" spacing={0} >
+        <Grid container justifyContent="center" spacing={0} >
           {/* ---------------------------Yerevan----- */}
           <Card className={classes.root}>
             <CardActionArea component={Link} to="/yerevanHotels">

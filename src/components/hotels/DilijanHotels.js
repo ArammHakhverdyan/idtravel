@@ -1,19 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import ButtonBase from '@material-ui/core/ButtonBase';
-import Rating from '@material-ui/lab/Rating';
+import { makeStyles, Grid, Paper, Typography, ButtonBase, DialogTitle, DialogContent, Dialog, DialogActions, Rating } from '@material-ui/core';
 import { Badge, Box, Button, ButtonGroup, Snackbar, TextField } from '@material-ui/core';
 import ReactReadMoreReadLess from "react-read-more-read-less";
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import { db, storageRef } from '../../config/config';
-import addWeeks from 'date-fns/addWeeks';
 import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
 import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
 import MobileDateRangePicker from '@material-ui/lab/MobileDateRangePicker';
@@ -37,26 +27,17 @@ const useStyles = makeStyles((theme) => ({
     height: "128px",
   }
 }));
-
-function getWeeksAfter(date, amount) {
-  return date ? addWeeks(date, amount) : undefined;
-}
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
+export default function YerevanHotels() {
+  const [open, setOpen] = useState(false);
+  const [date, setDate] = useState([null, null]);
+  const [ToOpen, setToOpen] = useState(false);
+  const [countPerson, setCountPerson] = useState(2);
+  const [countHotel, setCountHotel] = useState(1);
+  const [hotel, setHotels] = useState([])
 
-export default function DilijanHotels() {
-
-  const [open, setOpen] = React.useState(false);
-  const [date, setDate] = React.useState([null, null]);
-  const [ToOpen, setToOpen] = React.useState(false);
-  const [countPerson, setCountPerson] = React.useState(2);
-  const [countHotel, setCountHotel] = React.useState(1);
-  const [invisible, setInvisible] = React.useState(false);
-
-  const handleBadgeVisibility = () => {
-    setInvisible(!invisible);
-  }
   const [reserve, setReserve] = useState({
     fullName: "",
     emailAdress: "",
@@ -111,6 +92,7 @@ export default function DilijanHotels() {
     }))
   }
 
+
   const [url, setUrl] = useState(["", "", "", "", "", "", ""])
 
   useEffect(() => {
@@ -144,12 +126,28 @@ export default function DilijanHotels() {
   }, [])
 
   const classes = useStyles();
-  // const [five] = React.useState(5)
-  const [four] = React.useState(4)
-  const [three] = React.useState(3)
+  const [star] = React.useState(5)
+  // const [four] = React.useState(4)
+  // const [three] = React.useState(3)
   // const [two] = React.useState(2)
-  const [one] = React.useState(1)
-  const [zero] = React.useState(0)
+  // const [one] = React.useState(1)
+  // const [zero] = React.useState(0)
+
+  const fetchHotels = async () => {
+    const response = db.collection('dilijanHotels');
+    const data = await response.get();
+    const dataArr = [];
+    data.docs.forEach(item => {
+      dataArr.push(item.data())
+    })
+    setHotels(dataArr);
+  }
+  useEffect(() => {
+    fetchHotels();
+  }, [])
+
+
+
   const handleClickOpen = (hotel) => {
     setToOpen(hotel);
   };
@@ -159,76 +157,6 @@ export default function DilijanHotels() {
   };
 
   const background = url[0]
-  const hotels = [
-    {
-      imgUrl: url[1],
-      imgText: "complex",
-      hotelName: "DiliJazz Hotel & Restaurant",
-      location: "1/1 Teghut 2nd Street, 3902 Dilijan, Armenia",
-      describtion: " DiliJazz Hotel & Restaurant features a restaurant, bar, a shared lounge and garden in Dilijan. With free WiFi, this 4-star hotel offers a 24-hour front desk and room service. The hotel has family rooms. All units in the hotel are equipped with a flat-screen TV with satellite channels. At DiliJazz Hotel & Restaurant, each room includes air conditioning and a private bathroom. A continental breakfast is available daily at the accommodation. DiliJazz Hotel & Restaurant offers a barbecue. You can play table tennis at the hotel, and the area is popular for hiking. Tsaghkadzor is 46 km from DiliJazz Hotel & Restaurant. The nearest airport is Zvartnots International Airport, 83 km from the accommodation. Couples particularly like the location — they rated it 9.7 for a two-person trip. We speak your language!",
-      night: "1 night, 2 adults, Breakfast",
-      price: "AMD 52,800",
-      includes: "Includes taxes and charges",
-      star: four
-    },
-    {
-      imgUrl: url[2],
-      imgText: "complex",
-      hotelName: "Tufenkian Old Dilijan Complex",
-      location: "Sharambeyan Street, 3901 Dilijan, Armenia",
-      describtion: "With a façade featuring exposed stone and wood, this hotel is located in Sharambeyan Street, in the historic district of Dilijan. All rooms at Tufenkian feature 19th-century décor and a flat-screen satellite TV. Room fittings at the Tufenkian Old Dilijan Complex include hand-made wooden furniture, antique wardrobes and hand-woven carpets. Each has tiled floors, heating and a private bathroom with free toiletries. The suites also include a separate seating area and spacious terrace overlooking Dilijan. A buffet breakfast is provided daily. Armenian specialities are served in elegant Haykanoush restaurant, where the traditional carpets contrast with the modern furniture and chandeliers. The Armenian bakery provides outdoor seating under a canopy. Tufenkian Complex offers free Wi-Fi in public areas and an on-request shuttle service. Dilijan National Park, with its rich birdlife, is 8 km away.  Couples particularly like the location — they rated it 9.0 for a two-person trip. We speak your language!",
-      night: "1 night, 2 adults, Breakfast",
-      price: "AMD 30,000",
-      includes: "Includes taxes and charges",
-      star: three
-    },
-    {
-      imgUrl: url[3],
-      imgText: "complex",
-      hotelName: "Guest house Dilijan Orran",
-      location: "str. Hovsepyan 26, 0010 Dilijan, Armenia",
-      describtion: "Guest house Dilijan Orran has a restaurant, bar, a shared lounge and garden in Dilijan. Among the facilities at this property are a shared kitchen and room service, along with free WiFi throughout the property. There is free private parking and the property offers paid airport shuttle service. All guest rooms come with a microwave, fridge, a kettle, a hot tub, a hairdryer and a desk. At the guest house all rooms include a flat-screen TV, a private bathroom, and a patio with a garden view. Continental and vegetarian breakfast options are available every morning at Guest house Dilijan Orran. The accommodation offers a barbecue. The nearest airport is Zvartnots International Airport, 79 km from Guest house Dilijan Orran. Couples particularly like the location — they rated it 8.2 for a two-person trip. We speak your language!",
-      night: "1 night, 2 adults",
-      price: "AMD 21,000",
-      includes: "Includes taxes and charges",
-      star: three
-    },
-    {
-      imgUrl: url[4],
-      imgText: "complex",
-      hotelName: "ECO GARDEN",
-      location: "Kamo Street 146, 3741 Dilijan, Armenia",
-      describtion: "Surrounded by the pine forest on the bank of the river, Villa Jrvezh offers accommodation in Dilijan, a 30-minute drive to Lake Sevan. The guest house has a terrace and a sun terrace, and guests can enjoy a meal at the restaurant or a drink at the bar. Lake Parz is a 20-minute drive away. All rooms are equipped with a flat-screen TV. Extras include free toiletries and a hair dryer. A TV is provided. Guests can enjoy national cuisine, made from ecological products from local villages. A free shuttle to the city centre is offered, as well as tour desk services. One of the popular activities around area is hiking across Transcaucasian Trail and feeding red deer in breeding centre. Couples particularly like the location — they rated it 8.8 for a two-person trip. We speak your language!",
-      night: "1 night, 2 adults",
-      price: "AMD 16,000",
-      includes: "Includes taxes and charges",
-      star: one
-    },
-    {
-      imgUrl: url[5],
-      imgText: "complex",
-      hotelName: "Nran Hatik",
-      location: "Myasnikyan St. 12/3, 3906 Dilijan, Armenia",
-      describtion: "Located in Dilijan, Nran Hatik features a bar, shared lounge, garden, and free WiFi. Featuring family rooms, this property also provides guests with a barbecue.Private parking can be arranged at an extra charge.At the guest house each room includes a flat-screen TV, a private bathroom, and a balcony with a mountain view.Guests at Nran Hatik can enjoy a continental breakfast.The accommodation offers a terrace. The nearest airport is Zvartnots International Airport, 76 km from Nran Hatik. We speak your language!",
-      night: "1 night, 2 adults",
-      price: "AMD 13,000",
-      includes: "Includes taxes and charges",
-      star: zero
-    },
-    {
-      imgUrl: url[6],
-      imgText: "complex",
-      hotelName: "Ojakh",
-      location: "Miasnikian street house number 5, 3906 Dilijan, Armenia",
-      describtion: "Situated in Dilijan, Ojakh has a garden. All rooms boast a kitchenette and a shared bathroom. There is a terrace and guests can make use of free WiFi and free private parking. All rooms will provide guests with a fridge.        The nearest airport is Zvartnots International Airport, 78 km from the guest house. Couples particularly like the location — they rated it 8.1 for a two-person trip.We speak your language!",
-      night: "1 night, 2 adults",
-      price: "AMD 7,000",
-      includes: "Includes taxes and charges",
-      star: zero
-    },
-
-
-  ]
   return (
     <>
       <div style={{
@@ -236,10 +164,9 @@ export default function DilijanHotels() {
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
       }}>
-
         <div className={classes.root}>
           <h1 style={{ textAlign: "center" }}>We cooperate with the following hotels:</h1>
-          {hotels.map((value, index) => (
+          {hotel && hotel.map((value, index) => (
             <Paper key={index} className={classes.paper}>
               <Grid container spacing={2}>
                 <Grid item>
@@ -247,12 +174,11 @@ export default function DilijanHotels() {
                     <img className="hotelImg" alt={value.imgText} src={value.imgUrl} />
                   </ButtonBase>
                 </Grid>
-
                 <Grid item xs={12} sm container>
                   <Grid item xs container direction="column" spacing={2}>
                     <Grid item xs>
-                      <Box component="fieldset" mb={3} borderColor="transparent">
-                        <Rating name="read-only" value={value.star} readOnly />
+                      <Box component="fieldset" borderColor="transparent">
+                        <Rating name="read-only" value={star} readOnly />
                       </Box>
                       <Typography gutterBottom style={{ fontSize: "20px", color: "black" }}>
                         {value.hotelName}
@@ -267,7 +193,7 @@ export default function DilijanHotels() {
                         readMoreClassName="read-more-less--more"
                         readLessClassName="read-more-less--less"
                       >
-                        {value.describtion}
+                        {value.description}
                       </ReactReadMoreReadLess>
                     </Grid>
                   </Grid>

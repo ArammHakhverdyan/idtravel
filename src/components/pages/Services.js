@@ -72,16 +72,17 @@ function Services() {
   const img1 = url[1]
   const img2 = url[2]
   const img3 = url[3]
+  const background = "https://micedata.s3.eu-central-1.amazonaws.com/MiceProjectData/Images/2019/12/1/1_3804_40fedd5d-e1ff-4edd-814d-e8585b6792ba.jpg"
   return (
     <>
       <CssBaseline />
       <ImageHeader text="Services" backgroundImage={url[0]} />
       <div style={{
-        // backgroundImage: `url(${background})`,
+        backgroundImage: `url(${background})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
       }}>
-        <Grid container justify="center" spacing={0} >
+        <Grid container justifyContent="center" spacing={0} >
           <Card className={classes.root} variant="outlined">
             <CardActionArea component={Link} to="/tours">
 

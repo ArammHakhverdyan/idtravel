@@ -1,19 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import ButtonBase from '@material-ui/core/ButtonBase';
-import Rating from '@material-ui/lab/Rating';
+import { makeStyles, Grid, Paper, Typography, ButtonBase, DialogTitle, DialogContent, Dialog, DialogActions, Rating } from '@material-ui/core';
 import { Badge, Box, Button, ButtonGroup, Snackbar, TextField } from '@material-ui/core';
 import ReactReadMoreReadLess from "react-read-more-read-less";
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import { db, storageRef } from '../../config/config';
-import addWeeks from 'date-fns/addWeeks';
 import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
 import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
 import MobileDateRangePicker from '@material-ui/lab/MobileDateRangePicker';
@@ -30,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
     margin: 'auto',
-    maxWidth: 800,
     maxWidth: "1000px",
     marginTop: "15px"
   },
@@ -39,24 +28,17 @@ const useStyles = makeStyles((theme) => ({
     height: "128px",
   }
 }));
-
-function getWeeksAfter(date, amount) {
-  return date ? addWeeks(date, amount) : undefined;
-}
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
-export default function GorisHotels() {
-  const [open, setOpen] = React.useState(false);
-  const [date, setDate] = React.useState([null, null]);
-  const [ToOpen, setToOpen] = React.useState(false);
-  const [countPerson, setCountPerson] = React.useState(1);
-  const [countHotel, setCountHotel] = React.useState(1);
-  const [invisible, setInvisible] = React.useState(false);
+export default function YerevanHotels() {
+  const [open, setOpen] = useState(false);
+  const [date, setDate] = useState([null, null]);
+  const [ToOpen, setToOpen] = useState(false);
+  const [countPerson, setCountPerson] = useState(2);
+  const [countHotel, setCountHotel] = useState(1);
+  const [hotel, setHotels] = useState([])
 
-  const handleBadgeVisibility = () => {
-    setInvisible(!invisible);
-  }
   const [reserve, setReserve] = useState({
     fullName: "",
     emailAdress: "",
@@ -145,83 +127,27 @@ export default function GorisHotels() {
 
 
   const classes = useStyles();
-  // const [five] = React.useState(5)
+  const [star] = React.useState(5)
   // const [four] = React.useState(4)
-  const [three] = React.useState(3)
-  const [two] = React.useState(2)
+  // const [three] = React.useState(3)
+  // const [two] = React.useState(2)
   // const [one] = React.useState(1)
-  const [zero] = React.useState(0)
-  const background = url[0];
-  const hotels = [
-    {
-      imgUrl: url[1],
-      imgText: "complex",
-      hotelName: "Diana Hotel",
-      location: "Artsakhyan Highway 30, 3201 Goris, Armenia",
-      describtion: "Located in the city of Goris, this hotel offers Wi-Fi, a swimming pool, and a games room. Free private parking and a fitness centre are available on site.Diana Hotel offers a variety of individually decorated rooms and suites. Each one includes a flat-screen TV, minibar, and private bathroom providing bathrobes and slippers.Guests are provided with a daily breakfast and can choose to enjoy the meal in their room. The hotel’s Restaurant Diana serves Armenian specialities in the evenings, and guests can also make use of on-site barbecue facilities.Yerevan Airport is 300 km away and shuttle services can be arranged for a fee.Couples particularly like the location — they rated it 8.8 for a two-person trip. We speak your language!",
-      night: "1 night, 2 adults, All Inclusive",
-      price: "AMD 27,000",
-      includes: "Includes taxes and charges",
-      star: three
-    },
-    {
-      imgUrl: url[2],
-      imgText: "complex",
-      hotelName: "Goris Hotel",
-      location: "Khorenatsi 53, 3201 Goris, Armenia",
-      describtion: "Set in Goris, Goris Hotel features a restaurant, bar, garden, and free WiFi. This 4-star hotel offers room service. There is free private parking and the property offers paid airport shuttle service. Guests at the hotel can enjoy a buffet breakfast. Couples particularly like the location — they rated it 8.2 for a two-person trip. We speak your language!",
-      night: "1 night, 2 adults, Breakfast",
-      price: "AMD 21,600",
-      includes: "Includes taxes and charges",
-      star: two
-    },
-    {
-      imgUrl: url[3],
-      imgText: "complex",
-      hotelName: "Asour Hotel",
-      location: "95/1 Mashtots Street, 3201 Goris, Armenia",
-      describtion: "ASOUR HOTEL has a restaurant, bar, a shared lounge and garden in Goris. The hotel also features free WiFi and free private parking.At the hotel, rooms come with a patio. At ASOUR HOTEL rooms are fitted with a desk, a flat-screen TV and a private bathroom.The accommodation offers a continental or à la carte breakfast.Speaking Armenian, Russian, English and French at the 24-hour front desk, staff are always on hand to help. We speak your language!",
-      night: "1 night, 2 adults",
-      price: "AMD 15,000",
-      includes: "Includes taxes and charges",
-      star: zero
-    },
-    {
-      imgUrl: url[4],
-      imgText: "complex",
-      hotelName: "Sofya",
-      location: "165 Mashtots Street, 3201 Goris, Armenia",
-      describtion: "Sofya features a restaurant, bar, a shared lounge and garden in Goris. Among the facilities at this property are a 24-hour front desk and a shared kitchen, along with free WiFi throughout the property. Private parking can be arranged at an extra charge. Guests at the hotel can enjoy a buffet or a à la carte breakfast. Sofya offers a terrace. Guests at the accommodation will be able to enjoy activities in and around Goris, like hiking. Sofya provides an ironing service, as well as business facilities like fax and photocopying.",
-      night: "1 night, 2 adults",
-      price: "AMD 13,500",
-      includes: "Includes taxes and charges",
-      star: zero
-    },
-    {
-      imgUrl: url[5],
-      imgText: "complex",
-      hotelName: "Yeghevnut Hotel",
-      location: "Yerevanskoe Shosse 7, 3201 Goris, Armenia",
-      describtion: "Offering a 24-hour reception and rooms with flat-screen TVs, this hotel is situated in the east of Goris. Armenian specialities are served in the restaurant, and free Wi-Fi is available in public areas. The simple rooms at Egevnut Hotel feature a work desk, and a private bathroom with toiletries and slippers. Free tea and coffee is provided throughout the day. The Egevnut reception can organise tours of the area, as well as trips to the world’s longest cable car, 17 km from the hotel. A shuttle service is available to take guests to Yerevan Airport and Train Station, 240 km away.   Couples particularly like the location — they rated it 8.9 for a two-person trip. We speak your language!",
-      night: "1 night, 2 adults, Breakfast",
-      price: "AMD 27,900",
-      includes: "Includes taxes and charges",
-      star: two
-    },
-    {
-      imgUrl: url[6],
-      imgText: "complex",
-      hotelName: "Aregak B&B and Tours",
-      location: "Getapny Str, 4 Bld,Apartment-16, 3201 Goris, Armenia",
-      describtion: "Aregak B&B and Tours is situated in Goris and has a garden and a terrace. Among the facilities of this property are a restaurant, a 24-hour front desk and a shared kitchen, along with free WiFi. The accommodation features room service, a shared lounge and organising tours for guests.All units at the guest house are fitted with a seating area. The rooms will provide guests with a desk and a kettle. Aregak B&B and Tours offers a continental or vegetarian breakfast. The accommodation offers a children's playground. Couples particularly like the location — they rated it 9.9 for a two-person trip. We speak your language!",
-      night: "1 night, 2 adults",
-      price: "AMD 12,000",
-      includes: "Includes taxes and charges",
-      star: zero
-    },
+  // const [zero] = React.useState(0)
+
+  const fetchHotels = async () => {
+    const response = db.collection('gorisHotels');
+    const data = await response.get();
+    const dataArr = [];
+    data.docs.forEach(item => {
+      dataArr.push(item.data())
+    })
+    setHotels(dataArr);
+  }
+  useEffect(() => {
+    fetchHotels();
+  }, [])
 
 
-  ]
 
   const handleClickOpen = (hotel) => {
     setToOpen(hotel);
@@ -230,6 +156,8 @@ export default function GorisHotels() {
   const handleClickClose = () => {
     setToOpen(false);
   };
+
+  const background = url[0]
 
   return (
     <>
@@ -240,7 +168,7 @@ export default function GorisHotels() {
       }}>
         <div className={classes.root}>
           <h1 style={{ textAlign: "center" }}>We cooperate with the following hotels:</h1>
-          {hotels.map((value, index) => (
+          {hotel && hotel.map((value, index) => (
             <Paper key={index} className={classes.paper}>
               <Grid container spacing={2}>
                 <Grid item>
@@ -251,8 +179,8 @@ export default function GorisHotels() {
                 <Grid item xs={12} sm container>
                   <Grid item xs container direction="column" spacing={2}>
                     <Grid item xs>
-                      <Box component="fieldset" mb={3} borderColor="transparent">
-                        <Rating name="read-only" value={value.star} readOnly />
+                      <Box component="fieldset" borderColor="transparent">
+                        <Rating name="read-only" value={star} readOnly />
                       </Box>
                       <Typography gutterBottom style={{ fontSize: "20px", color: "black" }}>
                         {value.hotelName}
@@ -261,13 +189,13 @@ export default function GorisHotels() {
                         {value.location}
                       </Typography>
                       <ReactReadMoreReadLess
-                        charLimit={150}
+                        charLimit={200}
                         readMoreText={"Read more ▼"}
                         readLessText={"Read less ▲"}
                         readMoreClassName="read-more-less--more"
                         readLessClassName="read-more-less--less"
                       >
-                        {value.describtion}
+                        {value.description}
                       </ReactReadMoreReadLess>
                     </Grid>
                   </Grid>
@@ -373,4 +301,3 @@ export default function GorisHotels() {
     </>
   );
 }
-
