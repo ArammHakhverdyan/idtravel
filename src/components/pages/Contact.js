@@ -19,9 +19,6 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(2),
     },
   },
-  alert: {
-    width: '100%',
-  },
   contactForm: {
     float: "right",
     marginRight: "150px",
@@ -78,7 +75,7 @@ function Contact() {
     )
   }, []);
 
-  const background = url[1]
+  // const background = url[1]
 
   const [contact, setContact] = useState({
     name: "",

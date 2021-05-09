@@ -6,8 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { Link } from 'react-router-dom';
-import ImageHeader from './components/shared/ImageHeader';
-import { storageRef } from './config/config';
+import ImageHeader from '../shared/ImageHeader';
+import { storageRef } from '../../config/config';
 
 const useStyles = makeStyles((theme) => ({
   root: {

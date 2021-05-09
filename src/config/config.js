@@ -4,17 +4,15 @@ import 'firebase/auth'
 import "firebase/storage";
 
 
-
 const config = {
-    apiKey: "AIzaSyCXvaWuFa9T9q0S7ZABa0OccH-fWGdmuJc",
-    authDomain: "idtravel-450d9.firebaseapp.com",
-    projectId: "idtravel-450d9",
-    storageBucket: "idtravel-450d9.appspot.com",
-    messagingSenderId: "502379513308",
-    appId: "1:502379513308:web:eb45ced472dc7a72a37b19",
-    measurementId: "G-ZM1TVZQQ6M"
+  apiKey: "AIzaSyCXvaWuFa9T9q0S7ZABa0OccH-fWGdmuJc",
+  authDomain: "idtravel-450d9.firebaseapp.com",
+  projectId: "idtravel-450d9",
+  storageBucket: "idtravel-450d9.appspot.com",
+  messagingSenderId: "502379513308",
+  appId: "1:502379513308:web:eb45ced472dc7a72a37b19",
+  measurementId: "G-ZM1TVZQQ6M"
 };
-
 
 
 firebase.initializeApp(config);

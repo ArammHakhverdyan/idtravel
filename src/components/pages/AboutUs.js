@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Box, Typography, Grid, makeStyles } from '@material-ui/core/';
 import ImageHeader from '../shared/ImageHeader';
-import { CardTravelOutlined, DirectionsBus } from '@material-ui/icons';
-import PublicIcon from '@material-ui/icons/Public';
-import HomeWorkIcon from '@material-ui/icons/HomeWork';
+import { DirectionsBus, Public, HomeWork } from '@material-ui/icons';
 import { storageRef } from '../../config/config';
 
 
 function AboutUs() {
   const classes = useStyles();
   const [url, setUrl] = useState(["", "", "", "", "", ""])
+
   useEffect(() => {
     const a = storageRef.child('Images/aboutUs/garni.jpg')
     const b = storageRef.child('Images/aboutUs/aboutUs.jpg')
@@ -19,24 +18,26 @@ function AboutUs() {
     const f = storageRef.child('Images/aboutUs/3.png')
     const images = [a, b, c, d, e, f]
     images.map(function (item, index) {
-      item.getDownloadURL().then((downloadURL) => {
-        setUrl((old) => {
-          const newSt = [...old];
-          newSt[index] = downloadURL;
-          return newSt;
-        });
-      }).catch((error) => {
-        switch (error.code) {
-          case 'storage/object-not-found':
-            break;
-          default: {
-            return
+      return (
+        item.getDownloadURL().then((downloadURL) => {
+          setUrl((old) => {
+            const newSt = [...old];
+            newSt[index] = downloadURL;
+            return newSt;
+          });
+        }).catch((error) => {
+          switch (error.code) {
+            case 'storage/object-not-found':
+              break;
+            default: {
+              return
+            }
           }
-        }
-      })
+        })
+      )
     })
   }, [])
-  console.log(url[2])
+
   return (
     <>
       <ImageHeader backgroundImage={url[0]} />
@@ -69,7 +70,7 @@ function AboutUs() {
                             </Typography>
             </Grid>
             <Grid item sm={4}>
-              <PublicIcon className={classes.icons} />
+              <Public className={classes.icons} />
               <Typography variant="h5" className={classes.text}>
                 Diverse Destinations
               </Typography>
@@ -78,7 +79,7 @@ function AboutUs() {
                             </Typography>
             </Grid>
             <Grid item sm={4}>
-              <HomeWorkIcon className={classes.icons} />
+              <HomeWork className={classes.icons} />
               <Typography variant="h5" className={classes.text}>
                 Great Hotels
               </Typography>
@@ -92,9 +93,9 @@ function AboutUs() {
       <div>
         <img src={url[2]} alt='' className={classes.imgCity} />
         <Grid className={classes.imgContainer}>
-          <img className={classes.imgStyle} src={url[3]} />
-          <img className={classes.imgStyle} src={url[4]} />
-          <img className={classes.imgStyle} src={url[5]} />
+          <img className={classes.imgStyle} src={url[3]} alt="" />
+          <img className={classes.imgStyle} src={url[4]} alt="" />
+          <img className={classes.imgStyle} src={url[5]} alt="" />
         </Grid>
       </div>
     </>
@@ -120,7 +121,8 @@ const useStyles = makeStyles({
   imgCity: {
     minHeight: "30vh",
     width: "100%",
-    position: "relative"
+    position: "relative",
+    display: "block",
   },
   imgContainer: {
     padding: "50px",

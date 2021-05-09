@@ -4,11 +4,9 @@ import { Link } from 'react-router-dom';
 import { storageRef } from '../../config/config';
 
 
-
 const Description = () => {
   const classes = useStyles();
   const [url, setUrl] = useState(["", "", ""])
-
 
   useEffect(() => {
     const a = storageRef.child('Images/description/sevanLake.jpg')
@@ -37,10 +35,7 @@ const Description = () => {
     )
   }, [])
 
-
-
   return (
-
     <div className="pages">
       <div className="img-container">
         <img src={url[0]} key={0} alt='' />,
@@ -70,9 +65,7 @@ const Description = () => {
   )
 }
 
-
 export default Description
-
 
 const useStyles = makeStyles({
   loginBtn: {

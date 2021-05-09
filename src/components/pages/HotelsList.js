@@ -18,6 +18,7 @@ const useStyles = makeStyles({
     marginRight: 10,
     marginTop: 30,
     marginBottom: 1,
+    textAlign: "center",
   },
   media: {
     width: 350,
@@ -89,7 +90,7 @@ export default function MediaCard() {
           </Typography>
               </CardContent>
             </CardActionArea>
-            <CardActions style={{ marginLeft: "65%" }}>
+            <CardActions style={{ justifyContent: "center" }}>
               <Button size="small" color="primary" component={Link} to="/yerevanHotels">
                 See Hotels
         </Button>
@@ -110,7 +111,7 @@ export default function MediaCard() {
           </Typography>
               </CardContent>
             </CardActionArea>
-            <CardActions style={{ marginLeft: "65%" }}>
+            <CardActions style={{ justifyContent: "center" }}>
 
               <Button size="small" color="primary" component={Link} to="/tsaghkadzorHotels">
                 See Hotels
@@ -134,7 +135,7 @@ export default function MediaCard() {
           </Typography>
               </CardContent>
             </CardActionArea>
-            <CardActions style={{ marginLeft: "65%" }}>
+            <CardActions style={{ justifyContent: "center" }}>
 
               <Button size="small" color="primary" component={Link} to="/dilijanHotels">
                 See Hotels
@@ -158,7 +159,7 @@ export default function MediaCard() {
           </Typography>
               </CardContent>
             </CardActionArea>
-            <CardActions style={{ marginLeft: "65%" }}>
+            <CardActions style={{ justifyContent: "center" }}>
 
               <Button size="small" color="primary" component={Link} to="/sevanHotels">
                 See Hotels
@@ -182,7 +183,7 @@ export default function MediaCard() {
           </Typography>
               </CardContent>
             </CardActionArea>
-            <CardActions style={{ marginLeft: "65%" }}>
+            <CardActions style={{ justifyContent: "center" }}>
 
               <Button size="small" color="primary" component={Link} to="/jermukHotels">
                 See Hotels
@@ -206,7 +207,7 @@ export default function MediaCard() {
           </Typography>
               </CardContent>
             </CardActionArea>
-            <CardActions style={{ marginLeft: "65%" }}>
+            <CardActions style={{ justifyContent: "center" }}>
               <Button size="small" color="primary" component={Link} to="/gorisHotels">
                 See Hotels
         </Button>

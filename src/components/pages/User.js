@@ -2,7 +2,7 @@ import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Divider, Li
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLoggedInUserId, selectLoggedInUserInfo } from '../../redux/selectors';
-import userImg from '../img/user.png';
+import userImg from '../../assets/images/user.png';
 import InboxIcon from '@material-ui/icons/Inbox';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { updateLoggedInUserInfo } from '../../actions/AuthActions';

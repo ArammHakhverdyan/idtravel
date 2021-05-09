@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect, } from "react-router-dom";
 import Header from './components/layout/Header';
-import Footer from './components/Footer';
+import Footer from './components/layout/Footer';
 import Contact from './components/pages/Contact';
 import AboutUs from './components/pages/AboutUs';
 import Tours from './components/pages/Tours';
@@ -13,7 +13,7 @@ import { auth, db } from './config/config'
 import { connect } from 'react-redux';
 import HotelsList from './components/pages/HotelsList';
 import CarRental from './components/pages/CarRental';
-import Vehicles from './Vehicles';
+import Vehicles from './components/pages/Vehicles';
 import User from './components/pages/User';
 import YerevanHotels from './components/hotels/YerevanHotels'
 import TsaghkadzorHotels from './components/hotels/TsaghkadzorHotels'
@@ -89,7 +89,6 @@ class App extends React.Component {
               <Redirect to="/" />
             </Switch>
           )}
-
           <Footer />
         </Router>
       </div>
