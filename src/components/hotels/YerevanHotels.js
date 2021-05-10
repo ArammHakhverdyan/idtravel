@@ -227,6 +227,7 @@ export default function YerevanHotels() {
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <MobileDateRangePicker
               startText="Start"
+              minDate={new Date()}
               value={date}
               onChange={(newValue) => {
                 setDate(newValue);
