@@ -9,8 +9,6 @@ import { updateLoggedInUserInfo } from '../../actions/AuthActions';
 import MuiAlert from '@material-ui/lab/Alert';
 
 
-
-
 const User = () => {
   const classes = useStyles()
   const dispatch = useDispatch()
@@ -42,8 +40,6 @@ const User = () => {
     setEmail(e.target.value);
   }
 
-
-
   React.useEffect(() => {
     if (snackPack.length && !messageInfo) {
       // Set a new snack when we don't have an active one
@@ -74,9 +70,6 @@ const User = () => {
     }
   }
 
-
-
-
   const handleClose = (event, reason) => {
 
     if (reason === 'clickaway') {
@@ -88,10 +81,8 @@ const User = () => {
   };
   const handleChange = (panel) => (event, isExpanded) => {
 
-
     setExpanded(isExpanded ? panel : false);
   };
-
 
 
   return (
@@ -114,9 +105,20 @@ const User = () => {
             <Typography className={classes.heading} component={"span"}>History</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Typography component={"span"}>
-              You haven't booked any tour yet
-                    </Typography>
+            {userInfo.toursList ?
+              <div>
+                {
+                  <div style={{ backgroundColor: "#eaeaea", borderBottom: "1px solid #94c93d", padding: "10px", }}>
+                    <p style={{ color: "black" }}>{userInfo.toursList.title}</p>
+                    <p style={{ color: "black" }}>{userInfo.toursList.date}</p>
+                  </div>
+                }
+              </div>
+              :
+              <Typography component={"span"}>
+                You haven't booked any tour yet
+              </Typography>
+            }
           </AccordionDetails>
         </Accordion>
         <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
@@ -138,7 +140,7 @@ const User = () => {
             <Snackbar open={openSuccessButton} autoHideDuration={6000} onClose={handleClose}>
               <Alert onClose={handleClose} severity="success" className={classes.alert}>
                 Settings changed!
-                            </Alert>
+              </Alert>
             </Snackbar>
             <Snackbar open={openErrorButton} autoHideDuration={6000} onClose={handleClose}>
               <Alert onClose={handleClose} severity="error" className={classes.alert}>
@@ -160,7 +162,7 @@ const User = () => {
 
 
 
-export default User
+export default User;
 
 
 
@@ -205,5 +207,4 @@ const useStyles = makeStyles({
     alignItems: "center",
     flexDirection: "column"
   }
-
 });
