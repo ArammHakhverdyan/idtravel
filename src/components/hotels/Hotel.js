@@ -95,14 +95,17 @@ export default function YerevanHotels() {
     }))
   }
 
-  const [url, setUrl] = useState(["", "", "", "", "", "", ""])
+  const [url, setUrl] = useState(["", "", "", "", "", ""])
 
   useEffect(() => {
     const a = storageRef.child('Images/hotels/GorisHotels/header.jpg')
+    const b = storageRef.child('Images/hotels/DilijanHotels/header.jpeg')
+    const c = storageRef.child('Images/hotels/JermukHotels/header.jpeg')
+    const d = storageRef.child('Images/hotels/SevanHotels/header.jpg')
+    const e = storageRef.child('Images/hotels/TsaghkadzorHotels/header.jpg')
+    const f = storageRef.child('Images/hotels/YerevanHotels/header.jpg')
 
-
-
-    const images = [a]
+    const images = [a, b, c, d, e, f]
 
     images.map((item, index) =>
       item.getDownloadURL().then((downloadURL) => {
@@ -124,11 +127,6 @@ export default function YerevanHotels() {
 
 
   const classes = useStyles();
-  // const [four] = React.useState(4)
-  // const [three] = React.useState(3)
-  // const [two] = React.useState(2)
-  // const [one] = React.useState(1)
-  // const [zero] = React.useState(0)
 
   const fetchHotels = async () => {
     const response = db.collection('hotels').where("locationRef", "==", hotelLocation);
