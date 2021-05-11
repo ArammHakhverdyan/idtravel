@@ -116,11 +116,6 @@ export default function YerevanHotels() {
 
 
   const classes = useStyles();
-  // const [four] = React.useState(4)
-  // const [three] = React.useState(3)
-  // const [two] = React.useState(2)
-  // const [one] = React.useState(1)
-  // const [zero] = React.useState(0)
 
   const fetchHotels = async () => {
     const response = db.collection('hotels').where("locationRef", "==", hotelLocation);
