@@ -95,32 +95,24 @@ export default function YerevanHotels() {
     }))
   }
 
-  const [url, setUrl] = useState(["", "", "", "", "", "", ""])
+  const [url, setUrl] = useState("")
+
+
 
   useEffect(() => {
-    const a = storageRef.child('Images/hotels/GorisHotels/header.jpg')
-
-
-
-    const images = [a]
-
-    images.map((item, index) =>
-      item.getDownloadURL().then((downloadURL) => {
-        setUrl((old) => {
-          const newSt = [...old];
-          newSt[index] = downloadURL;
-          return newSt;
-        });
-      }).catch((error) => {
-        switch (error.code) {
-          case 'storage/object-not-found':
-            break;
-          default:
-            return
-        }
-      })
-    )
+    const a = storageRef.child('Images/hotels/hotelsList-header.jpg')
+    a.getDownloadURL().then((downloadURL) => {
+      setUrl(downloadURL);
+    }).catch((error) => {
+      switch (error.code) {
+        case 'storage/object-not-found':
+          break;
+        default:
+          return
+      }
+    })
   }, [])
+
 
 
   const classes = useStyles();
@@ -153,7 +145,7 @@ export default function YerevanHotels() {
     setToOpen(false);
   };
 
-  const background = url[0]
+  const background = url
 
   return (
     <>
