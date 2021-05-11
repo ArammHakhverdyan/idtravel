@@ -22,6 +22,7 @@ import SevanHotels from './components/hotels/SevanHotels'
 import JermukHotels from './components/hotels/JermukHotels'
 import GorisHotels from './components/hotels/GorisHotels';
 import TourView from './components/tour/TourView';
+import Hotel from './components/hotels/Hotel';
 
 
 
@@ -76,6 +77,7 @@ class App extends React.Component {
               <Route path="/tours/:id" component={TourView} />
               <Route path="/contact" component={Contact} />
               <Route path="/vehicles" component={Vehicles} />
+              <Route path="/hotelsList/:hotelLocation" component={Hotel} />
               <Route path="/hotelsList" component={HotelsList} />
               <Route path="/yerevanHotels" component={YerevanHotels} />
               <Route path="/tsaghkadzorHotels" component={TsaghkadzorHotels} />
