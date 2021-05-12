@@ -67,6 +67,7 @@ class App extends React.Component {
               <Route path="/contact" component={Contact} />
               <Route path="/vehicles" component={Vehicles} />
               <Route path="/hotelsList/:hotelLocation" component={Hotel} />
+              {/* {this.props.loggedInUser &&} */}
               <Route path="/hotelsList" component={HotelsList} />
               <Route path='/signin' component={SignIn} />
               <Route path='/signup' component={SignUp} />
