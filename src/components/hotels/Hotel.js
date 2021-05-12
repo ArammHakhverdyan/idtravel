@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles, Grid, Paper, Typography, ButtonBase, DialogTitle, DialogContent, Dialog, DialogActions, Rating } from '@material-ui/core';
-import { Badge, Box, Button, ButtonGroup, Snackbar, TextField } from '@material-ui/core';
+import { makeStyles, Grid, Paper, Typography, ButtonBase, DialogTitle, DialogContent, Dialog, DialogActions, Rating, Badge, Box, Button, ButtonGroup, Snackbar, TextField } from '@material-ui/core';
 import ReactReadMoreReadLess from "react-read-more-read-less";
 import DialogContentText from '@material-ui/core/DialogContentText';
 import { db, storageRef } from '../../config/config';
@@ -11,8 +10,11 @@ import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import PersonIcon from '@material-ui/icons/Person';
 import HotelIcon from '@material-ui/icons/Hotel';
-import MuiAlert from '@material-ui/lab/Alert';
 import { useParams } from 'react-router';
+//import { selectLoggedInUser, selectLoggedInUserInfo } from '../../redux/selectors';
+//import { useSelector } from 'react-redux';
+import MuiAlert from '@material-ui/core/Alert';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
+
 export default function YerevanHotels() {
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState([null, null]);
@@ -40,6 +43,7 @@ export default function YerevanHotels() {
   const [countHotel, setCountHotel] = useState(1);
   const [hotel, setHotels] = useState([])
   const { hotelLocation } = useParams()
+  //const loggedIn = useSelector(selectLoggedInUser)
 
   const [reserve, setReserve] = useState({
     fullName: "",
@@ -48,7 +52,7 @@ export default function YerevanHotels() {
     textMessage: "",
   })
 
-  const hotelReserve = async (event, hotel) => {
+  const hotelReserve = async (event) => {
     event.preventDefault();
     try {
       const hotels = await db.collection("hotelOrders");
@@ -58,7 +62,8 @@ export default function YerevanHotels() {
         endDate: date[1],
         persons: countPerson,
         rooms: countHotel,
-        hotel: ToOpen.hotelName
+
+        //hotel: ToOpen.hotelName
 
       });
     } catch (e) {
@@ -70,11 +75,12 @@ export default function YerevanHotels() {
       emailAdress: "",
       phoneNumber: "",
       textMessage: "",
+      hotel: ""
     })
 
     handleClickClose()
-    setOpen(true);
   };
+
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -132,8 +138,8 @@ export default function YerevanHotels() {
 
 
 
-  const handleClickOpen = (hotel) => {
-    setToOpen(hotel);
+  const handleClickOpen = () => {
+    setToOpen(true);
   };
 
   const handleClickClose = () => {
@@ -150,7 +156,7 @@ export default function YerevanHotels() {
         backgroundSize: "cover",
       }}>
         <div className={classes.root}>
-          <h1 style={{ textAlign: "center" }}>We cooperate with the following hotels:</h1>
+          <h1 style={{ textAlign: "center", marginBottom: "20px" }}>We cooperate with the following hotels:</h1>
           {hotel && hotel.map((value, index) => (
             <Paper key={index} className={classes.paper}>
               <Grid container spacing={2}>
@@ -186,7 +192,7 @@ export default function YerevanHotels() {
                     <Typography style={{ fontSize: "12px", color: "black" }}>{value.night}</Typography>
                     <Typography style={{ fontSize: "25px", color: "#94c93d" }}>{value.price}</Typography>
                     <Typography style={{ fontSize: "10px", color: "black" }}>{value.includes}</Typography>
-                    <Button style={{ marginTop: "15px", backgroundColor: "#94c93d" }} variant="contained" onClick={() => handleClickOpen(value)}>
+                    <Button style={{ marginTop: "15px", backgroundColor: "#94c93d" }} variant="contained" onClick={() => handleClickOpen()}>
                       Book this hotel
                     </Button>
                   </Grid>
@@ -205,12 +211,14 @@ export default function YerevanHotels() {
           <DialogContentText>
             Please fill in the details․
           </DialogContentText>
-          <TextField fullWidth={true} id="fullName" label="Full Name" variant="outlined" onChange={handleChange} />
+          <TextField fullWidth={true} id="hotel" label="Hotel Name" variant="outlined" onChange={handleChange} />
+          <TextField fullWidth={true} style={{ marginTop: "20px" }} id="fullName" label="Full Name" variant="outlined" onChange={handleChange} />
           <TextField fullWidth={true} style={{ marginTop: "20px" }} id="emailAdress" label="Email" variant="outlined" onChange={handleChange} />
           <TextField fullWidth={true} style={{ marginTop: "20px" }} id="phoneNumber" label="Phone Number" variant="outlined" onChange={handleChange} />
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <MobileDateRangePicker
               startText="Start"
+              minDate={new Date()}
               value={date}
               onChange={(newValue) => {
                 setDate(newValue);
@@ -281,6 +289,8 @@ export default function YerevanHotels() {
           <Button style={{ backgroundColor: "#94c93d" }} fullWidth={true} variant="contained" onClick={hotelReserve}>Book</Button>
         </DialogActions>
       </Dialog>
+
+
     </>
   );
 }

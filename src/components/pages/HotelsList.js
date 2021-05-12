@@ -77,8 +77,8 @@ export default function MediaCard() {
         backgroundSize: "cover",
       }}>
         <Grid container justifyContent="center" spacing={0} >
-          {hotels.map((h) => (
-            <Card className={classes.root}>
+          {hotels.map((h, i) => (
+            <Card key={i} className={classes.root}>
               <CardActionArea component={Link} to={`${pathname}/${h.name}`}>
                 <CardMedia title="See hotels in Yerevan">
                   <img src={h.url} className={classes.media} alt="services" />

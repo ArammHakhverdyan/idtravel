@@ -3,7 +3,7 @@ import { makeStyles, Container, Box, TextField, Button, Grid } from '@material-u
 import ImageHeader from '../shared/ImageHeader';
 import { db } from '../../config/config';
 import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
+import MuiAlert from '@material-ui/core/Alert';
 import SimpleMap from './Map';
 import { storageRef } from '../../config/config';
 
