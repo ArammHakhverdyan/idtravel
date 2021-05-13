@@ -11,9 +11,10 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import PersonIcon from '@material-ui/icons/Person';
 import HotelIcon from '@material-ui/icons/Hotel';
 import { useParams } from 'react-router';
-//import { selectLoggedInUser, selectLoggedInUserInfo } from '../../redux/selectors';
-//import { useSelector } from 'react-redux';
+import { selectLoggedInUser, selectLoggedInUserInfo } from '../../redux/selectors';
+import { useSelector } from 'react-redux';
 import MuiAlert from '@material-ui/core/Alert';
+import { Link } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -43,7 +44,7 @@ export default function YerevanHotels() {
   const [countHotel, setCountHotel] = useState(1);
   const [hotel, setHotels] = useState([])
   const { hotelLocation } = useParams()
-  //const loggedIn = useSelector(selectLoggedInUser)
+  const userInfo = useSelector(selectLoggedInUserInfo)
 
   const [reserve, setReserve] = useState({
     fullName: "",
@@ -207,81 +208,110 @@ export default function YerevanHotels() {
       </Snackbar>
       <Dialog open={ToOpen} onClose={handleClickClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Booking {ToOpen.hotelName}</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Please fill in the details․
+        {userInfo ? (
+          <DialogContent>
+            <DialogContentText>
+              Please fill in the details․
           </DialogContentText>
-          <TextField fullWidth={true} id="hotel" label="Hotel Name" variant="outlined" onChange={handleChange} />
-          <TextField fullWidth={true} style={{ marginTop: "20px" }} id="fullName" label="Full Name" variant="outlined" onChange={handleChange} />
-          <TextField fullWidth={true} style={{ marginTop: "20px" }} id="emailAdress" label="Email" variant="outlined" onChange={handleChange} />
-          <TextField fullWidth={true} style={{ marginTop: "20px" }} id="phoneNumber" label="Phone Number" variant="outlined" onChange={handleChange} />
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <MobileDateRangePicker
-              startText="Start"
-              minDate={new Date()}
-              value={date}
-              onChange={(newValue) => {
-                setDate(newValue);
-              }}
-              renderInput={(startProps, endProps) => (
-                <React.Fragment>
-                  <TextField {...startProps} style={{ marginTop: "20px" }} variant="standard" fullWidth={true} id="startDate" label="Start" />
-                  <Box sx={{ mx: 2 }}> to </Box>
-                  <TextField {...endProps} variant="standard" fullWidth={true} id="endDate" label="End" />
-                </React.Fragment>
-              )}
-            />
-          </LocalizationProvider>
-          <div style={{ marginTop: "20px", display: "flex" }}>
-            <div>
-              <Badge color="secondary" badgeContent={countPerson}>
-                <PersonIcon />
-              </Badge>
-              <ButtonGroup>
-                <Button
-                  aria-label="reduce"
-                  onClick={() => {
-                    setCountPerson(Math.max(countPerson - 1, 0));
-                  }}
-                >
-                  <RemoveIcon fontSize="small" />
-                </Button>
-                <Button
-                  aria-label="increase"
-                  onClick={() => {
-                    setCountPerson(countPerson + 1);
-                  }}
-                >
-                  <AddIcon fontSize="small" />
-                </Button>
-              </ButtonGroup>
+            <TextField fullWidth={true} id="hotel" label="Hotel Name" variant="outlined" onChange={handleChange} />
+            <TextField fullWidth={true} style={{ marginTop: "20px" }} id="fullName" label="Full Name" variant="outlined" onChange={handleChange} />
+            <TextField fullWidth={true} style={{ marginTop: "20px" }} id="emailAdress" label="Email" variant="outlined" onChange={handleChange} />
+            <TextField fullWidth={true} style={{ marginTop: "20px" }} id="phoneNumber" label="Phone Number" variant="outlined" onChange={handleChange} />
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <MobileDateRangePicker
+                startText="Start"
+                minDate={new Date()}
+                value={date}
+                onChange={(newValue) => {
+                  setDate(newValue);
+                }}
+                renderInput={(startProps, endProps) => (
+                  <React.Fragment>
+                    <TextField {...startProps} style={{ marginTop: "20px" }} variant="standard" fullWidth={true} id="startDate" label="Start" />
+                    <Box sx={{ mx: 2 }}> to </Box>
+                    <TextField {...endProps} variant="standard" fullWidth={true} id="endDate" label="End" />
+                  </React.Fragment>
+                )}
+              />
+            </LocalizationProvider>
+            <div style={{ marginTop: "20px", display: "flex" }}>
+              <div>
+                <Badge color="secondary" badgeContent={countPerson}>
+                  <PersonIcon />
+                </Badge>
+                <ButtonGroup>
+                  <Button
+                    aria-label="reduce"
+                    onClick={() => {
+                      setCountPerson(Math.max(countPerson - 1, 0));
+                    }}
+                  >
+                    <RemoveIcon fontSize="small" />
+                  </Button>
+                  <Button
+                    aria-label="increase"
+                    onClick={() => {
+                      setCountPerson(countPerson + 1);
+                    }}
+                  >
+                    <AddIcon fontSize="small" />
+                  </Button>
+                </ButtonGroup>
+              </div>
+              <div style={{ marginLeft: "70px" }}>
+                <Badge color="secondary" badgeContent={countHotel}>
+                  <HotelIcon />
+                </Badge>
+                <ButtonGroup>
+                  <Button
+                    aria-label="reduce"
+                    onClick={() => {
+                      setCountHotel(Math.max(countHotel - 1, 0));
+                    }}
+                  >
+                    <RemoveIcon fontSize="small" />
+                  </Button>
+                  <Button
+                    aria-label="increase"
+                    onClick={() => {
+                      setCountHotel(countHotel + 1);
+                    }}
+                  >
+                    <AddIcon fontSize="small" />
+                  </Button>
+                </ButtonGroup>
+              </div>
             </div>
-            <div style={{ marginLeft: "70px" }}>
-              <Badge color="secondary" badgeContent={countHotel}>
-                <HotelIcon />
-              </Badge>
-              <ButtonGroup>
-                <Button
-                  aria-label="reduce"
-                  onClick={() => {
-                    setCountHotel(Math.max(countHotel - 1, 0));
-                  }}
-                >
-                  <RemoveIcon fontSize="small" />
-                </Button>
-                <Button
-                  aria-label="increase"
-                  onClick={() => {
-                    setCountHotel(countHotel + 1);
-                  }}
-                >
-                  <AddIcon fontSize="small" />
-                </Button>
-              </ButtonGroup>
-            </div>
-          </div>
-          <TextField fullWidth={true} style={{ marginTop: "20px" }} id="textMessage" label="Message" variant="outlined" multiline rows={4} onChange={handleChange} />
-        </DialogContent>
+            <TextField fullWidth={true} style={{ marginTop: "20px" }} id="textMessage" label="Message" variant="outlined" multiline rows={4} onChange={handleChange} />
+          </DialogContent>
+
+        ) : (
+
+          <Dialog
+            open={ToOpen}
+            onClose={handleClickClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">{"IDTravel"}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description" style={{ fontSize: "25px" }}>
+                Please LogIn or SignUp
+          </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClickClose} color="primary">
+                Cancel
+          </Button>
+              <Button component={Link} to="/signin" color="primary" autoFocus style={{ backgroundColor: "#94c93d", marginLeft: "20px" }} variant="contained">
+                LogIn
+          </Button>
+              <Button component={Link} to="/signup" color="primary" autoFocus style={{ backgroundColor: "#94c93d", marginLeft: "20px" }} variant="contained">
+                SignUp
+          </Button>
+            </DialogActions>
+          </Dialog>
+        )}
         <DialogActions>
           <Button onClick={handleClickClose} color="primary">
             Cancel
@@ -289,8 +319,6 @@ export default function YerevanHotels() {
           <Button style={{ backgroundColor: "#94c93d" }} fullWidth={true} variant="contained" onClick={hotelReserve}>Book</Button>
         </DialogActions>
       </Dialog>
-
-
     </>
   );
 }
